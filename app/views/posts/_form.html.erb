@@ -1,0 +1,38 @@
+<div class="post-form">
+	<%= form_with model: @post do |form| %>
+		<div>
+			<%= form.label :words %><br/>
+			<%= form.text_area :words, size: "50x5" %>
+		</div>
+
+		<div>
+			<div class="styling">
+				<%= form.label :rotate %><br/>
+				<%= 
+					form.range_field :rotate, min: 0, max: 360
+				%>
+			</div>
+
+			<div class="styling">
+				<%= form.label :top %><br/>
+				<%= form.number_field :top, placeholder: 0, min: -500, max: 500 %>
+			</div>
+
+			<div class="styling">
+				<%= form.label :left %><br/>
+				<%= form.number_field :left, placeholder: 0, min: -500, max: 500 %>
+			</div>
+
+			<div class="styling">
+				<%= form.label :color %><br/>
+				<%= form.select :color, Post.colors.each_with_index.to_a %>
+			</div>
+		</div>
+
+		<div>
+			<%= form.submit %>
+		</div>
+	<% end %>
+</div>
+
+<%= javascript_include_tag 'form' %>

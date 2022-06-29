@@ -1,0 +1,12 @@
+<div class="post-parent">
+	<div class="post" style="<%= params["disable_styling"] == "1" ? "" : post.style %>">
+		<div class="link"><%= link_to "(_)", post %></div>
+		<div class="words">"<%= post.words %>"</div>
+		<div class="user">
+			<% if post.user %>
+				-<%= link_to post.user.username, user_path(post.user.id) %>,&nbsp;
+			<% end %>
+			<%= post.created_at.strftime('%H:%M %m/%d') %>	
+		</div>
+	</div>
+</div>

@@ -1,0 +1,106 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body{
+  background: cornsilk;
+}
+
+h1 {
+  text-align: center;
+  font-size: 80px;
+  word-wrap: break-word;
+}
+
+.lazar {
+  color: black;
+  font-weight: heavy;
+  font-style: italic;
+  text-shadow: 0.04em 0.04em #f00, 
+               0.08em 0.08em #0f0, 
+               0.12em 0.12em #00f,
+               0.16em 0.16em lightseagreen,
+               0.20em 0.20em antiquewhite,
+               0.24em 0.24em black;
+}
+
+/* ~~~~~~~~~~~~~~~FORMS~~~~~~~~~~~~~~~~~~~ */
+
+.input-area{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.post-form{
+  background: white;
+  /*width: 20%;*/
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 100;
+  position: relative;
+  border: 1px solid black;
+}
+
+.post-form input[type=number]{
+  width: 50px;
+}
+
+.post-form .styling{
+  display: inline-block;
+  padding: 5px;
+}
+
+.post-form label{
+  font-weight: bold;
+}
+
+/* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
+
+#timeline {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.post-parent{
+  position: static;
+  z-index:  0;
+}
+
+.post{
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  width: 40vw;
+  min-width: 500px;
+  text-align: left;
+  position: relative;
+  z-index: revert-layer;
+  background-color: lightcoral;
+}
+
+.post .link, .post .words, .post .user{
+  position:  relative;
+}
+
+.post .link{
+  text-align: right;
+}
+
+.post .user{
+  padding-left: 15%;
+}

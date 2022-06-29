@@ -1,0 +1,11 @@
+<div class="input-area">
+	<% if Current.user %>
+		<%= render 'posts/form' %>
+	<% else %>
+		<%= render 'posts/signin' %>
+	<% end %>
+</div>
+
+<div id="timeline">
+	<%= render @posts %>
+</div>
