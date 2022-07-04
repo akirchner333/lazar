@@ -11,9 +11,21 @@
   </head>
 
   <body>
-    <h1 class="lazar">LA2AR</h1>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <header>
+      <% if Current.user %>
+        <div class="user-bar interactable-zone">
+          <div class="name">
+              <%= link_to Current.user.username, Current.user %>
+          </div>
+          <div class="user-buttons">
+            <%= button_to "Change Name", Current.user, method: :patch %>
+            <%= button_to "Sign Out", sign_out_path, method: :delete %>
+          </div>
+        </div>
+      <% end %>
+      <%= render "components/flash" %>
+    </header>
+    <h1 class="lazar"><%= link_to "LA2AR", root_path %></h1>
     <%= yield %>
   </body>
 </html>
