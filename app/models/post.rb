@@ -34,7 +34,7 @@ class Post < ApplicationRecord
 			transform: rotate(#{style_hash["rotate"] || 0}deg);
 			top: #{style_hash["top"] || 0}px;
 			left: #{style_hash["left"] || 0}px;
-			background-color: #{style_hash["color"] || 'transparent'}
+			background-color: #{style_hash["color"] || 'transparent'};
 		STYLE
 
 	end

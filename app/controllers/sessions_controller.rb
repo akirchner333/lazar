@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
-	def new; end
+	def new
+		@google_client_id = Rails.configuration.x.google_auth.client_id
+		@state = 'abc123'
+	end
 
 	def create
 		user = User.find_by(email: params[:email])
@@ -7,19 +10,16 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to root_path, notice: "Logged in"
 		else
-			flash.now[:alert] = 'Invalid email or password'
-			render :new
+			login_failure
 		end
 	end
 
-	def create_google
-		if user = authenticate_with_google
-			session[:user_id] = user.id
-			redirect_to root_path, notice: "Logged in"
-		else
-			flash.now[:alert] = "Problem logging in"
-			render :new
-		end
+	def omniauth
+		@user = User.from_omniauth(auth)
+		@user.save
+		session[:user_id] = @user.id
+		redirect_to root_path, notice: "Logged in"
+		# Are there any scenarios in which omniauth would fail?
 	end
 
 	def destroy
@@ -28,13 +28,12 @@ class SessionsController < ApplicationController
 	end
 
 	private
-	# I don't know what any of this stuff means!
-	def authenticate_with_google
-		if id_token = flash[:google_sign_in][:id_token]
-			User.find_by(google_id: GoogleSignIn::Identity.new(id_token).user_id)
-		elsif error = flash[:google_sign_in]
-			p "OH NO!"
-			nil
-		end
+	def login_failure
+		flash.alert = "We were unable to log you in. Please try again or make a new account."
+		redirect_to sign_in_path
+	end
+
+	def auth
+		request.env['omniauth.auth']
 	end
 end

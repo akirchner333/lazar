@@ -1,4 +1,4 @@
-<div class="post-parent">
+<div class="post-parent" style="z-index: <%= 500 - index %>">
 	<div class="post" style="<%= params["disable_styling"] == "1" ? "" : post.style %>">
 		<div class="link"><%= link_to "(_)", post %></div>
 		<div class="words">"<%= post.words %>"</div>

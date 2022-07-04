@@ -11,9 +11,8 @@ Rails.application.routes.draw do
   get 'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create'
   delete 'sign_out', to: 'sessions#destroy'
-  get 'google_sign_in/callback', to: 'sessions#create_google'
-
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   # Should let people update / restore their passwords, so there'd be paths for that
-  #  But that can wait till later
+  # But that can wait till later
 end

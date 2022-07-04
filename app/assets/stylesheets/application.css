@@ -120,7 +120,7 @@ h2 {
 .post-form{
   padding: 20px;
   border-radius: 10px;
-  z-index: 100;
+  z-index: 501;
   position: relative;
 }
 
@@ -142,7 +142,7 @@ h2 {
 #timeline {
   display: flex;
   align-items: center;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .post-parent{
