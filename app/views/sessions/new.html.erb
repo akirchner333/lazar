@@ -1,8 +1,6 @@
 <h2>Sign In!</h2>
 
 <div class="user-form interactable-zone">
-	<%= link_to "Log In with Google", '/auth/google_oauth2' %>
-
 	<%= form_with url: sign_in_path, local: true do |f| %>
 		<p>
 			<%= f.label 'email' %>
@@ -15,6 +13,13 @@
 		</p>
 		<%= f.submit 'Log In' %>
 	<% end %>
+
+	<div class="sso">
+		<div class="sso-box sso-google">
+			<%= link_to "Log In with Google", '/auth/google_oauth2' %>
+		</div>
+	</div>
+
 	<div>
 		No account? <%= link_to "Sign up now!", sign_up_path %>
 	</div>

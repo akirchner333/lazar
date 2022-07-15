@@ -109,6 +109,17 @@ h2 {
   margin: 10px;
 }
 
+.sso{
+  display: flex;
+  justify-content: center;
+}
+
+.sso-box{
+  background: white;
+  border: 1px solid black;
+  padding: 5px;
+}
+
 /* ~~~~~~~~~~~~~~~FORMS~~~~~~~~~~~~~~~~~~~ */
 
 .input-area{
