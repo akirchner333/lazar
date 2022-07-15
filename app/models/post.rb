@@ -36,6 +36,5 @@ class Post < ApplicationRecord
 			left: #{style_hash["left"] || 0}px;
 			background-color: #{style_hash["color"] || 'transparent'};
 		STYLE
-
 	end
 end

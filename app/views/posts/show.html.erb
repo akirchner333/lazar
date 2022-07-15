@@ -1,3 +1,3 @@
 <div id="timeline">
-	<%= render @post %>
+	<%= render partial: 'posts/post', locals: {post: @post, index: 500} %>
 </div>
