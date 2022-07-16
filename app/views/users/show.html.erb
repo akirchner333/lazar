@@ -1,5 +1,7 @@
-<h1><%= @user.username %></h1>
+<h2 class="username"><%= @user.username %></h2>
 
-<div id="timeline">
-	<%= render partial: "posts/posts", locals: {posts: @user.posts.order(created_at: :desc)} %>
-</div>
+<section>
+	<div id="timeline">
+		<%= render partial: "posts/posts", locals: {posts: @user.posts.order(created_at: :desc)} %>
+	</div>
+</section>

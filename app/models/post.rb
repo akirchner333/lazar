@@ -29,12 +29,33 @@ class Post < ApplicationRecord
 	end
 
 	def style
-		style_hash = JSON.parse(css)
+		@style ||= JSON.parse(css)
+	end
+
+	def style_tag
 		<<-STYLE
-			transform: rotate(#{style_hash["rotate"] || 0}deg);
-			top: #{style_hash["top"] || 0}px;
-			left: #{style_hash["left"] || 0}px;
-			background-color: #{style_hash["color"] || 'transparent'};
+			transform: rotate(#{style["rotate"] || 0}deg);
+			top: #{style["top"] || 0}px;
+			left: #{style["left"] || 0}px;
+			background-color: #{style["color"] || 'transparent'};
 		STYLE
+	end
+
+	def aria_label
+		attributes = []
+		attributes.push("is rotated #{style["rotate"]} degrees") if style["rotate"] != 0
+
+		offset = []
+		if style['left'] != 0
+			offset.push("#{style["left"].abs} pixels #{style["left"] > 0 ? 'right' : 'left'}")
+		end
+		if style['top'] != 0
+			offset.push("#{style["top"].abs} pixels #{style["top"] > 0 ? 'down' : 'up'}")
+		end
+		attributes.push("is offset by #{offset.to_sentence}") if offset.length > 0
+
+		attributes.push("has a #{style["color"].titleize.downcase} background")
+
+		"This post #{attributes.to_sentence}."
 	end
 end

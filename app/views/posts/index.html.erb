@@ -1,11 +1,11 @@
-<div class="input-area">
+<section class="input-area">
 	<% if Current.user %>
 		<%= render 'posts/form' %>
 	<% else %>
 		<%= render 'posts/signin' %>
 	<% end %>
-</div>
+</section>
 
-<div id="timeline">
+<section id="timeline">
 	<%= render partial: 'posts', locals:  {posts: @posts} %>
-</div>
+</section>
