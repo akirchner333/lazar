@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root "posts#index"
 
+  if ENV['SITE_LIVE'] != 'true'
+    get '*path', to: redirect('/')
+  end
+
   resources :posts, only: %i[index show create]
   resources :users, only: %i[new create update show]
 

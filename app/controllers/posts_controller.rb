@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
 	def index
-		@posts = Post.all.order(created_at: :desc).limit(500)
-		@post = Post.new
-		@params = params
+		if ENV['SITE_LIVE'] == 'true'
+			@posts = Post.all.order(created_at: :desc).limit(500)
+			@post = Post.new
+			@params = params
+		else
+			render 'static/not_live'
+		end
 	end
 
 	def show
