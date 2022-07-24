@@ -20,7 +20,7 @@ class Post < ApplicationRecord
 
 	def self.new(**args)
 		post = super(**args)
-		post.rotate = 
+		post.rotate = 0
 		post.top = 0
 		post.left = 0
 		post.color = "Transparent"

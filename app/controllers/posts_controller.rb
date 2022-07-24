@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 		)
 
 		if @post.save
+			@post = Post.new
 			redirect_to :posts
 		else
 			p "No"
