@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_212043) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_26_031022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.integer "reaction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "plies_replies", id: false, force: :cascade do |t|
+    t.bigint "ply_id"
+    t.bigint "reply_id"
+    t.index ["ply_id"], name: "index_plies_replies_on_ply_id"
+    t.index ["reply_id"], name: "index_plies_replies_on_reply_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "words"
@@ -20,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_212043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "generation", default: 5
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
