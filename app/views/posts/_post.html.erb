@@ -1,10 +1,25 @@
 <li class="post">
-	<div class="link"><%= link_to "(_)", post %></div>
-	<div class="words"><%= post.words %></div>
-	<div class="user">
-		<% if post.user %>
-			-<%= link_to post.user.username, user_path(post.user.id) %>,
-		<% end %>
-		<%= post.created_at.strftime('%H:%M %m/%d') %>
+	<div class="post-header">
+		<div class="user">
+			<%= link_to post.user.username, user_path(post.user.id) %>
+			
+		</div>
+		<div>
+			<%= post.created_at.strftime('%m/%d %H:%M') %>
+		</div>
+		<div class="link"><%= link_to "(_)", post %></div>
 	</div>
+	<div class="words"><%= post.words %></div>
+	<% if Current.user %>
+		<div class="-ply-form">
+			<details class="ply-form">
+				<summary>Ply</summary>
+				<%= render partial: 'posts/form', locals: {post: @new_post, plies: [post.id], replies: []} %>
+			</details>
+			<details class="reply-form">
+				<summary>Reply</summary>
+				<%= render partial: 'posts/form', locals: {post: @new_post, plies: [], replies: [post.id]} %>
+			</details>
+		</div>
+	<% end %>
 </li>

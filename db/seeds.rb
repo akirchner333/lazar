@@ -9,28 +9,34 @@ require 'csv'
 
 Post.where(generation: 6).delete_all
 
-previous = false
-start = DateTime.now
-CSV.foreach('./db/macbeth.csv', headers: true) do |line|
-	character = User.find_or_initialize_by(
-		username: line['character'],
-		email: "#{line['character'].downcase.gsub(" ", "_")}@macbeth.com"
-	)
-	if character.has_changes_to_save?
-		character.password = "#{line[:character]}_4bx9s"
-		character.password_confirmation = "#{line[:character]}_4bx9s"
-		character.save
-	end
+def load_play(file, start, offset)
+	previous = false
+	CSV.foreach("./db/#{file}.csv", headers: true) do |line|
+		character = User.find_or_initialize_by(
+			username: line['character'],
+			email: "#{line['character'].downcase.gsub(" ", "_")}@macbeth.com"
+		)
+		if character.has_changes_to_save?
+			character.password = "#{line[:character]}_4bx9s"
+			character.password_confirmation = "#{line[:character]}_4bx9s"
+			character.save
+		end
 
-	post = Post.create(
-		words: line['line'],
-		user_id: character.id,
-		generation: 6,
-		created_at: start + 10 * line['num'].to_i,
-		css: ""
-	)
-	if previous
-		previous.replies << post
+		post = Post.create(
+			words: line['line'],
+			user_id: character.id,
+			generation: 6,
+			created_at: start + (100 * line['num'].to_i + offset).seconds,
+			css: ""
+		)
+		if previous
+			previous.replies << post
+		end
+		previous = post
 	end
-	previous = post
+	p "Saved #{file} to database"
 end
+
+start = DateTime.now
+load_play('macbeth', start, 0)
+load_play('errors', start, 50)

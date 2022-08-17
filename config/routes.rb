@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
+  get 'likes/:reaction', to: 'likes#user_index'
+  get ':user/likes/:reaction', to: 'likes#index'
+  resources :likes, only: %i[create destroy]
+
   # Should let people update / restore their passwords, so there'd be paths for that
   # But that can wait till later
 end

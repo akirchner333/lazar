@@ -11,4 +11,5 @@ class Post < ApplicationRecord
 		join_table: :plies_replies,
 		foreign_key: :reply_id,
 		association_foreign_key: :ply_id
+	has_many :likes
 end

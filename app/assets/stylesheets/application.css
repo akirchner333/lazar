@@ -15,7 +15,7 @@
  */
 
 body{
-  background: darkblue;
+  background: midnightblue;
   margin: 0px;
   color: #94dae8;
 }
@@ -123,7 +123,6 @@ h2 {
 }
 
 /* ~~~~~~~~~~~~~~~FORMS~~~~~~~~~~~~~~~~~~~ */
-
 .input-area{
   display: flex;
   justify-content: center;
@@ -150,50 +149,18 @@ h2 {
   font-weight: bold;
 }
 
-/* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
-
-#timeline {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-  height: 100%;
-}
-
-.posts-list{
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  height: 80vw;
-  list-style-type: none;
-  padding: 0;
-  width: 30%;
-  max-height: 100vh;
-  overflow-y: scroll;
-}
-
-.post{
-  padding: 10px;
-  margin-bottom: 5px;
-  border: 0.5px solid black;
-  border-radius: 2px;
-  width: 90%;
-  /*max-height: 100px;*/
-  text-align: left;
-  background-color: #cc4a0e;
-  margin: auto;
-}
-
-.post .link{
-  text-align: right;
-}
-
-.post .user{
-  padding-left: 15%;
-}
-
 /* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& USERS &&&&&&&&&&&&&&&&&&&&&&&& */
 
 .username{
   font-size: 80px;
   word-break: break-all;
+}
+
+.likes {
+  display: flex;
+  justify-content: center;
+}
+
+.likes div{
+  margin: 0 15px;
 }

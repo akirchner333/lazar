@@ -1,0 +1,7 @@
+<h2><%= image_tag "#{params[:reaction]}.svg", alt: params[:reaction] %></h2>
+
+<section>
+	<div id="timeline">
+		<%= render partial: "posts/posts", locals: {posts: @likes} %>
+	</div>
+</section>

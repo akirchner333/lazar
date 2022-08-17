@@ -1,7 +1,5 @@
 <section class="input-area">
-	<% if Current.user %>
-		<%= render 'posts/form' %>
-	<% else %>
+	<% if !Current.user %>
 		<%= render 'posts/signin' %>
 	<% end %>
 </section>

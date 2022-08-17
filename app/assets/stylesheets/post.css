@@ -1,0 +1,52 @@
+/* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
+#timeline {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+}
+
+.posts-list{
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  height: 80vw;
+  list-style-type: none;
+  padding: 0;
+  width: 30%;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
+.post{
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 0.5px solid black;
+  border-radius: 2px;
+  width: 90%;
+  /*max-height: 100px;*/
+  text-align: left;
+  background-color: oldlace;
+  color: black;
+  margin: auto;
+}
+
+.post-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.-ply-form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.ply-form, .reply-form{
+  display: inline-block;
+}
+
+.reply-form summary{
+  text-align: right;
+}
