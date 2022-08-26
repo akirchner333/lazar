@@ -15,20 +15,27 @@
 		</div>
 		<div class="words"><%= post.words %></div>
 		<% if Current.user %>
-			<div class="-ply-form">
-				<!-- <details class="ply-form">
-					<summary>Ply</summary>
-					<%#= render partial: 'posts/form', locals: {post: @new_post, plies: [post.id], replies: []} %>
-				</details> -->
+			<div class="post-interactions">
 				<%= svg('ply') %>
-				<%= svg('crab') %>
-				<%= svg('microphone') %>
-				<%= svg('obelisk') %>
+				<%= render partial: 'likes/like_button', locals: {
+					post_id: post.id,
+					reaction: 'crab',
+					count: post.crab_count,
+					liked: post.crab_liked
+				} %>
+				<%= render partial: 'likes/like_button', locals: {
+					post_id: post.id,
+					reaction: 'microphone',
+					count: post.microphone_count,
+					liked: post.microphone_liked
+				} %>
+				<%= render partial: 'likes/like_button', locals: {
+					post_id: post.id,
+					reaction: 'obelisk',
+					count: post.obelisk_count,
+					liked: post.obelisk_liked
+				} %>
 				<%= svg('reply') %>
-				<!-- <details class="reply-form">
-					<summary>Reply</summary>
-					<%#= render partial: 'posts/form', locals: {post: @new_post, plies: [], replies: [post.id]} %>
-				</details> -->
 			</div>
 		<% end %>
 	</div>

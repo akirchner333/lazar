@@ -1,9 +1,11 @@
 <section id="timeline">
-	<%= render partial: 'posts', locals:  {posts: @post.plies, right_line: true} %>
+	<%= render partial: 'posts', locals:  {posts: @post.plies.with_likes(Current.user.id), right_line: true} %>
 
 	<ul class="posts-list">
 		<%= render partial: 'posts/post', locals: {post: @post, right_line: @post.replies.count > 0, left_line: @post.plies.count > 0} %>
 	</ul>
 
-	<%= render partial: 'posts', locals:  {posts: @post.replies, left_line: true} %>
+	<%= render partial: 'posts', locals:  {posts: @post.replies.with_likes(Current.user.id), left_line: true} %>
+
+	<%= render partial: 'posts/form' %>
 </section>

@@ -1,0 +1,15 @@
+.user-likes{
+	text-align: center;
+}
+
+.user-likes div{
+	display: inline-block;
+	padding: 2px 10px;
+	margin: 0 0 10px 0;
+	background: white;
+}
+
+.likes-icon svg{
+	height: 100px;
+	fill: white;
+}

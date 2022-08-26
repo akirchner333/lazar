@@ -48,7 +48,6 @@
   border: 0.5px solid black;
   border-radius: 2px;
   width: 90%;
-  /*max-height: 100px;*/
   text-align: left;
   background-color: oldlace;
   color: black;
@@ -60,17 +59,51 @@
   justify-content: space-between;
 }
 
-.-ply-form{
+.post-interactions{
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 }
 
-.ply-form, .reply-form{
+.like form {
   display: inline-block;
 }
 
-.reply-form summary{
-  text-align: right;
+.active button{
+  background: red;
+}
+/*************************** FORM *************************/
+
+.input-area{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.post-form{
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+.post-form input[type=number]{
+  width: 50px;
+}
+
+.post-form .styling{
+  display: inline-block;
+  padding: 5px;
+}
+
+.post-form label{
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
 }
 
 /*Likes*/

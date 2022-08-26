@@ -1,0 +1,16 @@
+<div class="like <%= liked ? 'active' : '' %>">
+	<% if liked %>
+		<%= button_to like_path(post_id: post_id), method: 'delete' do %>
+			<%= svg(reaction) %>
+		<% end %> 
+	<% else %>
+		<%= button_to controller: 'likes',
+			action: 'create',
+			post_id: post_id,
+			reaction: reaction do 
+		%>
+			<%= svg(reaction) %>
+		<% end %> 
+	<% end %>
+	<span><%= count %></span>
+</div>

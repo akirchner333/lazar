@@ -1,17 +1,38 @@
 class LikesController < ApplicationController
+	before_action :find_post, only: %i[create destroy]
+
 	def create
-		# make a like...
+		@post.likes.create(user_id: Current.user.id, reaction: params[:reaction])
+
+		# In time, redirect to nothing
+		# Just some ajax
+		redirect_to @post
+	end
+
+	def destroy
+		Like.where(user_id: Current.user.id, post_id: @post.id).delete_all
+
+		redirect_to @post
 	end
 
 	def user_index
 		@likes = Post
-			.joins(:likes)
+			.with_likes(Current.user.id)
 			.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
 	end
 
 	def index
 		@likes = Post
-			.joins(:likes)
+			.with_likes(Current.user.id)
 			.where('likes.reaction' => params["reaction"], 'likes.user_id' => params["user"])
+	end
+
+	private
+	def like_params
+		params.require(:like).permit(:post_id, :reaction)
+	end
+
+	def find_post
+		@post = Post.find(params[:post_id])
 	end
 end

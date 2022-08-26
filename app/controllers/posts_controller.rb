@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
 	def index
 		if ENV['SITE_LIVE'] == 'true'
-			@posts = Post.all.where(generation: 6).order(created_at: :asc).limit(500)
+			@posts = Post.all
+				.with_likes(Current.user.id)
+				.where(generation: 6)
+				.order(created_at: :asc)
+				.limit(500)
 			@params = params
 			@new_post = Post.new
 		else
@@ -10,13 +14,11 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@post = Post.find(params[:id])
+		@post = Post.with_likes(Current.user.id).find(params[:id])
 		@new_post = Post.new
 	end
 
 	def create
-		p "g" * 666
-		p post_params
 		@post = Post.new(
 			words: post_params[:words], 
 			user: Current.user,

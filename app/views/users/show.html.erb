@@ -1,13 +1,11 @@
 <h2 class="username"><%= @user.username %></h2>
 
-<div class="likes">
-	<% %i[crab microphone obelisk].each do |reaction| %>
-		<div>
+<div class="user-likes">
+	<% %i[crab microphone obelisk].each do |reaction| %><div>
 			<%= link_to "/#{@user.id}/likes/#{reaction}" do %>
 				<%= image_tag "#{reaction}.svg", height: "50px", alt: reaction %>
 			<% end %>
-		</div>
-	<% end %>
+	</div><% end %>
 </div>
 <section>
 	<div id="timeline">

@@ -5,8 +5,16 @@
 			<%= form.text_area :words, size: "50x5" %>
 		</div>
 
-		<%= form.hidden_field(:plies, value: plies) %>
-		<%= form.hidden_field(:replies, value: replies) %>
+		<div>
+			<strong>Replies</strong>
+		</div>
+
+		<div>
+			<strong>Plies</strong>
+		</div>
+
+		<%= form.hidden_field(:plies, value: []) %>
+		<%= form.hidden_field(:replies, value: []) %>
 
 		<div>
 			<%= form.submit %>
