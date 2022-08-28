@@ -9,6 +9,6 @@
 </div>
 <section>
 	<div id="timeline">
-		<%= render partial: "posts/posts", locals: {posts: @user.posts.order(created_at: :desc)} %>
+		<%= render partial: "posts/posts", locals: {posts: @user.posts.with_likes(Current.user.id).order(created_at: :desc)} %>
 	</div>
 </section>

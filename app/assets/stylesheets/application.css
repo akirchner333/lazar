@@ -52,6 +52,14 @@ h2 {
   border: 1px solid black;
 }
 
+footer{
+  background: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /* _______________ HEADER ___________________ */
 .user-bar{
   display: flex;

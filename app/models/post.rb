@@ -13,6 +13,7 @@ class Post < ApplicationRecord
 		association_foreign_key: :ply_id
 	has_many :likes
 
+	validates :words, length: { maximum: 142 }
 
 	def self.with_likes(user_id)
 		with_like_counts.liked_by(user_id)

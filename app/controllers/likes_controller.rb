@@ -4,15 +4,24 @@ class LikesController < ApplicationController
 	def create
 		@post.likes.create(user_id: Current.user.id, reaction: params[:reaction])
 
-		# In time, redirect to nothing
-		# Just some ajax
-		redirect_to @post
+		respond_to do |format|
+			p format
+			format.html { redirect_to @post }
+			format.json { head :no_content }
+			format.js { }
+		end
 	end
 
 	def destroy
-		Like.where(user_id: Current.user.id, post_id: @post.id).delete_all
+		Like
+			.where(user_id: Current.user.id, post_id: @post.id, reaction: params["reaction"])
+			.delete_all
 
-		redirect_to @post
+		respond_to do |format|
+			format.html { redirect_to @post }
+			format.json { head :no_content }
+			format.js { }
+		end
 	end
 
 	def user_index

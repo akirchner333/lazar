@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :posts, only: %i[index show create]
   resources :users, only: %i[new create update show]
 
-
   get 'sign_up', to: 'users#new'
   post 'sign_up', to: 'users#create'
 
@@ -17,10 +16,12 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
+  resources :likes, only: %i[create]
   get 'likes/:reaction', to: 'likes#user_index'
   delete 'likes', to: 'likes#destroy'
   get ':user/likes/:reaction', to: 'likes#index'
-  resources :likes, only: %i[create destroy]
+
+  get 'random', to: 'posts#random'
 
   # Should let people update / restore their passwords, so there'd be paths for that
   # But that can wait till later

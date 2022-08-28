@@ -1,13 +1,14 @@
 <div class="like <%= liked ? 'active' : '' %>">
 	<% if liked %>
-		<%= button_to like_path(post_id: post_id), method: 'delete' do %>
+		<%= button_to likes_path(post_id: post_id, reaction: reaction), method: 'delete', remote: true do %>
 			<%= svg(reaction) %>
 		<% end %> 
 	<% else %>
 		<%= button_to controller: 'likes',
 			action: 'create',
 			post_id: post_id,
-			reaction: reaction do 
+			reaction: reaction,
+			remote: true do 
 		%>
 			<%= svg(reaction) %>
 		<% end %> 
