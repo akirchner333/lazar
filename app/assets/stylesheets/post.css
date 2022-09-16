@@ -73,43 +73,59 @@
   background: red;
 }
 /*************************** FORM *************************/
+.hide {
+  display: none !important;
+}
 
-.input-area{
+#modal-background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  padding-bottom: 50px;
+  align-items: center;
 }
 
-.post-form{
-  padding: 20px;
+#post-form{
   border-radius: 10px;
+  padding: 20px;
+  width: 50vw;
+  background: white;
+  border: 3px solid black;
   z-index: 1;
-  position: fixed;
-  top: 50px;
-  left: 50px;
 }
 
-.post-form input[type=number]{
-  width: 50px;
-}
-
-.post-form .styling{
-  display: inline-block;
-  padding: 5px;
-}
-
-.post-form label{
+#post-form label{
   font-weight: bold;
 }
 
-.hide {
-  display: none;
+#post-form th{
+  font-weight: bold;
 }
 
-/*Likes*/
+#post-form table{
+  width: 100%;
+}
+
+#post-form tr{
+  text-align: left;
+}
+
+#post-form svg{
+  height: 20px;
+}
+
+/* --------------------------- Likes -------------------------------*/
 
 .post svg {
   color: black;
   width: 20px;
   height: 20px;
+}
+
+.short-post {
+  background: beige;
 }

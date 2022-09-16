@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   resources :likes, only: %i[create]
-  get 'likes/:reaction', to: 'likes#user_index'
+  get 'likes/:reaction', to: 'likes#user_index', as: 'user_likes'
   delete 'likes', to: 'likes#destroy'
   get ':user/likes/:reaction', to: 'likes#index'
 

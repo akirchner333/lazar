@@ -25,9 +25,15 @@ class LikesController < ApplicationController
 	end
 
 	def user_index
-		@likes = Post
-			.with_likes(Current.user.id)
-			.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
+		p "Starting the old likes cotnroller!"
+		if turbo_frame_request?
+			p "I know this a turbo frame"
+		else
+			p "I don't think this is a frame"
+		end
+		# @likes = Post
+		# 	.with_likes(Current.user.id)
+		# 	.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
 	end
 
 	def index

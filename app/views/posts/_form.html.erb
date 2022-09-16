@@ -1,23 +1,45 @@
-<div class="post-form interactable-zone">
-	<%= form_with model: @new_post do |form| %>
-		<div>
-			<%= form.label :words %><br/>
-			<%= form.text_area :words, size: "50x3", maxlength: "142" %>
-		</div>
+<div id="modal-background" class="xhide">
+	<div id="post-form">
+		<%= form_with model: @new_post do |form| %>
+			<div>
+				<%= form.label :words %><br/>
+				<%= form.text_area :words, size: "50x3", maxlength: "142" %>
+			</div>
 
-		<div>
-			<strong>Replies</strong>
-		</div>
+			<div class="connections">
+				<ul class="plies-list">
+					<li><strong>Plies</strong></li>
+				</ul>
 
-		<div>
-			<strong>Plies</strong>
-		</div>
+				<ul class="replies-list">
+					<li><strong>Replies</strong></li>
+				</ul>
+				<%= form.hidden_field(:plies, value: []) %>
 
-		<%= form.hidden_field(:plies, value: []) %>
-		<%= form.hidden_field(:replies, value: []) %>
+				<%= form.hidden_field(:replies, value: []) %>
+			</div>
 
-		<div>
-			<%= form.submit %>
-		</div>
-	<% end %>
+			<div>
+				<strong>Add Plies and Replies</strong>
+				<div>
+					<!-- <div>
+						<a href="/likes/crab" data-turbo-frame='likes'>
+							<%= svg("crab") %>	
+						</a>
+					</div> -->
+					<div><%= svg("microphone") %></div>
+					<div><%= svg("obelisk") %></div>
+				</div>
+				<turbo-frame id="likes">
+					<%= link_to 'click for crab', user_likes_path('crab'), data: {turbo_frame: 'likes'} %>
+				</turbo-frame>
+			</div>
+
+			<div>
+				<%= form.submit %>
+			</div>
+		<% end %>
+	</div>
 </div>
+
+<%= javas
