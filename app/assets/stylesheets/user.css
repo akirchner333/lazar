@@ -13,3 +13,18 @@
 	height: 100px;
 	fill: white;
 }
+
+.username{
+  font-size: 80px;
+  word-break: break-all;
+  text-transform: uppercase;
+}
+
+.likes {
+  display: flex;
+  justify-content: center;
+}
+
+.likes div{
+  margin: 0 15px;
+}

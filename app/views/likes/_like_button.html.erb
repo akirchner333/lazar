@@ -1,17 +1,19 @@
-<div class="like <%= liked ? 'active' : '' %>">
-	<% if liked %>
-		<%= button_to likes_path(post_id: post_id, reaction: reaction), method: 'delete', remote: true do %>
-			<%= svg(reaction) %>
-		<% end %> 
-	<% else %>
-		<%= button_to controller: 'likes',
-			action: 'create',
-			post_id: post_id,
-			reaction: reaction,
-			remote: true do 
-		%>
-			<%= svg(reaction) %>
-		<% end %> 
-	<% end %>
-	<span><%= count %></span>
-</div>
+<turbo-frame id="<%= "#{reaction}-#{post_id}"%>">
+	<div class="like <%= liked ? 'active' : '' %>">
+		<% if liked %>
+			<%= button_to likes_path(post_id: post_id, reaction: reaction), method: 'delete', remote: true do %>
+				<%= svg(reaction) %>
+			<% end %> 
+		<% else %>
+			<%= button_to controller: 'likes',
+				action: 'create',
+				post_id: post_id,
+				reaction: reaction,
+				remote: true do 
+			%>
+				<%= svg(reaction) %>
+			<% end %> 
+		<% end %>
+		<span><%= count %></span>
+	</div>
+</turbo-frame>

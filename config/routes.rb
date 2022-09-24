@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'random', to: 'posts#random'
 
+  get 'help', to: 'static#help'
+
   # Should let people update / restore their passwords, so there'd be paths for that
   # But that can wait till later
 end

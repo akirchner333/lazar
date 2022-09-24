@@ -2,14 +2,14 @@ class LikesController < ApplicationController
 	before_action :find_post, only: %i[create destroy]
 
 	def create
-		@post.likes.create(user_id: Current.user.id, reaction: params[:reaction])
+		like = @post.likes.create(user_id: Current.user.id, reaction: params[:reaction])
 
-		respond_to do |format|
-			p format
-			format.html { redirect_to @post }
-			format.json { head :no_content }
-			format.js { }
-		end
+		render partial: 'like_button', locals: {
+			post_id: @post.id,
+			reaction: params[:reaction],
+			count: @post.likes.where(reaction: params[:reaction]).count,
+			liked: true
+		}
 	end
 
 	def destroy
@@ -17,29 +17,29 @@ class LikesController < ApplicationController
 			.where(user_id: Current.user.id, post_id: @post.id, reaction: params["reaction"])
 			.delete_all
 
-		respond_to do |format|
-			format.html { redirect_to @post }
-			format.json { head :no_content }
-			format.js { }
-		end
+		# render partial: 'like_button'
+
+		render partial: 'like_button', locals: {
+			post_id: @post.id,
+			reaction: params[:reaction],
+			count: @post.likes.where(reaction: params[:reaction]).count,
+			liked: false
+		}
 	end
 
 	def user_index
-		p "Starting the old likes cotnroller!"
-		if turbo_frame_request?
-			p "I know this a turbo frame"
-		else
-			p "I don't think this is a frame"
-		end
-		# @likes = Post
-		# 	.with_likes(Current.user.id)
-		# 	.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
+		@likes = Post
+			.with_likes(Current.user.id)
+			.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
+			.sort_method(params[:order])
+			.limit(20)
 	end
 
 	def index
 		@likes = Post
 			.with_likes(Current.user.id)
 			.where('likes.reaction' => params["reaction"], 'likes.user_id' => params["user"])
+			.sort_method(params[:order])
 	end
 
 	private

@@ -13,7 +13,7 @@ class Post < ApplicationRecord
 		association_foreign_key: :ply_id
 	has_many :likes
 
-	validates :words, length: { maximum: 142 }
+	validates :words, length: { minimum: 4, maximum: 142 }
 
 	def self.with_likes(user_id)
 		with_like_counts.liked_by(user_id)
@@ -39,6 +39,22 @@ class Post < ApplicationRecord
 			liked_by_sql(user_id, "obelisk")
 		)
 		.group('posts.id')
+	end
+
+	def self.sort_method(param)
+		case param
+		when 'alpha'
+			order(:words)
+		when 'revalpha'
+			order(words: :desc)
+		when 'chrono'
+			order(:created_at)
+		else
+			order(created_at: :desc)
+		end
+
+		# What else? Like count? plies/replies? Some other fucked up attributes?
+		# This is probably enough for now
 	end
 
 	private

@@ -1,4 +1,4 @@
-<div id="modal-background" class="xhide">
+<div id="modal-background" class="hide">
 	<div id="post-form">
 		<%= form_with model: @new_post do |form| %>
 			<div>
@@ -21,18 +21,15 @@
 
 			<div>
 				<strong>Add Plies and Replies</strong>
-				<div>
-					<!-- <div>
-						<a href="/likes/crab" data-turbo-frame='likes'>
-							<%= svg("crab") %>	
-						</a>
-					</div> -->
-					<div><%= svg("microphone") %></div>
-					<div><%= svg("obelisk") %></div>
+				<div class="get-likes">
+					<% %w[crab microphone obelisk].each do |react| %>
+						<%= link_to "/likes/#{react}", 'data-turbo-frame' => 'likes' do %>
+							<div class="like-button">
+								<%= svg(react) %>
+							</div><% end %>
+					<% end %>
 				</div>
-				<turbo-frame id="likes">
-					<%= link_to 'click for crab', user_likes_path('crab'), data: {turbo_frame: 'likes'} %>
-				</turbo-frame>
+				<turbo-frame id="likes"></turbo-frame>
 			</div>
 
 			<div>
@@ -41,5 +38,3 @@
 		<% end %>
 	</div>
 </div>
-
-<%= javas

@@ -3,8 +3,9 @@ class PostsController < ApplicationController
 		if ENV['SITE_LIVE'] == 'true'
 			@posts = Post.all
 				.with_likes(Current.user.id)
-				.order(words: :desc)
-				.limit(500)
+				.sort_method(params[:order])
+				.offset((params[:page].to_i || 0) * 30)
+				.limit(30)
 			@params = params
 			@new_post = Post.new
 		else
@@ -27,14 +28,14 @@ class PostsController < ApplicationController
 		if @post.save
 			post_params[:plies].split(' ').each do |id|
 				if id.present?
-					p "ply------#{id}"
+					# p "ply------#{id}"
 					@post.replies << Post.find(id)
 				end
 			end
 
 			post_params[:replies].split(' ').each do |id|
 				if id.present?
-					p "reply------#{id}"
+					# p "reply------#{id}"
 					@post.plies << Post.find(id)
 				end
 			end
