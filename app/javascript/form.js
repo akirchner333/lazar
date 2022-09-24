@@ -50,7 +50,7 @@ document.addEventListener('turbo:load', () => {
 	}
 
 	function addPost(item){
-		const ply = !item.getAttribute('class').includes('reply-button')
+		const ply = !item.getAttribute('class').includes('reply-button');
 		const responses = getResponses(ply)
 		const id = item.getAttribute('data-id');
 
@@ -60,7 +60,7 @@ document.addEventListener('turbo:load', () => {
 			}else{
 				replies = [...replies, id]
 			}
-			setResponses(	);
+			setResponses();
 			item.parentElement.parentElement.classList.add('selected');
 
 			const words = item.parentElement.parentElement.querySelector(".words").innerHTML;
@@ -90,7 +90,9 @@ document.addEventListener('turbo:load', () => {
 		}
 		setResponses();
 
-		parent.classList.remove('selected')
+		if(!replies.includes(id) && !plies.includes(id)){
+			parent.classList.remove('selected');
+		}
 	}
 
 	function getResponses(ply){

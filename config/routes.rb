@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index show create]
+  get '/posts/:id/replies', to: 'posts#replies'
+  get '/posts/:id/plies', to: 'posts#plies'
   resources :users, only: %i[new create update show]
 
   get 'sign_up', to: 'users#new'

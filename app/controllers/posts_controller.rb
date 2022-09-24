@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.new(
+		@post = Post.new(	
 			words: post_params[:words], 
 			user: Current.user,
 			generation: 6
@@ -49,6 +49,25 @@ class PostsController < ApplicationController
 	def random
 		id = Post.offset(rand(Post.count)).limit(1).pluck(:id)
 		redirect_to "/posts/#{id[0]}"
+	end
+
+	def plies
+		post = Post.find(params[:id])
+
+		render partial: 'carousel', locals: {
+			post_id: post.id,
+			posts: post.plies.with_likes(Current.user.id),
+			up: true
+		}
+	end
+
+	def replies
+		post = Post.find(params[:id])
+		render partial: 'carousel', locals: {
+			post_id: post.id,
+			posts: post.replies.with_likes(Current.user.id),
+			up: false
+		}
 	end
 
 	private

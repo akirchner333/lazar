@@ -1,5 +1,5 @@
 <turbo-frame id="likes">
-	<div>
+	<div class="user-likes-box">
 		<% @likes.each do |post| %>
 			<div class="post">
 				<div class="post-header">
@@ -13,11 +13,11 @@
 				</div>
 				<div class="words"><%= post.words %></div>
 				<div class="post-interactions">
-					<div class="ply-button add-post" data-id="<%= post.id %>">
-						<%= svg('ply') %>
+					<div class="ply-button-small add-post" data-id="<%= post.id %>">
+						<%= svg('arrow_up') %>
 					</div>
-					<div class="reply-button add-post" data-id="<%= post.id %>">
-						<%= svg('reply') %>
+					<div class="reply-button-small add-post" data-id="<%= post.id %>">
+						<%= svg('arrow_down') %>
 					</div>
 				</div>
 			</div>

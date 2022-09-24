@@ -47,12 +47,12 @@ h2 {
 }
 
 .interactable-zone{
-  background: white;
+  background: oldlace;
   border: 1px solid black;
 }
 
 footer{
-  background: white;
+  background: oldlace;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -124,7 +124,7 @@ footer{
 }
 
 .sso-box{
-  background: white;
+  background: oldlace;
   border: 1px solid black;
   padding: 5px;
 }

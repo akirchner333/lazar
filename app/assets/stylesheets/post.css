@@ -2,7 +2,7 @@
 #timeline {
   display: flex;
   align-items: top;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   height: 100%;
   padding: 40px;
@@ -17,23 +17,77 @@
   overflow-y: scroll;
 }
 
-.wide-columns .posts-list{
-  width: 80vw;
-}
-
 .show-post{
   display: flex;
   align-items: start;
-  width: 100%;
-  height: 80vh;
+  width: 60vw;
+  margin: auto;
+  font-size: 20px;
 }
 
+.arrow{
+  fill: oldlace;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+/* ----------------- carousel ------------------ */
+.posts-carousel{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  position: static;
+  justify-content: center;
+}
+
+.post-row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  position: static;
+  justify-content: center;
+}
+
+.carousel-post{
+  display: none;
+  position: relative;
+}
+
+.carousel-post .post{
+  width: 50vw;
+}
+
+.posts-carousel .carousel-active{
+  display: block;
+}
+
+.posts-carousel .nav svg{
+  height: 50px;
+  width: 50px;
+  fill: oldlace;
+  cursor: pointer;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.count{
+  color: oldlace;
+  font-weight: bold;
+}
+
+.button-row{
+  text-align: center;
+}
 
 /* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
 .post{
   padding: 10px;
   border: 0.5px solid black;
   border-radius: 4px;
+  width: 100%;
   text-align: left;
   background-color: oldlace;
   color: black;
@@ -43,16 +97,6 @@
 .post-header{
   display: flex;
   justify-content: space-between;
-}
-
-.user{
-  /*max-width: 50%;*/
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-transform: uppercase;
-  word-break: break-all;
-  padding-right: 8px;
 }
 
 .post-interactions{
@@ -66,7 +110,28 @@
 }
 
 .active button{
-  background: red;
+  background: salmon;
+}
+
+.connections{
+  display: flex;
+  flex-direction: row;
+}
+
+.plies-list, .replies-list{
+  width: 50%;
+  list-style: square;
+  height: 20vh;
+  overflow-y: scroll;
+}
+
+.user-likes-box{
+  height: 20vh;
+  overflow-y:  scroll;
+}
+
+.user-likes-box .post{
+  width: unset;
 }
 
 /*************************** FORM *************************/
@@ -90,7 +155,7 @@
   border-radius: 10px;
   padding: 20px;
   width: 50vw;
-  background: white;
+  background: oldlace;
   border: 3px solid black;
   z-index: 1;
 }
@@ -133,7 +198,7 @@
 }
 
 #likes .selected {
-  background: red;
+  background: salmon;
 }
 
 /* --------------------------- Likes -------------------------------*/
@@ -146,34 +211,4 @@
 
 .short-post {
   background: oldlace;
-}
-
-/* ---- bracket */
-.bracket{
-  display: flex;
-  height: 80vh;
-  width: 60px;
-  align-items: start;
-  padding: 0 5px;
-}
-
-.bracket svg{
-  fill: white;
-  width: 40px;
-  height: 60px;
-}
-
-.right-bracket, .left-bracket{
-  height: 100%;
-  width: 20px;
-  border-color: white;
-  border-style: solid;
-}
-
-.bracket .right-bracket{
-  border-width: 8px 8px 8px 0;
-}
-
-.bracket .left-bracket{
-  border-width: 8px 0 8px 8px;
 }

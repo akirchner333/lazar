@@ -1,4 +1,4 @@
-<li class="post" data-id="<%= post.id %>">
+<div class="post" data-id="<%= post.id %>">
 	<div class="post-header">
 		<div class="user">
 			<%= link_to post.user.username, user_path(post.user.id) %>
@@ -13,7 +13,7 @@
 	</div>
 	<% if Current.user %>
 		<div class="post-interactions">
-			<div class="ply-button add-post" data-id="<%= post.id %>">
+			<div class="reply-button add-post" data-id="<%= post.id %>">
 				<%= svg('ply') %>
 			</div>
 			<%= render partial: 'likes/like_button', locals: {
@@ -34,9 +34,9 @@
 				count: post.obelisk_count,
 				liked: post.obelisk_liked
 			} %>
-			<div class="reply-button add-post" data-id="<%= post.id %>">
+			<div class="ply-button add-post" data-id="<%= post.id %>">
 				<%= svg('reply') %>
 			</div>
 		</div>
 	<% end %>
-</li>
+</div>
