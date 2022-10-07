@@ -1,6 +1,18 @@
 document.addEventListener('turbo:load', () => {
 	document.querySelectorAll('.posts-carousel').forEach((carousel) => {
-		const posts = carousel.querySelectorAll('.carousel-post')
+		loadCarousel(carousel)
+	});
+});
+
+document.addEventListener('turbo:frame-render', (event) => {
+	event.target.querySelectorAll('.posts-carousel').forEach((carousel) => {
+		loadCarousel(carousel)
+	});
+});
+
+function loadCarousel(carousel){
+	const posts = carousel.querySelectorAll('.carousel-post')
+	if(posts.length > 0){
 		const length = posts.length;
 		let index = 0;
 
@@ -27,8 +39,10 @@ document.addEventListener('turbo:load', () => {
 		});
 
 		function updateActive(){
-			carousel.querySelector('.carousel-active')?.classList?.remove('carousel-active');
+			for(let i = 0; i < carousel.children.length; i++){
+				carousel.children[i].classList.remove('carousel-active');
+			}
 			posts[index].classList.add('carousel-active');
 		}
-	});
-});
+	}
+}

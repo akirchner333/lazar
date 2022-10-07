@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
 	belongs_to :user
+	# default_scope { order(:words)}
 	
 	has_and_belongs_to_many :plies,
 		class_name: "Post", 
@@ -15,8 +16,18 @@ class Post < ApplicationRecord
 
 	validates :words, length: { minimum: 4, maximum: 142 }
 
-	def self.with_likes(user_id)
-		with_like_counts.liked_by(user_id)
+	def self.with_everything(user, params)
+		scope = with_like_counts
+			.sort_method(params[:order])
+			.offset((params[:page].to_i || 0) * 30)
+			.limit(30)
+
+		if user
+			scope.liked_by(user.id)
+		else
+			scope
+		end
+
 	end
 
 	def self.with_like_counts
@@ -49,8 +60,10 @@ class Post < ApplicationRecord
 			order(words: :desc)
 		when 'chrono'
 			order(:created_at)
-		else
+		when 'revchrono'
 			order(created_at: :desc)
+		else
+			order(:words)
 		end
 
 		# What else? Like count? plies/replies? Some other fucked up attributes?

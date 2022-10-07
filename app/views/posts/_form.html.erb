@@ -3,7 +3,7 @@
 		<%= form_with model: @new_post do |form| %>
 			<div>
 				<%= form.label :words %><br/>
-				<%= form.text_area :words, size: "50x3", maxlength: "142" %>
+				<%= form.text_area :words, size: "50x3", minlength: 4, maxlength: "142" %>
 			</div>
 
 			<div class="connections">

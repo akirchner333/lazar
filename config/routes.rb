@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "posts#index"
+  root "static#landing"
 
   if ENV['SITE_LIVE'] != 'true'
     get '*path', to: redirect('/')

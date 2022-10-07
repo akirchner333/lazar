@@ -16,10 +16,12 @@ class SessionsController < ApplicationController
 
 	def omniauth
 		@user = User.from_omniauth(auth)
-		@user.save
-		session[:user_id] = @user.id
-		redirect_to root_path, notice: "Logged in"
-		# Are there any scenarios in which omniauth would fail?
+		if @user.save
+			session[:user_id] = @user.id
+			redirect_to root_path, notice: "Logged in"
+		else
+			redirect_to root_path, notice: @user.errors
+		end
 	end
 
 	def destroy

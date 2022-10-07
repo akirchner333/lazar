@@ -29,17 +29,14 @@ class LikesController < ApplicationController
 
 	def user_index
 		@likes = Post
-			.with_likes(Current.user.id)
 			.where('likes.reaction' => params["reaction"], 'likes.user_id' => Current.user.id)
-			.sort_method(params[:order])
-			.limit(20)
+			.with_everything(Current.user, params)
 	end
 
 	def index
 		@likes = Post
-			.with_likes(Current.user.id)
 			.where('likes.reaction' => params["reaction"], 'likes.user_id' => params["user"])
-			.sort_method(params[:order])
+			.with_everything(Current.user, params)
 	end
 
 	private

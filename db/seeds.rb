@@ -22,21 +22,30 @@ def load_play(file, start, offset)
 			character.save
 		end
 
-		post = Post.create(
+		words = line['line']
+		if words.length < 4
+			words += "    "
+		end				
+		post = Post.new(
 			words: line['line'],
 			user_id: character.id,
 			generation: 6,
-			created_at: start + (100 * line['num'].to_i + offset).seconds,
+			created_at: start + (line['num'].to_i + offset).seconds,
 			css: ""
 		)
-		if previous
-			previous.replies << post
+		if post.save
+			if previous
+				previous.replies << post
+			end
+			previous = post
+		else
+			p post.errors
+			p words
 		end
-		previous = post
 	end
 	p "Saved #{file} to database"
 end
 
 start = DateTime.now
 load_play('macbeth', start, 0)
-load_play('errors', start, 50)
+load_play('tempest', start, 0.5)

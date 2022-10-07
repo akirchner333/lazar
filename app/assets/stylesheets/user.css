@@ -20,6 +20,10 @@
   text-transform: uppercase;
 }
 
+.user-link{
+	text-transform: uppercase;
+}
+
 .likes {
   display: flex;
   justify-content: center;

@@ -1,10 +1,6 @@
-<section class="input-area">
-	<% if !Current.user %>
-		<%= render 'posts/signin' %>
-	<% end %>
-</section>
-
 <section id="timeline" class="wide-columns">
 	<%= render partial: 'posts', locals:  {posts: @posts} %>
 	<%= render partial: 'posts/form' %>
 </section>
+
+<%= render partial: 'posts/form' %>

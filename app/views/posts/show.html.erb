@@ -1,11 +1,10 @@
 <section id="timeline">
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @post.plies.with_likes(Current.user.id).sort_method(params[:order]), up: true} %>
+	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @plies, up: true} %>
 	
 	<div class="show-post">
 			<%= render partial: 'posts/post', locals: {post: @post} %>
 	</div>
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @post.replies.with_likes(Current.user.id).sort_method(params[:order]), up: false} %>
-
-	
-	<%= render partial: 'posts/form' %>
+	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @replies, up: false} %>
 </section>
+
+<%= render partial: 'posts/form' %>

@@ -6,8 +6,8 @@
 				<div class="button-row">
 					<% if up %>
 						<turbo-frame id="post_<%= post.id %>_plies">
-							<%= link_to "/posts/#{post.id}/plies" do%>
-								<div class="nav">
+							<%= link_to "/posts/#{post.id}/plies" do %>
+								<div class="nav <%= post.plies.count > 0 ? '' : 'hidden' %>">
 									<%= svg('up') %>
 								</div>
 							<% end %>
@@ -36,7 +36,7 @@
 					<% if !up %>
 						<turbo-frame id="post_<%= post.id %>_replies">
 							<%= link_to "/posts/#{post.id}/replies" do%>
-								<div class="nav">
+								<div class="nav <%= post.replies.count > 0 ? '' : 'hidden' %>">
 									<%= svg('down') %>
 								</div>
 							<% end %>

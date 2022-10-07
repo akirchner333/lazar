@@ -1,7 +1,5 @@
 <div class="post-column">
-	<ul class="posts-list">
-		<% posts.each do |post| %>
-			<%= render partial: 'posts/post', locals: {post: post, left_line: local_assigns.dig(:left_line), right_line: local_assigns.dig(:right_line)} %>
-		<% end %>
-	</ul>
+	<% posts.each do |post| %>
+		<%= render partial: 'posts/post', locals: {post: post, left_line: local_assigns.dig(:left_line), right_line: local_assigns.dig(:right_line)} %>
+	<% end %>
 </div>

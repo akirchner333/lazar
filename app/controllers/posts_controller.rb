@@ -1,11 +1,7 @@
 class PostsController < ApplicationController
 	def index
 		if ENV['SITE_LIVE'] == 'true'
-			@posts = Post.all
-				.with_likes(Current.user.id)
-				.sort_method(params[:order])
-				.offset((params[:page].to_i || 0) * 30)
-				.limit(30)
+			@posts = Post.with_everything(Current.user, params)
 			@params = params
 			@new_post = Post.new
 		else
@@ -14,7 +10,9 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@post = Post.with_likes(Current.user.id).find(params[:id])
+		@post = Post.with_everything(Current.user, params).find(params[:id])
+		@plies = @post.plies.with_everything(Current.user, params)
+		@replies = @post.replies.with_everything(Current.user, params)
 		@new_post = Post.new
 	end
 
@@ -29,14 +27,14 @@ class PostsController < ApplicationController
 			post_params[:plies].split(' ').each do |id|
 				if id.present?
 					# p "ply------#{id}"
-					@post.replies << Post.find(id)
+					@post.plies << Post.find(id)
 				end
 			end
 
 			post_params[:replies].split(' ').each do |id|
 				if id.present?
 					# p "reply------#{id}"
-					@post.plies << Post.find(id)
+					@post.replies << Post.find(id)
 				end
 			end
 
@@ -56,7 +54,7 @@ class PostsController < ApplicationController
 
 		render partial: 'carousel', locals: {
 			post_id: post.id,
-			posts: post.plies.with_likes(Current.user.id),
+			posts: post.plies.with_everything(Current.user, params),
 			up: true
 		}
 	end
@@ -65,7 +63,7 @@ class PostsController < ApplicationController
 		post = Post.find(params[:id])
 		render partial: 'carousel', locals: {
 			post_id: post.id,
-			posts: post.replies.with_likes(Current.user.id),
+			posts: post.replies.with_everything(Current.user, params),
 			up: false
 		}
 	end

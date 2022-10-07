@@ -20,9 +20,12 @@
 .show-post{
   display: flex;
   align-items: start;
-  width: 60vw;
   margin: auto;
   font-size: 20px;
+}
+
+.show-post .post{
+  width: 60vw;
 }
 
 .arrow{
@@ -87,7 +90,6 @@
   padding: 10px;
   border: 0.5px solid black;
   border-radius: 4px;
-  width: 100%;
   text-align: left;
   background-color: oldlace;
   color: black;
@@ -149,6 +151,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 #post-form{

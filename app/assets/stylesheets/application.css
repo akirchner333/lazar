@@ -17,6 +17,7 @@
 body{
   background: midnightblue;
   margin: 0px;
+  position: relative;
 }
 
 h1 {
@@ -31,6 +32,7 @@ h1 a{
 
 h2 {
   text-align: center;
+  color: oldlace;
 }
 
 .lazar {
@@ -49,14 +51,18 @@ h2 {
 .interactable-zone{
   background: oldlace;
   border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
 }
 
 footer{
+  box-sizing: border-box;
   background: oldlace;
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
 
 /* _______________ HEADER ___________________ */
@@ -129,7 +135,21 @@ footer{
   padding: 5px;
 }
 
-/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& USERS &&&&&&&&&&&&&&&&&&&&&&&& */
+
+
+
 #help{
   background: oldlace;
+  margin: 20px;
+  padding: 5px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center
+}
+
+.logo svg{
+  height: 600px;
+  padding: 20px;
 }

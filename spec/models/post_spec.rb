@@ -46,18 +46,5 @@ RSpec.describe Post, type: :model do
       expect(post.microphone_count).to eql 1
       expect(post.obelisk_count).to eql 1
     end
-
-    context('with_likes') do
-      it 'combines the above' do
-        create :like, user_id: user.id, post_id: post.id, reaction: 'crab'
-
-        post = Post.with_likes(user.id).first
-        expect(post.crab_liked).to be true
-        expect(post.crab_count).to eql 1
-
-        expect(post.obelisk_liked).to be false
-        expect(post.obelisk_count).to be 0
-      end
-    end
   end
 end

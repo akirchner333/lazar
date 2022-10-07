@@ -11,13 +11,9 @@ document.addEventListener('turbo:load', () => {
 			}
 		});
 
-		[
-			...document.querySelectorAll(".reply-button"),
-			...document.querySelectorAll(".ply-button")
-		].forEach((item) => {
-			item.addEventListener('click', (event) => {
-				openForm(item);
-			})
+		enableButtons(document);
+		document.addEventListener('turbo:frame-render', (event) => {
+			enableButtons(event.target);
 		});
 
 		document.querySelector("#likes").addEventListener('turbo:frame-load', (event) => {
@@ -31,6 +27,17 @@ document.addEventListener('turbo:load', () => {
 					item.parentElement.parentElement.classList.add('selected');
 				}
 			});
+		});
+	}
+
+	function enableButtons(target){
+		[
+			...target.querySelectorAll(".reply-button"),
+			...target.querySelectorAll(".ply-button")
+		].forEach((item) => {
+			item.addEventListener('click', (event) => {
+				openForm(item);
+			})
 		});
 	}
 
