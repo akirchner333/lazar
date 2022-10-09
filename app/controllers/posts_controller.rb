@@ -1,12 +1,8 @@
 class PostsController < ApplicationController
 	def index
-		if ENV['SITE_LIVE'] == 'true'
-			@posts = Post.with_everything(Current.user, params)
-			@params = params
-			@new_post = Post.new
-		else
-			render 'static/not_live'
-		end
+		@posts = Post.with_everything(Current.user, params)
+		@params = params
+		@new_post = Post.new
 	end
 
 	def show
