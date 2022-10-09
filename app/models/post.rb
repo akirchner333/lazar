@@ -17,10 +17,11 @@ class Post < ApplicationRecord
 	validates :words, length: { minimum: 4, maximum: 142 }
 
 	def self.with_everything(user, params)
-		scope = with_like_counts
+		scope =
+			limit(30)
+			.with_like_counts
 			.sort_method(params[:order])
 			.offset((params[:page].to_i || 0) * 30)
-			.limit(30)
 
 		if user
 			scope.liked_by(user.id)
