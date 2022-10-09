@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   viewBox="0 0 1200 1200"
+   preserveAspectRatio="none"
+   id="svg4"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   class="arrow-up">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3122"
+     inkscape:window-height="1480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.19666667"
+     inkscape:cx="-950.84745"
+     inkscape:cy="600.00001"
+     inkscape:window-x="144"
+     inkscape:window-y="54"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 678.7228,521.2828 v 393.6 c 0,8.6914 -7.0547,15.742 -15.746,15.742 h -125.95 c -8.6914,0 -15.746,-7.0508 -15.746,-15.742 v -393.6 h -110.21 c -6.1562,0 -11.73,-3.5742 -14.312,-9.1641 -2.5664,-5.5898 -1.6367,-12.152 2.3633,-16.828 l 188.93,-220.42 c 2.9922,-3.4805 7.3555,-5.4961 11.953,-5.4961 4.5938,0 8.957,2.0156 11.949,5.4961 l 188.93,220.42 c 4,4.6758 4.9297,11.238 2.3633,16.828 -2.582,5.5898 -8.1562,9.1641 -14.312,9.1641 h -110.21 z"
+     id="path2"
+     inkscape:connector-curvature="0"
+     style="fill-rule:evenodd" />
+</svg>
