@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	def index
-		@posts = Post.with_everything(Current.user, params)
+		@posts = Post.limit(30).offset((params[:page].to_i || 0) * 30).order(created_at: :desc)
 		@params = params
 		@new_post = Post.new
 	end
