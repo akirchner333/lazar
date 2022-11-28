@@ -1,6 +1,6 @@
 class ActivityPubController < ApplicationController
 	skip_before_action :verify_authenticity_token
-	
+
 	def webfinger
 		render :json => {
 			subject: "acct:lazar@#{ENV['URL']}",
@@ -60,7 +60,9 @@ class ActivityPubController < ApplicationController
 		response = HTTP.headers({ 'Host': 'mastodon.social', 'Date': date, 'Signature': header })
 				    .post('https://mastodon.social/inbox', body: document)
 
+		p response
 
+		render response.read_body
 	end
 
 	def inbox
