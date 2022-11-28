@@ -2,6 +2,8 @@ class ActivityPubController < ApplicationController
 	skip_before_action :verify_authenticity_token
 
 	def webfinger
+		# TODO: Return this if they're asking for lazar
+		# Otherwise, nothing
 		render :json => {
 			subject: "acct:lazar@#{ENV['URL']}",
 			links: [
@@ -38,12 +40,12 @@ class ActivityPubController < ApplicationController
 		    "@context" => "https://www.w3.org/ns/activitystreams",
 		    id: "#{ENV['url']}/create-hello-world",
 		    type: "Create",
-		    actor: "#{ENV['url']}/actor",
+		    actor: "https://#{ENV['url']}/actor",
 		    object: {
-		        id: "#{ENV['url']}/hello-world",
+		        id: "https://#{ENV['url']}/hello-world",
 		        type: "Note",
 		        published: rfc_date,
-		        attributedTo: "#{ENV['url']}/actor",
+		        attributedTo: "https://#{ENV['url']}/actor",
 		        inReplyTo: "https://mastodon.social/@an_alexa_k/109334295008358033",
 		        content: "<p>Hello World</p>",
 		        to: "https://www.w3.org/ns/activitystreams#Public"
@@ -55,14 +57,14 @@ class ActivityPubController < ApplicationController
 		keypair       = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 		signed_string = "(request-target): post /inbox\nhost: mastodon.social\ndate: #{date}"
 		signature     = Base64.strict_encode64(keypair.sign(OpenSSL::Digest::SHA256.new, signed_string))
-		header        = "keyId=\"#{}/actor\",headers=\"(request-target) host date\",signature=\"#{signature}\""
+		header        = "keyId=\"https://#{ENV['url']}/actor\",headers=\"(request-target) host date\",signature=\"#{signature}\""
 
 		response = HTTP.headers({ 'Host': 'mastodon.social', 'Date': date, 'Signature': header })
 				    .post('https://mastodon.social/inbox', body: document)
 
 		p response
 
-		render response.read_body
+		render response
 	end
 
 	def inbox
