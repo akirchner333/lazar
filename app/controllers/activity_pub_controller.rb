@@ -1,6 +1,3 @@
-require 'http'
-require 'openssl'
-
 class ActivityPubController < ApplicationController
 	def webfinger
 		render :json => {
@@ -61,7 +58,7 @@ class ActivityPubController < ApplicationController
 		response = HTTP.headers({ 'Host': 'mastodon.social', 'Date': date, 'Signature': header })
 				    .post('https://mastodon.social/inbox', body: document)
 
-		
+
 	end
 
 	def inbox
