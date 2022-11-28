@@ -6,7 +6,7 @@ class StaticController < ApplicationController
 		if ENV['SITE_LIVE'] != 'true'
 			render 'not_live'
 		elsif Current.user
-			redirect_to "/random"
+			redirect_to "/posts"
 		end
 	end
 end

@@ -1,5 +1,5 @@
 <div class="post-column">
 	<% posts.each do |post| %>
-		<%= render partial: 'posts/post', locals: {post: post, left_line: local_assigns.dig(:left_line), right_line: local_assigns.dig(:right_line)} %>
+		<%= render partial: 'posts/post', locals: { post: post } %>
 	<% end %>
 </div>

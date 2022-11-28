@@ -1,10 +1,7 @@
-<section id="timeline">
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @plies, up: true} %>
-	
+<section id="timeline">	
 	<div class="show-post">
-			<%= render partial: 'posts/post', locals: {post: @post} %>
+		<%= render partial: 'posts/post', locals: {post: @post} %>
 	</div>
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @replies, up: false} %>
 </section>
 
 <%= render partial: 'posts/form' %>

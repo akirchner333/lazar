@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_26_031022) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_035501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,13 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_031022) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "plies_replies", id: false, force: :cascade do |t|
-    t.bigint "ply_id"
-    t.bigint "reply_id"
-    t.index ["ply_id"], name: "index_plies_replies_on_ply_id"
-    t.index ["reply_id"], name: "index_plies_replies_on_reply_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "words"
     t.string "css"
@@ -38,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_031022) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "generation", default: 5
+    t.bigint "posts_id"
+    t.index ["posts_id"], name: "index_posts_on_posts_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

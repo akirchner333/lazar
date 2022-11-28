@@ -9,8 +9,8 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "distance" %>
     <%= javascript_import_module_tag "form" %>
-    <%= javascript_import_module_tag "carousel" %>
     <%= favicon_link_tag asset_path('icon.png') %>
   </head>
 
@@ -29,7 +29,7 @@
       <% end %>
       <%= render "partials/flash" %>
     </header>
-    <h1 class="lazar"><%= link_to "Lazar,", root_path %></h1>
+    <h1 class="lazar"><%= link_to "+lazar+", root_path %></h1>
     <%= yield %>
     <footer>
       <div>

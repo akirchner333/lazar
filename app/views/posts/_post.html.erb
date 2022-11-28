@@ -13,28 +13,7 @@
 	</div>
 	<% if Current.user %>
 		<div class="post-interactions">
-			<div class="reply-button add-post" data-id="<%= post.id %>">
-				<%= svg('ply') %>
-			</div>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'crab',
-				count: post.crab_count,
-				liked: post.crab_liked
-			} %>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'microphone',
-				count: post.microphone_count,
-				liked: post.microphone_liked
-			} %>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'obelisk',
-				count: post.obelisk_count,
-				liked: post.obelisk_liked
-			} %>
-			<div class="ply-button add-post" data-id="<%= post.id %>">
+			<div class="reply-button" data-id="<%= post.id %>">
 				<%= svg('reply') %>
 			</div>
 		</div>

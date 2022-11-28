@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root "static#landing"
 
+  # --------------- ActivityPub ----------------------
+  get '/actor', to: 'activity_pub#actor'
+  get '/.well-known/webfinger', to: 'activity_pub#webfinger'
+  post '/reply', to: 'activity_pub#reply'
+
   if ENV['SITE_LIVE'] != 'true'
     get '*path', to: redirect('/')
   end
@@ -27,6 +32,8 @@ Rails.application.routes.draw do
 
   get 'help', to: 'static#help'
 
+  
+
   # Should let people update / restore their passwords, so there'd be paths for that
-  # But that can wait till later
+  # Until then, we lose access to our accounts like men
 end

@@ -35,56 +35,6 @@
   margin: auto;
 }
 
-/* ----------------- carousel ------------------ */
-.posts-carousel{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  position: static;
-  justify-content: center;
-}
-
-.post-row{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  position: static;
-  justify-content: center;
-}
-
-.carousel-post{
-  display: none;
-  position: relative;
-}
-
-.carousel-post .post{
-  width: 50vw;
-}
-
-.posts-carousel .carousel-active{
-  display: block;
-}
-
-.posts-carousel .nav svg{
-  height: 50px;
-  width: 50px;
-  fill: oldlace;
-  cursor: pointer;
-}
-
-.hidden{
-  visibility: hidden;
-}
-
-.count{
-  color: oldlace;
-  font-weight: bold;
-}
-
-.button-row{
-  text-align: center;
-}
-
 /* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
 .post{
   padding: 10px;
@@ -134,6 +84,11 @@
 
 .user-likes-box .post{
   width: unset;
+}
+
+.red{
+  color: darkred;
+  font-weight: bold;
 }
 
 /*************************** FORM *************************/

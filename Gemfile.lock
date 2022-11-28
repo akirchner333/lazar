@@ -104,6 +104,7 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.3)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -119,6 +120,9 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jwt (2.4.1)
+    levenshtein (0.2.2)
+    levenshtein-ffi (1.1.0)
+      ffi (~> 1.9)
     loofah (2.17.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -292,6 +296,8 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails
   jbuilder
+  levenshtein
+  levenshtein-ffi
   omniauth
   omniauth-google-oauth2
   omniauth-twitter

@@ -1,18 +1,5 @@
 <section id="timeline" class="wide-columns">
-	<% @posts.each do |post| %>
-		<div class="post" data-id="<%= post.id %>">
-			<div class="post-header">
-				<div class="user-link">
-					<%= link_to post.user.username, user_path(post.user.id), data: { turbo_frame: "_top" } %>
-				</div>
-				<div>
-					<%= post.created_at.strftime('%m/%d %H:%M') %>
-				</div>
-				<div class="link"><%= link_to "(_)", post, data: { turbo_frame: "_top" } %></div>
-			</div>
-			<div class="words">
-				<%= post.words %>
-			</div>
-		</div>
-	<% end %>
+	<%= render partial: "posts/posts", locals: {posts: @posts} %>
 </section>
+
+<%= render partial: 'posts/form' %>
