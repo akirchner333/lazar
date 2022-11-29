@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   root "static#landing"
 
   # --------------- ActivityPub ----------------------
-  get '/actor', to: 'activity_pub#actor'
-  get '/.well-known/webfinger', to: 'activity_pub#webfinger'
-  post '/reply', to: 'activity_pub#reply'
+  get '/.well-known/webfinger', to: 'finger#webfinger', module: 'pub'
+
+  namespace :pub do
+    get '/actor/:id', to: 'actor#actor'
+    post '/reply', to: 'actor#reply'
+  end
 
   if ENV['SITE_LIVE'] != 'true'
     get '*path', to: redirect('/')
