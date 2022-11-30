@@ -2,7 +2,7 @@ module Pub
 	class FingerController < ApplicationController
 		def webfinger
 			account = params[:resource].match(/acct:(.*)@lazar.social/)
-			if account.downcase == 'lazar'
+			if account && account[1] && account[1].downcase == 'lazar'
 				render :json => {
 					subject: "acct:lazar@#{ENV['URL']}",
 					links: [

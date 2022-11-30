@@ -2,6 +2,8 @@ module Pub
 	class ActorController < ApplicationController
 		skip_before_action :verify_authenticity_token
 
+		# I'd like to add some feature posts (probably the 4-5 most recent posts)
+		# And some boxes
 		def actor
 			summary = <<~HTML
 			<p>

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root "static#landing"
 
   # --------------- ActivityPub ----------------------
-  get '/.well-known/webfinger', to: 'finger#webfinger', module: 'pub'
+  scope module: 'pub' do
+    get '/.well-known/webfinger', to: 'finger#webfinger'
+  end
 
   namespace :pub do
     get '/actor/:id', to: 'actor#actor'
