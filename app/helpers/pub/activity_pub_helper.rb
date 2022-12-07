@@ -18,7 +18,7 @@ module Pub
 			sig = "signature=\"#{signature}\""
 
 			sig_header = "#{keyId},#{headers},#{sig}"
-			{ 'Host' => host, 'Date' => date, 'Signature' => sig_header }
+			{ Host: host, Date: date, Signature: sig_header }
 		end
 
 		def sig_check(req_headers)
@@ -47,6 +47,7 @@ module Pub
 			date = DateTime.parse(req_headers['Date'])
 			# Check the digest
 			# Check that the actor and who's following match
+			p 'run bool'
 			key.verify(OpenSSL::Digest::SHA256.new, signature, comparison_string) &&
 				date > 1.minute.ago
 		end
