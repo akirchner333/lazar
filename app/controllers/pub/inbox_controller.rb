@@ -6,7 +6,7 @@ module Pub
 		def inbox
 			p "Inbox times! #{params}"
 			if helpers.sig_check(request.headers)
-				if params['type'] == "Follow"
+				if params['type'] == "Follow" && params['actor'].ends_with?('lazar')
 					follower = PubFollower.create(actor_url: params['actor'])
 					inbox = follower.full_actor['inbox']
 					headers = helpers.http_signature(ENV['URL'])
