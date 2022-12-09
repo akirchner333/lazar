@@ -33,19 +33,9 @@ module Pub
 			end
 		end
 
-		def test
-			document = JSON.generate({hello: "hello!"})
-
-			headers = helpers.http_signature('localhost:3000')
-			# p headers
-			# response = HTTP.headers(headers)
-			# 		       .post('http://localhost:3000/pub/inbox', body: document)
-
-			# render plain: response.to_s, status: 200
-			curl_headers = headers.to_a.map do |kv|
-				"-H '#{kv[0]}: #{kv[1]}'"
-			end.join(' ')
-			render plain: "curl -X POST #{curl_headers} http://localhost:3000/pub/inbox\n" 
+		def inbox_test
+			p "Somebody is posting to /inbox"
+			p params
 		end
 	end
 end

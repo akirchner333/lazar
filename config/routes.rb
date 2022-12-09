@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # --------------- ActivityPub ----------------------
   scope module: 'pub' do
     get '/.well-known/webfinger', to: 'finger#webfinger'
+    post '/inbox', to: 'inbox#inbox_test'
   end
 
   namespace :pub do
