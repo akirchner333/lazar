@@ -28,10 +28,12 @@ module Pub
 				parts = pair.match(/(.*)=\"(.*)\"/)
 				[parts[1], parts[2]]
 			end.to_h
+			p "sig_header: #{sig_header}"
 
 			key_id = sig_header['keyId']
 			headers = sig_header['headers']
 			signature = Base64.decode64(sig_header['signature'])
+			p "Signature: #{signature}"
 
 			actor_response = HTTP.headers(
 				'Content-Type' => 'application/json',

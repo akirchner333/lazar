@@ -9,8 +9,8 @@ module Pub
 		def actor
 			summary = <<~HTML
 			<p>
-				Lazar dot social is a series of experiments into new forms of social media. 
-				Any and all posts made on lazar will appear on this account.
+				Every post made by anyone on lazar.social, the home of a series of
+				cutting edge social media experiments.
 			</p>
 			HTML
 
@@ -21,10 +21,18 @@ module Pub
 				],
 				id: "#{full_url}/pub/actor/#{params[:id]}",
 				type: "Application",
-				preferredUsername: "+lazar+",
+				# following: "",
+				# followers: "",
+				preferredUsername: "lazar",
+				name: "+lazar+",
 				inbox: "#{full_url}/pub/inbox",
+				# featured: "", <-- I'd like to do this. But it'll need another url
+				# featuredTags: "",
 				summary: summary,
 				url: "https://lazar.social",
+				manuallyApprovesFollowers: false,
+				discoverable: true,
+				published: "1937-01-01T00:00:00Z""
 				publicKey: {
 					id: "#{full_url}/pub/actor/lazar#main-key",
 					owner: "#{full_url}/pub/actor/lazar#main-key",
@@ -34,7 +42,23 @@ module Pub
 					type: "Image",
 					mediaType: "image/png",
 					url: "#{full_url}#{ActionController::Base.helpers.asset_path('lazar_icon.png')}"
-				}
+				},
+				# image: { //Put the header here
+				# 	type: "Image",
+				# 	mediaType: "image/png",
+				# 	url: ""
+				# },
+				attachment: [
+					{
+						type: "PropertyValue",
+						name: "Lazar is currently",
+						value: ENV['SITE_LIVE'] ? "awake" : "asleep"
+					},{
+						type: "PropertyValue",
+						name: "Current Generation",
+						value: "6"
+					}
+				]
 			}
 		end
 
