@@ -33,7 +33,13 @@ module Pub
 			headers = sig_header['headers']
 			signature = Base64.decode64(sig_header['signature'])
 
-			actor = JSON.parse(HTTP.get(key_id).to_s)
+			actor_response = HTTP.headers(
+				'Content-Type' => 'application/json',
+				'Accept': 'application/json'
+			).get(key_id)
+			return false unless actor_response.code == 200
+
+			actor = JSON.parse(actor_response.to_s)
 			key = OpenSSL::PKey::RSA.new(actor['publicKey']['publicKeyPem'])
 
 			comparison_string = headers.split(' ').map do |header_name|

@@ -5,7 +5,14 @@ class PubFollower < ApplicationRecord
 	# 	create(actor: params[:actor])
 	# end
 
+	# What should I do if the user gets deleted or moved?
 	def full_actor
-		JSON.parse(HTTP.get(actor_url))
+		response = HTTP.headers(
+			'Content-Type' => 'application/json',
+			'Accept': 'application/json'
+		).get(key_id)
+		# return false unless actor_response.code == 200
+
+		JSON.parse(response.to_s)
 	end
 end
