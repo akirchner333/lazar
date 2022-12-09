@@ -4,10 +4,11 @@ module Pub
 		skip_before_action :verify_authenticity_token
 
 		def inbox
-			p "Inbox times! #{request.body}"
+			body = JSON.parse(request.raw_post)
+			p "Inbox times! #{body}"
 			if helpers.sig_check(request.headers)
-				if request.body['type'] == "Follow" && request.body['actor'].ends_with?('lazar')
-					follower = PubFollower.create(actor_url: request.body['actor'])
+				if body['type'] == "Follow" && body['actor'].ends_with?('lazar')
+					follower = PubFollower.create(actor_url: body['actor'])
 					inbox = follower.full_actor['inbox']
 					headers = helpers.http_signature(ENV['URL'])
 					HTTP.headers(headers).post(inbox, body: {
@@ -18,12 +19,12 @@ module Pub
 					    id: `https://${domain}/${guid}`,
 					    type: 'Accept',
 					    actor: "https://#{ENV['URL']}/pub/actor/lazar",
-					    object: request.body,
+					    object: body,
 					})
-				elsif request.body['type'] == "Undo"
-					if request.body['object']['type'] == 'Follow'
+				elsif body['type'] == "Undo"
+					if body['object']['type'] == 'Follow'
 						# Unfollow
-						PubFollower.where(account_url: request.body['actor']).delete_all
+						PubFollower.where(account_url: body['actor']).delete_all
 						# What should we send back?
 					end
 				end
