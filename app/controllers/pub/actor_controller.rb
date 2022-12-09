@@ -32,7 +32,7 @@ module Pub
 				url: "https://lazar.social",
 				manuallyApprovesFollowers: false,
 				discoverable: true,
-				published: "1937-01-01T00:00:00Z""
+				published: "1937-01-01T00:00:00Z",
 				publicKey: {
 					id: "#{full_url}/pub/actor/lazar#main-key",
 					owner: "#{full_url}/pub/actor/lazar#main-key",
