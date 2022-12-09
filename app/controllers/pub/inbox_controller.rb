@@ -8,7 +8,7 @@ module Pub
 			p "Inbox times! #{body}"
 			p (request.headers)
 			if helpers.sig_check(request.headers)
-				if body['type'] == "Follow" && body['actor'].ends_with?('lazar')
+				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create(actor_url: body['actor'])
 					inbox = follower.full_actor['inbox']
 					headers = helpers.http_signature(ENV['URL'])
@@ -25,7 +25,7 @@ module Pub
 				elsif body['type'] == "Undo"
 					if body['object']['type'] == 'Follow'
 						# Unfollow
-						PubFollower.where(account_url: body['actor']).delete_all
+						PubFollower.where(actor_url: body['actor']).delete_all
 						# What should we send back?
 					end
 				end
