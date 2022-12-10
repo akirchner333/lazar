@@ -51,6 +51,7 @@ module Pub
 					"#{header_name}: #{req_headers[header_name.capitalize]}"
 				end
 			end.join("\n")
+			p comparison_string
 
 			date = DateTime.parse(req_headers['Date'])
 			# Check the digest

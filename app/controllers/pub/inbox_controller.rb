@@ -7,6 +7,7 @@ module Pub
 			body = JSON.parse(request.raw_post)
 			p "Inbox times! #{body}"
 			if helpers.sig_check(request.headers)
+				p "Yo this working? #{body['type']}"
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create(actor_url: body['actor'])
 					inbox = follower.full_actor['inbox']
