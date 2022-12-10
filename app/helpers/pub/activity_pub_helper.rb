@@ -54,6 +54,7 @@ module Pub
 			p comparison_string
 
 			date = DateTime.parse(req_headers['Date'])
+			p "Date: #{date}"
 			# Check the digest
 			# Check that the actor and who's following match
 			key.verify(OpenSSL::Digest::SHA256.new, signature, comparison_string) &&
