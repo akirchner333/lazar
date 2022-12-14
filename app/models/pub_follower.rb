@@ -8,8 +8,8 @@ class PubFollower < ApplicationRecord
 	# What should I do if the user gets deleted or moved?
 	def full_actor
 		response = HTTP.headers(
-			'Content-Type' => 'application/json',
-			'Accept': 'application/json'
+			'Content-Type' => 'application/activity+json',
+			'Accept': 'application/activity+json'
 		).get(key_id)
 		# return false unless actor_response.code == 200
 
