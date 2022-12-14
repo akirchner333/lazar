@@ -80,7 +80,7 @@ module Pub
 
 		private
 
-		def build_comp(header_list, headers)
+		def build_comp_string(header_list, headers)
 			header_list.split(' ').map do |header_name|
 				if header_name == '(request-target)'
 					'(request-target): post /pub/inbox'
