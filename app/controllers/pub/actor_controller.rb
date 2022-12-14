@@ -52,7 +52,7 @@ module Pub
 					{
 						type: "PropertyValue",
 						name: "Lazar is currently",
-						value: ENV['SITE_LIVE'] ? "awake" : "asleep"
+						value: ENV['SITE_LIVE'] == 'true' ? "awake" : "asleep"
 					},{
 						type: "PropertyValue",
 						name: "Current Generation",

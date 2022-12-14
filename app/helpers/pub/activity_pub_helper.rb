@@ -85,7 +85,7 @@ module Pub
 				if header_name == '(request-target)'
 					'(request-target): post /pub/inbox'
 				else
-					"#{header_name}: #{req[header_name.capitalize]}"
+					"#{header_name}: #{headers[header_name.capitalize]}"
 				end
 			end.join("\n")
 		end
