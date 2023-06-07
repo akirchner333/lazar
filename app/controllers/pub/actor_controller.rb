@@ -24,7 +24,7 @@ module Pub
 				# following: "",
 				# followers: "",
 				preferredUsername: "lazar",
-				name: "+lazar+",
+				name: "Lazar Firehose",
 				inbox: "#{full_url}/pub/inbox",
 				# featured: "", <-- I'd like to do this. But it'll need another url
 				# featuredTags: "",
@@ -43,7 +43,7 @@ module Pub
 					mediaType: "image/png",
 					url: "#{full_url}#{ActionController::Base.helpers.asset_path('lazar_icon.png')}"
 				},
-				# image: { //Put the header here
+				# image: { //Put a header here
 				# 	type: "Image",
 				# 	mediaType: "image/png",
 				# 	url: ""
@@ -62,31 +62,31 @@ module Pub
 			}
 		end
 
-		def reply
-			rfc_date = Time.now.utc.strftime('%FT%TZ')
-			activity = {
-			    "@context" => "https://www.w3.org/ns/activitystreams",
-			    id: "#{ENV['url']}/create-hello-world",
-			    type: "Create",
-			    actor: "https://#{ENV['url']}/actor",
-			    object: {
-			        id: "https://#{ENV['url']}/hello-world",
-			        type: "Note",
-			        published: rfc_date,
-			        attributedTo: "https://#{ENV['url']}/actor",
-			        inReplyTo: "https://mastodon.social/@an_alexa_k/109334295008358033",
-			        content: "<p>Hello World</p>",
-			        to: "https://www.w3.org/ns/activitystreams#Public"
-			    } 
-			}
-			document = JSON.generate(activity)
+		# def reply
+		# 	rfc_date = Time.now.utc.strftime('%FT%TZ')
+		# 	activity = {
+		# 	    "@context" => "https://www.w3.org/ns/activitystreams",
+		# 	    id: "#{ENV['url']}/create-hello-world",
+		# 	    type: "Create",
+		# 	    actor: "https://#{ENV['url']}/actor",
+		# 	    object: {
+		# 	        id: "https://#{ENV['url']}/hello-world",
+		# 	        type: "Note",
+		# 	        published: rfc_date,
+		# 	        attributedTo: "https://#{ENV['url']}/actor",
+		# 	        inReplyTo: "https://mastodon.social/@an_alexa_k/109334295008358033",
+		# 	        content: "<p>Hello World</p>",
+		# 	        to: "https://www.w3.org/ns/activitystreams#Public"
+		# 	    } 
+		# 	}
+		# 	document = JSON.generate(activity)
 
-			response = HTTP.headers(http_signature('mastodon.social'))
-					       .post('https://mastodon.social/inbox', body: document)
+		# 	response = HTTP.headers(http_signature('mastodon.social'))
+		# 			       .post('https://mastodon.social/inbox', body: document)
 
-			p response
+		# 	p response
 
-			render response
-		end
+		# 	render response
+		# end
 	end
 end

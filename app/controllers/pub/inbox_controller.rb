@@ -11,7 +11,7 @@ module Pub
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create(actor_url: body['actor'])
 					inbox = follower.full_actor['inbox']
-					headers = helpers.http_signature(ENV['URL'])
+					headers = helpers.http_signature(ENV['URL'], target)
 					HTTP.headers(headers).post(inbox, body: {
 						'@context': [
 							'https://www.w3.org/ns/activitystreams',

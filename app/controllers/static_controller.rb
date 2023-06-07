@@ -9,4 +9,7 @@ class StaticController < ApplicationController
 			redirect_to "/posts"
 		end
 	end
+
+	def museum
+	end
 end

@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
 	def index
-		@posts = Post.limit(30).offset((params[:page].to_i || 0) * 30).order(created_at: :desc)
+		@posts = Post
+			.limit(30)
+			.offset((params[:page].to_i || 0) * 30)
+			.order(created_at: :desc)
 		@new_post = Post.new
 	end
 
@@ -14,7 +17,7 @@ class PostsController < ApplicationController
 			words: post_params[:words], 
 			user: Current.user,
 			generation: 7,
-			posts_id: post_params[:parent]
+			parent_id: post_params[:parent]
 		)
 
 		if @post.save

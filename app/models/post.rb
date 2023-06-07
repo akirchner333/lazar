@@ -1,25 +1,31 @@
 include Gem::Text
 
 class Post < ApplicationRecord
+	# ~~~~~ Associations ~~~~~~~~
 	belongs_to :user
-	# default_scope { order(:words)}
 	
-	has_many :replies, class_name: "Post", foreign_key: 'posts_id'
-	belongs_to :ply, class_name: "Post", foreign_key: 'posts_id', optional: true
+	has_many :replies, class_name: "Post", foreign_key: 'parent_id'
+	belongs_to :ply, class_name: "Post", foreign_key: 'parent_id', optional: true
+
+	belongs_to :root, class_name: "Post", foreign_key: 'root_id'
 
 	has_many :likes
 
+	# ~~~~~ Validations ~~~~~~~~
 	validates :words, length: { minimum: 4, maximum: 241 }
 	validates_each :words do |record, attr, value|
-		parent = Post.find(record.posts_id)
+		parent = Post.find(record.parent_id)
 		distance = levenshtein_distance(parent.words, value)
-		if record.posts_id && distance > 15
+		if record.parent_id && distance > 15
 			record.errors.add(
 				attr,
 				"has a variance rating of #{distance} and must be 15 or less"
 			)
 		end
 	end
+
+	# ~~~~~ Callbacks ~~~~~~~~
+	before_validation :set_root_and_distance
 
 	def self.with_everything(user, params)
 		scope = limit(30)
@@ -102,5 +108,14 @@ class Post < ApplicationRecord
 				END
 			) > 0 AS #{reaction}_liked
 		SQL
+	end
+
+	def set_root_and_distance
+		p "!" * 99
+
+		parent = Post.find(self.parent_id)
+		self.root_id = parent.root_id || self.parent_id
+		root = Post.find(self.root_id)
+		self.distance = levenshtein_distance(root.words, self.words)
 	end
 end

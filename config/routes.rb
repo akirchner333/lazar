@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'random', to: 'posts#random'
 
   get 'help', to: 'static#help'
+  get 'museum', to: 'static#museum'
 
   
 
