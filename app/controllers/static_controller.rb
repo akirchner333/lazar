@@ -12,4 +12,8 @@ class StaticController < ApplicationController
 
 	def museum
 	end
+
+	def rotate
+		render layout: false
+	end
 end

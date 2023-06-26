@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   get 'help', to: 'static#help'
   get 'museum', to: 'static#museum'
+  get 'rotate', to: 'static#rotate'
 
   
 

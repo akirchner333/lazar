@@ -1,36 +1,64 @@
 <div id="museum">
-	<h2>The History of Lazar.Social</h2>
+	<h2>The History of lazar.social</h2>
 	<div>
-		Lazar is run in generations, with each generation implimenting a different social media design. Each generation runs for a short period before shutting down.
+		Lazar was born in August of 2021 and since then has undergonea series of generations, with each generation showcasing a different design. Each generation runs for a short period before shutting down.
 	</div>
-	<div>
-		<h3>1st Generation: Reacts (Aug 3rd - Aug 6th, 2021)</h3>
-		<div>Users can only react - no posts, only reactions and reactions to reactions. Includes eight unique reactions: happy, sad, neutral, crab, glacier, microphone, obelisk and shield.</div>
+	<details>
+		<summary>1st Generation: Reacts (Aug 3rd - Aug 6th, 2021)</summary>
+		<div>The only form of interaction is reactions - no posts, only reactions and reactions to reactions. Started with three kinds of reactions (happy, sad, and neutral) and later added five more (crab, glacier, microphone, obelisk and shield).</div>
 		<div>
-			<%= image_tag 'museum/lazar1_1.png' %>
+			<%= image_tag 'museum/lazar1_5.png', title: "A slide for the G1 Lazar pitch deck" %>
+			<%= image_tag 'museum/lazar1_1.png', title: "A 4 deep reaction chain" %>
+			<%= image_tag 'museum/lazar1_2.png', title: "A very deep reaction chain" %>
+			<%= image_tag 'museum/lazar1_3.png', title: "The full set of reactions" %>
+			<%= image_tag 'museum/lazar1_4.png', title: "Close up of some reactions" %>
 		</div>
-	</div>
-	<div>
-		<h3>2nd Generation: MinMax (Sep 3rd - Sep 6th, 2021)</h3>
-		<div>Posts must be below a maximum character length and above a mininum character length. These limits would change every hour, including periods where the maximum exceeded the minimum, preventing posting all together.</div>
-	</div>
-	<div>
-		<h3>3rd Generation: Temperature (Oct 4th, 2021)</h3>
-		<div>Posts are sorted based on how close they are to a secret topic, with a prize for whichever user guessed the topic.</div> 
-	</div>
-	<div>
-		<h3>4rd Generation: Topics (Jan 29th - Feb 1st, 2022)</h3>
+	</details>
+	<details>
+		<summary>2nd Generation: MinMax (Sep 3rd - Sep 6th, 2021)</summary>
+		<div>Posts were limited by a minimum and maximum character length that would change every hour, including periods where the maximum exceeded the minimum, preventing posting all together.</div>
+		<div>
+			<%= image_tag 'museum/lazar2_4.png', title: "A slide from the g2 Lazar pitch deck" %>
+			<%= image_tag 'museum/lazar2_1.png', title: "The layout of the g2 site" %>
+			<%= image_tag 'museum/lazar2_2.png', title: "An example of some posts" %>
+			<%= image_tag 'museum/lazar2_3.png', title: "Close up on the lexical space graph" %>
+		</div>
+	</details>
+	<details>
+		<summary>3rd Generation: Temperature (Oct 4th, 2021)</summary>
+		<div>Posts were sorted on how closeness to a secret topic, with a prize for whichever user guessed the topic. The topic was "Temperature" and it was discovered in under 1 day.</div>
+		<div>
+			<%= image_tag 'museum/lazar3_2.png', title: "Users in the process of guessing" %>
+			<%= image_tag 'museum/lazar3_1.png', title: "The g3 lazar site, showing the best posts" %>
+			<%= image_tag 'museum/trophy.png', title: "The trophy for the winner of Lazar G3" %>
+			<%= image_tag 'museum/reverse_trophy.png', title: "The reverse trophy for the user of Lazar G3 who made the post farthest from the topic" %>
+		</div>
+	</details>
+	<details>
+		<summary>4rd Generation: Topics (Jan 29th - Feb 1st, 2022)</summary>
 		<div>Every hour a random topic is selected and only posts judged sufficiently on-topic are displayed.</div>
-	</div>
-	<div>
-		<h3>5th Generation: Rotation (July 17th - July 23rd, 2022)</h3>
-		<div>Users are given full control over their posts background color, rotation, and positioning on the page. View the state of the site at time of close here. You can read an in-depth essay on gen 5 on the lazar tumblr.</div>
-	</div>
-	<div>
-		<h3>6th Generation: Ply and Reply (October 9th - October 15th, 2022)</h3>
-		<div>Users can "ply" posts, making an older post a reply of their new post. This allows conversations to move both up and down and for disparate threads to be linked together. Lazar gen 6 also featured the complete scripts of Macbeth and the Tempest, converted into a social media feed. You can read an in-depth essay on gen 6 on the lazar tumblr.</div>
-	</div>
-	<div>
-		 
-	</div>
+		<div>
+			<%= image_tag 'museum/lazar4_1.jpeg', title: "The layout of lazar gen 4" %>
+			<%= image_tag 'museum/lazar4_2.png', title: "A topic and relevance threshold" %>
+		</div>
+	</details>
+	<details>
+		<summary>5th Generation: Rotation (July 17th - July 23rd, 2022)</summary>
+		<div>Users were given full control of their posts background color, rotation, and positioning on the page. View the state of the site at time of close <%= link_to "here", "/rotate" %>. You can read an in-depth essay on gen 5 on <%= link_to "the lazar tumblr", "https://www.tumblr.com/lazardotsocial/690054051547709441/lazar-dot-social-gen-5-rotate" %>.</div>
+		<div>
+			<%= image_tag 'museum/lazar5_1.png', title: "The g5 lazar site" %>
+			<%= image_tag 'museum/lazar5_2.png', title: "Another image of the g5 lazar site" %>
+			<%= image_tag 'museum/lazar5_3.png', title: "Some advice on how to post, rendered completely illegible" %>
+		</div>
+	</details>
+	<details>
+		<summary>6th Generation: Ply and Reply (October 9th - October 15th, 2022)</summary>
+		<div>Users could "ply" posts, making an older post a reply of their new post. This allowed conversations to move both up and down and for disparate threads to be linked together. Lazar gen 6 also featured the complete scripts of Macbeth and the Tempest, converted into a social media feed. You can read an in-depth essay on gen 6 on <%= link_to "the lazar tumblr", "https://www.tumblr.com/lazardotsocial/697666373247287296/lazar-gen-6-plies-and-replies" %>.</div>
+		<div>
+			<%= image_tag 'museum/lazar6_4.png', title: "A slide from the lazar gen 6 introduction, depicting two visual metaphors for plies and replies" %>
+			<%= image_tag 'museum/lazar6_1.png', title: "A conversation thread" %>
+			<%= image_tag 'museum/lazar6_2.png', title: "The posts of the stage directions user" %>
+			<%= image_tag 'museum/lazar6_3.png', title: "An exchange on lazar between ORCHID_MAID and STAGE DIRECTIONS" %>
+		</div>
+	</details>
 </div>
