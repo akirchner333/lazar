@@ -11,13 +11,10 @@
 	<div class="words">
 		<%= post.words %>
 	</div>
-	<div>
-		Total Variance: <%= post.distance %>
-	</div>
 	<% if Current.user %>
 		<div class="post-interactions">
 			<div class="reply-button" data-id="<%= post.id %>">
-				<%= svg('reply') %>
+				<%= svg('edit') %>
 			</div>
 		</div>
 	<% end %>

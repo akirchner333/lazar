@@ -15,7 +15,7 @@
  */
 
 body{
-  background: midnightblue;
+  background: coral;
   margin: 0px;
   position: relative;
 }
@@ -44,7 +44,8 @@ h2 {
                0.16em 0.16em lightseagreen,
                0.20em 0.20em antiquewhite,
                0.24em 0.24em black,
-               0.28em 0.28em cornsilk;
+               0.28em 0.28em cornsilk,
+               0.32em 0.32em midnightblue;
 }
 
 .interactable-zone{

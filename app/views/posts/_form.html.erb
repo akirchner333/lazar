@@ -1,15 +1,15 @@
 <div id="modal-background" class="hide">
 	<div id="post-form">
 		<%= form_with model: @new_post, id: 'modal-post-form' do |form| %>
+		<div>
+				<div>Root Text: <span id="original-text"></span></div>
+				<div>Current Variance: <span id="distance">0</span></div>
+			</div>
+
 			<div>
 				<%= form.label :words %><br/>
 				<%= form.text_area :words, size: "100x3", minlength: 4, maxlength: "142" %>
 				<%= form.hidden_field :parent %>
-			</div>
-
-			<div>
-				<div>Root Text: <span id="original-text"></span></div>
-				<div>Current Variance: <span id="distance">0</span></div>
 			</div>
 
 			<div>

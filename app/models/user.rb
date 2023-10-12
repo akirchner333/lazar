@@ -11,13 +11,7 @@ class User < ApplicationRecord
 	end
 
 	def self.from_omniauth(auth)
-		if auth.provider == "twitter"
-			where(email: "#{auth.uid}@twitter.com").first_or_initialize do |user|
-				user.email = "#{auth.uid}@twitter.com"
-				user.password_digest ||= SecureRandom.hex
-				user.username ||= self.name_gen
-			end
-		elsif auth.provider == "google_oauth2"
+		if auth.provider == "google_oauth2"
 			where(email: auth.info.email).first_or_initialize do |user|
 				user.email = auth.info.email
 				user.password_digest ||= SecureRandom.hex

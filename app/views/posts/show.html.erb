@@ -1,7 +1,14 @@
-<section id="timeline">	
+<section id="timeline">
+	<% if @post.ply %>
+		<% if @post.ply.ply %>
+			<%= render partial: 'posts/post', locals: {post: @post.ply.ply} %>
+		<% end %>
+		<%= render partial: 'posts/post', locals: {post: @post.ply} %>
+	<% end %>
 	<div class="show-post">
 		<%= render partial: 'posts/post', locals: {post: @post} %>
 	</div>
+	<%= render partial: 'posts/posts', locals: {posts: @post.replies} %>
 </section>
 
 <%= render partial: 'posts/form' %>

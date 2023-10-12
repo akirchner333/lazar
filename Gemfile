@@ -48,7 +48,6 @@ gem "bootsnap", require: false
 gem 'omniauth'
 gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-twitter'
 
 gem 'pg'
 gem 'http'

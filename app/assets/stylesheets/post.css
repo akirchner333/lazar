@@ -1,11 +1,11 @@
 /* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
 #timeline {
   display: flex;
-  align-items: top;
   flex-direction: column;
   justify-content: center;
   height: 100%;
   padding: 40px;
+  width: 60%;
 }
 
 .posts-list{
@@ -22,6 +22,7 @@
   align-items: start;
   margin: auto;
   font-size: 20px;
+  margin-left: -50px;
 }
 
 .show-post .post{
@@ -38,12 +39,12 @@
 /* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
 .post{
   padding: 10px;
-  border: 0.5px solid black;
-  border-radius: 4px;
+  border-radius: 16px;
   text-align: left;
   background-color: oldlace;
   color: black;
-  margin: 2px;
+  margin: 15px;
+  margin-left: 50px;
 }
 
 .post-header{
