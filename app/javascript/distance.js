@@ -29,7 +29,7 @@ export default function distance(a, b){
 
   // Remove any identical elements at the end of the string
   // So abba vs coba, we treat the lengths like 2 and 2
-  //since the last two characters are the same
+  // since the last two characters are the same
   while (la > 0 && (a.charCodeAt(la - 1) === b.charCodeAt(lb - 1))) {
     la--;
     lb--;
