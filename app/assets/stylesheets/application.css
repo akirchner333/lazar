@@ -15,7 +15,7 @@
  */
 
 body{
-  background: coral;
+  background: MediumSpringGreen;
   margin: 0px;
   position: relative;
 }
@@ -38,18 +38,19 @@ h2 {
   color: black;
   font-weight: heavy;
   font-style: italic;
-  text-shadow: 0.04em 0.04em #f00, 
-               0.08em 0.08em #0f0, 
-               0.12em 0.12em #00f,
-               0.16em 0.16em lightseagreen,
-               0.20em 0.20em antiquewhite,
-               0.24em 0.24em black,
-               0.28em 0.28em cornsilk,
-               0.32em 0.32em midnightblue;
+  text-shadow: 0.04em 0.04em lightseagreen, 
+               0.08em 0.08em antiquewhite, 
+               0.12em 0.12em black,
+               0.16em 0.16em cornsilk,
+               0.20em 0.20em midnightblue;
+}
+
+.lazar a:visited{
+  color: black;
 }
 
 .interactable-zone{
-  background: oldlace;
+  background: aliceblue;
   border: 1px solid black;
   padding: 10px;
   margin: 10px;
@@ -57,12 +58,14 @@ h2 {
 
 footer{
   box-sizing: border-box;
-  background: oldlace;
+  background: aliceblue;
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 /* _______________ HEADER ___________________ */
@@ -71,6 +74,8 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .user-bar .name{

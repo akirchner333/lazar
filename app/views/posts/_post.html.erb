@@ -1,21 +1,27 @@
-<div class="post" data-id="<%= post.id %>">
+<div class="post <%= local_assigns.fetch(:class, '') %>" data-id="<%= post.id %>">
 	<div class="post-header">
 		<div class="user-link">
 			<%= link_to post.user.username, user_path(post.user.id), data: { turbo_frame: "_top" } %>
 		</div>
-		<div>
-			<%= post.created_at.strftime('%m/%d %H:%M') %>
-		</div>
+		
 		<div class="link"><%= link_to "(_)", post, data: { turbo_frame: "_top" } %></div>
 	</div>
 	<div class="words">
 		<%= post.words %>
 	</div>
-	<% if Current.user %>
-		<div class="post-interactions">
-			<div class="reply-button" data-id="<%= post.id %>">
-				<%= svg('edit') %>
-			</div>
+	<div class="post-footer">
+		<div>
+			<%= post.distance %> Variance
 		</div>
-	<% end %>
+		<div>
+			<%= post.created_at.strftime('%m/%d %H:%M') %>
+		</div>
+		<% if Current.user %>
+			<div class="post-interactions">
+				<div class="reply-button" data-id="<%= post.id %>">
+					<%= svg('edit') %>
+				</div>
+			</div>
+		<% end %>
+	</div>
 </div>

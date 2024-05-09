@@ -1,4 +1,4 @@
-<div class="post-column">
+<div class="post-column <%= myclass %>">
 	<% posts.each do |post| %>
 		<%= render partial: 'posts/post', locals: { post: post } %>
 	<% end %>

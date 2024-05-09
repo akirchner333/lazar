@@ -1,4 +1,5 @@
 import distance from 'distance';
+import textDiff from 'diff';
 
 document.addEventListener('turbo:load', () => {
 	const modal = document.getElementById("modal-background");
@@ -11,7 +12,8 @@ document.addEventListener('turbo:load', () => {
 			distanceSpan: document.querySelector('#distance'),
 			distanceDiv: document.querySelector('#distance').parentNode,
 			resetButton: document.querySelector('#reset-button'),
-			submitButton: document.querySelector('#submit-button')
+			submitButton: document.querySelector('#submit-button'),
+			originalText: document.querySelector('#original-text')
 		};
 
 		// Closes the modal when you click outside it.
@@ -29,14 +31,32 @@ document.addEventListener('turbo:load', () => {
 
 		elements.textArea.addEventListener('input', (event) => {
 			updateFromDistance();
+			var text = elements.textArea.value;
+			var dif = textDiff(rootWords, text);
+			elements.originalText.innerHTML = "";
+			dif.forEach(c => {
+				const div = document.createElement('div')
+				div.textContent = c.char;
+				div.classList.add('char');
+				if(c.char == ' '){
+					div.classList.add('space');
+				}
+				if(c.delete){
+					div.classList.add('delete')
+				}
+				if(c.insert){
+					div.classList.add('insert')
+				}
+				elements.originalText.appendChild(div);
+			});
 		});
 
-		// TODO: Set up the reset button
 		elements.resetButton.addEventListener('click', (event) => {
 			event.preventDefault();
 			event.stopPropagation();
 			setForm(rootWords);
 			updateFromDistance();
+			elements.originalText.innerHTML = rootWords;
 			return false;
 		});
 
@@ -77,10 +97,10 @@ document.addEventListener('turbo:load', () => {
 		function openForm(item){
 			modal.classList.remove('hide');
 
-			rootWords = item.parentElement.parentElement
+			rootWords = item.closest(".post")
 				.querySelector(".words").innerHTML
 				.trim();
-			document.querySelector('#original-text').innerHTML = rootWords;
+			elements.originalText.innerHTML = rootWords;
 			setForm(rootWords);
 			const id = item.getAttribute('data-id');
 			document.querySelector('#post_parent').setAttribute('value', id);

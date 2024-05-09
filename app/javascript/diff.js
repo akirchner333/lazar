@@ -1,4 +1,4 @@
-function textDiff(a, b)
+export default function textDiff(a, b)
 {
 	const aLng = a.length;
 	const bLng = b.length;

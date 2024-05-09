@@ -5,10 +5,8 @@
 		<% end %>
 		<%= render partial: 'posts/post', locals: {post: @post.ply} %>
 	<% end %>
-	<div class="show-post">
-		<%= render partial: 'posts/post', locals: {post: @post} %>
-	</div>
-	<%= render partial: 'posts/posts', locals: {posts: @post.replies} %>
+	<%= render partial: 'posts/post', locals: {post: @post, class: "show-post"} %>
+	<%= render partial: 'posts/posts', locals: {posts: @post.replies, myclass: "reply-column"} %>
 </section>
 
 <%= render partial: 'posts/form' %>

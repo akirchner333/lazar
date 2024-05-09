@@ -6,6 +6,7 @@
   height: 100%;
   padding: 40px;
   width: 60%;
+  margin: auto;
 }
 
 .posts-list{
@@ -17,44 +18,48 @@
   overflow-y: scroll;
 }
 
-.show-post{
+.show-post
+{
+  margin-left: 20px !important;
+}
+
+.show-post .words{
+  font-weight: bold;
+}
+
+.reply-column {
   display: flex;
-  align-items: start;
-  margin: auto;
-  font-size: 20px;
-  margin-left: -50px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.show-post .post{
-  width: 60vw;
-}
-
-.arrow{
-  fill: oldlace;
-  width: 50px;
-  height: 50px;
-  margin: auto;
+.reply-column .post {
+  width: 40%;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
 .post{
+  background: palegreen;
   padding: 10px;
-  border-radius: 16px;
   text-align: left;
-  background-color: oldlace;
   color: black;
   margin: 15px;
   margin-left: 50px;
+  border: 1px solid black;
 }
 
-.post-header{
+.post-header, .post-footer{
   display: flex;
   justify-content: space-between;
+}
+
+.words {
+  font-size: 20px;
 }
 
 .post-interactions{
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   flex-direction: row;
 }
 
@@ -158,6 +163,29 @@
 
 #likes .selected {
   background: salmon;
+}
+
+#original-text{
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.char{
+  display: inline-block;
+  white-space: pre;
+}
+
+.delete{
+  color: grey;
+  font-weight: normal;
+  vertical-align: sub;
+}
+
+.insert{
+  color: lightseagreen;
+  font-weight: normal;
+  vertical-align: super;
 }
 
 /* --------------------------- Likes -------------------------------*/
