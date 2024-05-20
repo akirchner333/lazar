@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: lazar_rails_production
-  username: lazar_rails
-  password: <%= ENV["LAZAR_RAILS_DATABASE_PASSWORD"] %>
+  username: pguser
+  password: <%= ENV["DATABASE_PASSWORD"] %>
