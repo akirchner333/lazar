@@ -13,6 +13,7 @@ class Post < ApplicationRecord
 
 	# ~~~~~ Validations ~~~~~~~~
 	validates :words, length: { minimum: 4, maximum: 241 }
+	validates :words, uniqueness: true
 	validates_each :words do |record, attr, value|
 		parent = Post.find(record.parent_id)
 		distance = levenshtein_distance(parent.words, value)
@@ -111,8 +112,6 @@ class Post < ApplicationRecord
 	end
 
 	def set_root_and_distance
-		p "!" * 99
-
 		parent = Post.find(self.parent_id)
 		self.root_id = parent.root_id || self.parent_id
 		root = Post.find(self.root_id)
