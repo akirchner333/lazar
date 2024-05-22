@@ -1,4 +1,7 @@
-server '137.184.121.10', port: 22, roles: [:web, :app, :db], primary: true
+require 'dotenv'
+Dotenv.load
+
+server ENV.fetch('SERVER_IP'), port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:akirchner333/lazar-private.git'
 set :application,     'lazar'
