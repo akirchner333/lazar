@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_032728) do
     t.string "css"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "generation", default: 5
     t.bigint "root_id"
     t.bigint "parent_id"

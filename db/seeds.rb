@@ -1,10 +1,12 @@
-# I want to clear out some of the old users from plays
-# But I want to keep the actual users
-# Gotta figure out how to do that
-user = User.where(email: 'akirchner333@gmail.com').first
+user = User.first_or_create(
+	email: "admin@admin.com",
+	admin: true,
+	username: "ADMIN",
+	password: ENV['ADMIN_PASSWORD'],
+	password_confirmation: ENV['ADMIN_PASSWORD']
+)
 
 Post.where(generation: 6).delete_all
-
 [
 	'Nine rows of soldiers stood in line.',
     'The beach is dry and shallow at low tide.',
