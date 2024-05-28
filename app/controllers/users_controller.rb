@@ -15,7 +15,12 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@posts = @user.posts.with_everything(Current.user, params)
+		@posts = @user
+			.posts
+			.limit(30)
+			.sort_method(params[:order])
+			.offset((params[:page].to_i || 0) * 30)
+		@new_post = Post.new
 	end
 
 	def update
