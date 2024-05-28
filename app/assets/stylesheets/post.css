@@ -101,6 +101,18 @@
   font-weight: bold;
 }
 
+.line-box{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.line {
+  width: 0px;
+  height: 20px;
+  border: 1px solid black;
+}
+
 /*************************** FORM *************************/
 .hide {
   display: none !important;
