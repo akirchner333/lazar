@@ -15,9 +15,16 @@
  */
 
 body{
-  background: MediumSpringGreen;
+  background: MediumSeaGreen;
   margin: 0px;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 h1 {
@@ -59,13 +66,15 @@ h2 {
 footer{
   box-sizing: border-box;
   background: aliceblue;
-  padding: 10px;
+  border: 1px solid black;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 70%;
+  margin: 10px;
   margin-left: 15%;
   margin-right: 15%;
+  padding: 10px;
+  justify-content: space-between;
+  width: 70%;
 }
 
 /* _______________ HEADER ___________________ */

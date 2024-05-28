@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lazar,</title>
+    <title>+lazar+</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -31,7 +31,9 @@
       <%= render "partials/flash" %>
     </header>
     <h1 class="lazar"><%= link_to "+lazar+", root_path %></h1>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
     <footer>
       <div>
         <%= link_to "Random", "/random" %>
