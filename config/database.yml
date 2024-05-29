@@ -85,5 +85,5 @@ test:
 production:
   <<: *default
   database: lazar_rails_production
-  username: pguser
+  username: rails
   password: <%= ENV["DATABASE_PASSWORD"] %>
