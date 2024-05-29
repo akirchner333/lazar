@@ -32,7 +32,9 @@
     </header>
     <h1 class="lazar"><%= link_to "+lazar+", root_path %></h1>
     <main>
+      <%= render partial: "posts/total", locals: {total: @total} %>
       <%= yield %>
+      <%= render partial: "posts/daily", locals: {daily: @total} %>
     </main>
     <footer>
       <div>

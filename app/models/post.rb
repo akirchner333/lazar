@@ -13,14 +13,16 @@ class Post < ApplicationRecord
 
 	# ~~~~~ Validations ~~~~~~~~
 	validates :words, length: { minimum: 4, maximum: 241 }
-	validates :words, uniqueness: true
+	validates :words, uniqueness: {
+		message: "have already been said."
+	}
 	validates_each :words do |record, attr, value|
 		parent = Post.find(record.parent_id)
 		distance = levenshtein_distance(parent.words, value)
 		if record.parent_id && distance > 15
 			record.errors.add(
 				attr,
-				"has a variance rating of #{distance} and must be 15 or less"
+				"has a variance rating of #{distance} and must be 15 or less."
 			)
 		end
 	end

@@ -1,22 +1,26 @@
-<div id="post-form">
-	<% if @new_post.errors.any? %>
-		errors :(
-	<% end %>
-	<%= form_with model: @new_post, id: 'modal-post-form' do |form| %>
-	<div>
-			<div><span id="original-text"><%= @parent.words %></span></div>
-			<div>Current Variance: <span id="distance">0</span></div>
-		</div>
+<div id="new-post">
+	<div id="post-errors">
+		<% if @new_post.errors.any? %>
+			<ul>
+				<% @new_post.errors.each do |error| %>
+					<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>
+	<%= form_with model: @new_post, id: 'post-form' do |form| %>
+		<div class="diff"><span id="original-text"><%= @parent.words %></span></div>
+		<div class="variance">Current Variance: <span id="distance">0</span>/15</div>
 
 		<div>
-			<%= form.label :words %><br/>
-			<%= form.text_area :words, value: @parent.words, size: "100x3", minlength: 4, maxlength: "142" %>
-			<%= form.hidden_field :parent, value: @parent.id %>
+			<%= form.text_area :words, value: @parent.words, size: "100x3", minlength: 4, maxlength: 241 %>
 		</div>
 
-		<div>
+		<%= form.hidden_field :parent, value: @parent.id %>
+
+		<div class="form-buttons">
 			<button id="reset-button">RESET</button>
-			<%= form.submit "POST", id: 'submit-button' %>
+			<%= form.submit "POST", id: 'submit-button', disabled: "POST" %>
 		</div>
 	<% end %>
 </div>

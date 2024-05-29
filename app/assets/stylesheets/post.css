@@ -130,13 +130,18 @@
   z-index: 10;
 }
 
-#post-form{
-  border-radius: 10px;
+#new-post{
   padding: 20px;
-  width: 50vw;
+  width: 60vw;
   background: palegreen;
-  border: 3px solid black;
+  border: 1px solid black;
   z-index: 1;
+}
+
+#post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #post-form label{
@@ -180,10 +185,11 @@
   background: salmon;
 }
 
-#original-text{
-  font-size: 20px;
+.diff{
+  font-size: 40px;
   font-weight: bold;
-  line-height: 40px;
+  line-height: 50px;
+  text-align: center;
 }
 
 .char{
@@ -203,6 +209,20 @@
   font-weight: normal;
   vertical-align: super;
   line-height: 0;
+}
+
+.variance {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.form-buttons {
+  margin: 10px;
+}
+
+.form-buttons button, .form-buttons input{
+  font-size: 20px;
+  padding: 5px 10px;
 }
 
 /* --------------------------- Likes -------------------------------*/

@@ -18,9 +18,11 @@
 		</div>
 		<% if Current.user %>
 			<div class="post-interactions">
-				<div class="reply-button" data-id="<%= post.id %>">
-					<%= svg('edit') %>
-				</div>
+				<%= link_to "/posts/#{post.id}/new" do %>
+					<div class="reply-button" data-id="<%= post.id %>">
+						<%= svg('edit') %>
+					</div>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
