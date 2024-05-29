@@ -1,0 +1,22 @@
+<div id="post-form">
+	<% if @new_post.errors.any? %>
+		errors :(
+	<% end %>
+	<%= form_with model: @new_post, id: 'modal-post-form' do |form| %>
+	<div>
+			<div><span id="original-text"><%= @parent.words %></span></div>
+			<div>Current Variance: <span id="distance">0</span></div>
+		</div>
+
+		<div>
+			<%= form.label :words %><br/>
+			<%= form.text_area :words, value: @parent.words, size: "100x3", minlength: 4, maxlength: "142" %>
+			<%= form.hidden_field :parent, value: @parent.id %>
+		</div>
+
+		<div>
+			<button id="reset-button">RESET</button>
+			<%= form.submit "POST", id: 'submit-button' %>
+		</div>
+	<% end %>
+</div>

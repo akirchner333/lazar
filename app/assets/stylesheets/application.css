@@ -25,6 +25,8 @@ body{
 
 main {
   flex: 1;
+  display: flex;
+  justify-content: space-around;
 }
 
 h1 {
@@ -182,4 +184,28 @@ footer{
 #museum details div {
   padding-left: 20px;
   padding-bottom: 5px;
+}
+
+.banner{
+  background: black;
+  color: white;
+  width: 200px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.banner .total{
+  font-size: 80px;
+}
+
+.banner .slogan{
+  font-style: italic;
+  font-size: 15px;
 }

@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 			.offset((params[:page].to_i || 0) * 30)
 			.order(created_at: :desc)
 		@new_post = Post.new
+		@total = Post.sum(:distance)
+		@daily = Post.where("created_at >= ?", 1.days.ago).sum(:distance)
 	end
 
 	def show
@@ -12,18 +14,24 @@ class PostsController < ApplicationController
 		@new_post = Post.new
 	end
 
+	def new
+		@parent = Post.find(params[:id])
+		@new_post = Post.new
+	end
+
 	def create
-		@post = Post.new(	
+		@new_post = Post.new(	
 			words: post_params[:words], 
 			user: Current.user,
 			generation: 7,
 			parent_id: post_params[:parent]
 		)
 
-		if @post.save
-			redirect_to @post
+		if @new_post.save
+			redirect_to @new_post
 		else
-			p @post.errors
+			@parent = Post.find(post_params[:parent])
+			render :new
 		end
 	end
 

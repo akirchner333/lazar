@@ -4,9 +4,8 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  padding: 40px;
+  padding: 0 40px;
   width: 60%;
-  margin: auto;
 }
 
 .posts-list{

@@ -1,5 +1,7 @@
+<%= render partial: "posts/total", locals: {total: @total} %>
 <section id="timeline" class="wide-columns">
 	<%= render partial: "posts/posts", locals: {posts: @posts, myclass: ''} %>
 </section>
+<%= render partial: "posts/daily", locals: {daily: @daily} %>
 
 <%= render partial: 'posts/form' %>

@@ -1,5 +1,8 @@
 <div id="modal-background" class="hide">
 	<div id="post-form">
+		<% if @new_post.errors.any? %>
+			errors :(
+		<% end %>
 		<%= form_with model: @new_post, id: 'modal-post-form' do |form| %>
 		<div>
 				<div><span id="original-text"></span></div>
