@@ -1,7 +1,9 @@
 module Pub
 	class FingerController < ApplicationController
+		include ActivityPubHelper
 		def webfinger
-			account = params[:resource].match(/acct:(.*)@lazar.social/)
+			p "acct:(.*)@#{ENV['URL']}"
+			account = params[:resource]&.match(/acct:(.*)@#{ENV['URL']}/)
 			if account && account[1] && account[1].downcase.include?('lazar')
 				render :json => {
 					subject: "acct:lazar@#{ENV['URL']}",
@@ -9,11 +11,11 @@ module Pub
 						{
 							rel: "self",
 							type: "application/activity+json",
-							href: "https://#{ENV['URL']}/pub/actor/lazar"
+							href: "#{full_url}/pub/actor/lazar"
 						},{
 							rel: "http://webfinger.net/rel/profile-page",
 							type: "text/html",
-							href: "https://#{ENV['URL']}"
+							href: "#{full_url}"
 						}
 					]
 				}
