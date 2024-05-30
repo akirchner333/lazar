@@ -18,7 +18,7 @@ function runPostForm(){
 			originalText: document.querySelector('#original-text')
 		};
 
-		let rootWords = elements.originalText.innerHTML;
+		let rootWords = elements.originalText.textContent;
 
 		setDiff();
 

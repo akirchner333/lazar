@@ -17,11 +17,12 @@
 .username{
   font-size: 80px;
   word-break: break-all;
-  text-transform: uppercase;
+  text-transform: lowercase;
+  margin: 0;
 }
 
 .user-link{
-	text-transform: uppercase;
+	text-transform: lowercase;
 }
 
 .likes {

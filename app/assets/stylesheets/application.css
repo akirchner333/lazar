@@ -151,10 +151,15 @@ footer{
   padding: 5px;
 }
 
+#landing {
+  width: 60%;
+}
+
 #help, #museum{
   background: oldlace;
   margin: 20px;
   padding: 5px;
+  width: 60%;
 }
 
 .logo{
@@ -189,11 +194,11 @@ footer{
 .banner{
   background: black;
   color: white;
-  width: 200px;
+  width: 230px;
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  padding: 15px;
+  padding-top: 15px;
   height: 80vh;
   display: flex;
   justify-content: space-between;
@@ -201,11 +206,41 @@ footer{
   flex-direction: column;
 }
 
+.banner .announce{
+  margin: 0 15px ;
+}
+
 .banner .total{
-  font-size: 80px;
+  font-size: 60px;
 }
 
 .banner .slogan{
   font-style: italic;
   font-size: 15px;
+}
+
+.banner .fringe {
+  margin-top: 10px;
+  width: 0; 
+  height: 0; 
+  border-left: 115px solid transparent;
+  border-right: 115px solid transparent;
+  
+  border-bottom: 20px solid MediumSeaGreen;
+}
+
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .banner {
+    height: auto;
+
+  }
+
+  #timeline{
+    width: 100%;
+  }
 }

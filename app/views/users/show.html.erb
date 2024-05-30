@@ -1,7 +1,8 @@
-<h2 class="username"><%= @user.username %></h2>
 
-<section>
-	<div id="timeline">
+<section id="timeline">
+	<h2 class="username"><%= @user.username %></h2>
+
+	<div>
 		<%= render partial: "posts/posts", locals: {posts: @posts, myclass: ''} %>
 	</div>
 </section>

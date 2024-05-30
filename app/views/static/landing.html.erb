@@ -1,4 +1,4 @@
-<section class="">
+<section id="landing">
 	<div class="post-form interactable-zone">
 		<p>
 			Welcome to <span class="lazar">lazar.social</span>: an ongoing exploration into new forms of social media. Generation 7 is current active. For more information, <%= link_to "visit our tumblr", "https://www.tumblr.com/lazardotsocial" %>.
@@ -8,7 +8,7 @@
 			To post you must first <%= link_to "Sign In", sign_in_path %> or <%= link_to "Sign Up", sign_up_path %>.
 		</p>
 	</div>
-	<section id="timeline" class="wide-columns">
+	<section class="wide-columns">
 		<%= render partial: "posts/posts", locals: {posts: @posts, myclass: ''} %>
 	</section>
 </section>

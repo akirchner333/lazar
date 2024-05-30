@@ -4,7 +4,6 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  padding: 0 40px;
   width: 60%;
 }
 
@@ -185,6 +184,10 @@
   background: salmon;
 }
 
+#post_words {
+  width: 100%;
+}
+
 .diff{
   font-size: 40px;
   font-weight: bold;
@@ -194,7 +197,7 @@
 
 .char{
   display: inline-block;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .delete{

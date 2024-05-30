@@ -12,9 +12,8 @@
 		<div class="diff"><span id="original-text"><%= @parent.words %></span></div>
 		<div class="variance">Current Variance: <span id="distance">0</span>/15</div>
 
-		<div>
-			<%= form.text_area :words, value: @parent.words, size: "100x3", minlength: 4, maxlength: 241 %>
-		</div>
+
+		<%= form.text_area :words, value: @parent.words, minlength: 4, maxlength: 241 %>
 
 		<%= form.hidden_field :parent, value: @parent.id %>
 
