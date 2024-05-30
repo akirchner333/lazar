@@ -26,7 +26,7 @@ module Pub
 				preferredUsername: "lazar",
 				name: "Lazar Firehose",
 				inbox: "#{full_url}/pub/inbox",
-				# featured: "", <-- I'd like to do this. But it'll need another url
+				featured: "#{full_url}/pub/actor/#{params[:id]}/collections/featured",
 				# featuredTags: "",
 				summary: summary,
 				url: "https://lazar.social",
@@ -56,9 +56,22 @@ module Pub
 					},{
 						type: "PropertyValue",
 						name: "Current Generation",
-						value: "6"
+						value: "7"
 					}
 				]
+			}
+		end
+
+		def featured
+			render :json => {
+				"@context" => [
+					"https://www.w3.org/ns/activitystreams",
+					"https://w3id.org/security/v1"
+				],
+				id: "#{full_url}/pub/actor/#{params[:id]}/collections/featured",
+				type: "OrderedCollection",
+				totalItems: 5,
+				orderedItems: Post.limit(5).map { |p| p.to_note(full_url) }
 			}
 		end
 
@@ -67,7 +80,7 @@ module Pub
 		# 	activity = {
 		# 	    "@context" => "https://www.w3.org/ns/activitystreams",
 		# 	    id: "#{ENV['url']}/create-hello-world",
-		# 	    type: "Create",
+		# 	    typ7e: "Create",
 		# 	    actor: "https://#{ENV['url']}/actor",
 		# 	    object: {
 		# 	        id: "https://#{ENV['url']}/hello-world",

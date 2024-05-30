@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :pub do
     get '/actor/:id', to: 'actor#actor'
+    get '/actor/:id/collections/featured', to: 'actor#featured'
     get '/test', to: 'inbox#test'
     post '/reply', to: 'actor#reply'
     post '/inbox', to: 'inbox#inbox'

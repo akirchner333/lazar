@@ -84,6 +84,33 @@ class Post < ApplicationRecord
 		# This is probably enough for now
 	end
 
+	def to_note(full_url)
+		{
+			"@context" => "https://www.w3.org/ns/activitystreams",
+			type: "Note",
+			id: "#{full_url}/posts/#{id}",
+			summary: nil,
+			# Could link to the parent
+			inReplyTo: nil,
+			published: created_at,
+			url: "#{full_url}/posts/#{id}",
+			to: [],
+			cc: [],
+			sensitive: false,
+			#atomUri: "...",
+			#inReplyToAtomUri: nil,
+			# conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
+			content: "<p>#{words.html_safe}</p>",
+			contentMap: {
+				en: "<p>#{words.html_safe}</p>"
+			},
+			attachment: [],
+			tag: [],
+			# Could set up something here to link all the posts together
+			replies: []
+		}
+	end
+
 	private
 
 	# These should be sanitized somewhat
