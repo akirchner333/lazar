@@ -2,7 +2,7 @@ module Pub
 	class FingerController < ApplicationController
 		include ActivityPubHelper
 		def webfinger
-			p "acct:(.*)@#{ENV['URL']}"
+			p "Web Finger Triggered"
 			account = params[:resource]&.match(/acct:(.*)@#{ENV['URL']}/)
 			if account && account[1] && account[1].downcase.include?('lazar')
 				render :json => {
@@ -20,7 +20,7 @@ module Pub
 					]
 				}
 			else
-				render plain: '', status: 404
+				render plain: "#{params[:resource]} vs #{ENV['URL']}", status: 400
 			end
 		end
 	end
