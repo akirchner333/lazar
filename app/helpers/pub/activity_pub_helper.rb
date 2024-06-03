@@ -1,7 +1,7 @@
 module Pub
 	module ActivityPubHelper
 		def full_url
-			"http#{Rails.env == "production" && ENV['HTTPS'] ? 's' : ''}://#{ENV['URL']}"
+			"http#{Rails.env == "production" && ENV['HTTPS'] == 'true' ? 's' : ''}://#{ENV['URL']}"
 		end
 
 		def http_signature(host)
