@@ -6,18 +6,19 @@ module Pub
 		def inbox
 			body = JSON.parse(request.raw_post)
 			if helpers.sig_check(request.headers)
+				p "Inbox Request #{body}"
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
-					follower = PubFollower.create(actor_url: body['actor'])
-					inbox = follower.full_actor['inbox']
+					follower = PubFollower.create_from_activity(body)
+					inbox = follower.inbox
 					headers = helpers.http_signature(ENV['URL'], target)
 					HTTP.headers(headers).post(inbox, body: {
 						'@context': [
 							'https://www.w3.org/ns/activitystreams',
 							'https://w3id.org/security/v1'
 						],
-					    id: `https://${domain}/${guid}`,
+					    id: "#{full_url}/pub/actor/lazar#accepts/follows/#{follower.id}",
 					    type: 'Accept',
-					    actor: "https://#{ENV['URL']}/pub/actor/lazar",
+					    actor: "#{full_url}/pub/actor/lazar",
 					    object: body,
 					})
 				elsif body['type'] == "Undo"
@@ -30,16 +31,9 @@ module Pub
 
 				render plain: 'OK', status: 200
 			else
+				p "Invalid request to inbox"
 				render plain: 'Request signature could not be verified', status: 401
 			end
-		end
-
-		def inbox_test
-			p "Somebody is posting to /inbox"
-			p params
-			p request.body
-			p request.raw_post
-			render plain: 'No', status: 404
 		end
 	end
 end

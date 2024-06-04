@@ -1,8 +1,24 @@
 class PubFollower < ApplicationRecord
+
+	# {
+	# 	"@context":"https://www.w3.org/ns/activitystreams",
+	# 	"id":"https://activitypub.academy/9f1fc955-6251-4fe0-8bd9-b56b82486c4a",
+	# 	"type":"Follow",
+	# 	"actor":"https://activitypub.academy/users/dinulia_hondors",
+	# 	"object":"https://instance.digital/users/an_alexa_k"
+	# }
 	def self.create_from_activity(params)
-		# Sometimes it'll be a url and sometimes it'll be a hash? Am I remembering that correctly?
-		# And then we gotta 
-		create(actor: params[:actor])
+		# Sometimes it'll be a url and sometimes it'll be a hash?
+		# Am I remembering that correctly?
+		create(
+			follower: actor.split("/").last,
+			actor: params[:actor],
+			user_id: nil
+		)
+	end
+
+	def inbox
+		actor_url + "/inbox"
 	end
 
 	# What should I do if the user gets deleted or moved?
