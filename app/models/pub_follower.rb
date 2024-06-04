@@ -11,8 +11,8 @@ class PubFollower < ApplicationRecord
 		# Sometimes it'll be a url and sometimes it'll be a hash?
 		# Am I remembering that correctly?
 		create(
-			follower: actor.split("/").last,
-			actor: params[:actor],
+			follower: params["actor"].split("/").last,
+			actor_url: params["actor"],
 			user_id: nil
 		)
 	end

@@ -2,11 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   let(:user) { create :user }
-  let!(:post) { create :post, user_id: user.id, words: 'abc' }
+  let!(:post) do
+    post = build :post, user_id: user.id, words: 'abc'
+    post.save(validate: false)
+    post
+  end
 
   context 'distance' do
     it 'does not allow posts with too large a variance' do
-      post = Post.new(words: 'abc1234567890123456')
+      new_post = Post.new(words: 'abc1234567890123456', parent_id: post.id, user_id: user.id)
+      expect(new_post.valid?).to be_falsey
+      expect(new_post.errors.objects.first.full_message).to eq("Words have a variance rating of 16 and must be 15 or less.")
     end
   end
 

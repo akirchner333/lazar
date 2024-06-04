@@ -22,7 +22,7 @@ class Post < ApplicationRecord
 		if record.parent_id && distance > 15
 			record.errors.add(
 				attr,
-				"has a variance rating of #{distance} and must be 15 or less."
+				"have a variance rating of #{distance} and must be 15 or less."
 			)
 		end
 	end
@@ -141,6 +141,10 @@ class Post < ApplicationRecord
 	end
 
 	def set_root_and_distance
+		if self.parent_id.nil?
+			self.distance = 0
+			return
+		end
 		parent = Post.find(self.parent_id)
 		self.root_id = parent.root_id || self.parent_id
 		root = Post.find(self.root_id)
