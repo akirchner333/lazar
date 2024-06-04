@@ -10,8 +10,7 @@ module Pub
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create_from_activity(body)
 					inbox = follower.inbox
-					headers = helpers.http_signature(follower.host)
-					accept_body = {
+					accept_body = JSON.generate({
 						'@context': [
 							'https://www.w3.org/ns/activitystreams',
 							'https://w3id.org/security/v1'
@@ -20,8 +19,10 @@ module Pub
 					    type: 'Accept',
 					    actor: "#{full_url}/pub/actor/lazar",
 					    object: body,
-					}
-					HTTP.headers(headers).post(inbox, body: JSON.generate(accept_body))
+					})
+
+					headers = helpers.http_signature(URI.parse(inbox), accept_body)
+					HTTP.headers(headers).post(inbox, body: accept_body)
 				elsif body['type'] == "Undo"
 					if body['object']['type'] == 'Follow'
 						# Unfollow

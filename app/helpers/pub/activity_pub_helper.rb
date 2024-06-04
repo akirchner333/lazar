@@ -4,23 +4,24 @@ module Pub
 			"http#{Rails.env == "production" && ENV['HTTPS'] == 'true' ? 's' : ''}://#{ENV['URL']}"
 		end
 
-		def http_signature(host)
+		def http_signature(uri, body)
 			date = Time.now.utc.httpdate
 			keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
-			
-			# For `requet-target` I'm hard coding "post /inbox"
-			# But I'm not sure if that's correct
-			signed_string = "(request-target): post /inbox\nhost: #{host}\ndate: #{date}"
+			host = uri.host
+			target = uri.request_uri
+			digest = "SHA-256=#{Digest::SHA256.base64digest(body)}"
+
+			signed_string = "(request-target): post #{target}\nhost: #{host}\ndate: #{date}\ndigest: #{digest}"
 			signature = Base64.strict_encode64(
 				keypair.sign(OpenSSL::Digest::SHA256.new, signed_string)
 			)
 
-			keyId = "keyId=\"#{full_url}/pub/actor/lazar#publicKey\""
-			headers = "headers=\"(request-target) host date\""
+			keyId = "keyId=\"#{full_url}/pub/actor/lazar#main-key\""
+			headers = "headers=\"(request-target) host date digest\""
 			sig = "signature=\"#{signature}\""
 
 			sig_header = "#{keyId},#{headers},#{sig}"
-			{ Host: host, Date: date, Signature: sig_header }
+			{ Host: host, Date: date, Digest: digest, Signature: sig_header }
 		end
 
 		def sig_check(headers)
