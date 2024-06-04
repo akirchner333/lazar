@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PubFollower, type: :model do
+  let(:follower) { create :pub_follower }
+
   it 'creates a new pub follower from a follow request' do
     body = JSON.parse('{
       "@context":"https://www.w3.org/ns/activitystreams",
@@ -16,7 +18,14 @@ RSpec.describe PubFollower, type: :model do
   end
 
   it 'provides the inbox url' do
-    follower = create :pub_follower
     expect(follower.inbox).to eq("https://example.test/users/example_follower/inbox")
+  end
+
+  it 'provides the host' do
+    expect(follower.host).to eq("example.test")
+  end
+
+  it 'has an id' do
+    expect(follower).to have_attribute(:id)
   end
 end

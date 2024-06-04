@@ -8,12 +8,14 @@ module Pub
 			date = Time.now.utc.httpdate
 			keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 			
+			# For `requet-target` I'm hard coding "post /inbox"
+			# But I'm not sure if that's correct
 			signed_string = "(request-target): post /inbox\nhost: #{host}\ndate: #{date}"
 			signature = Base64.strict_encode64(
 				keypair.sign(OpenSSL::Digest::SHA256.new, signed_string)
 			)
 
-			keyId = "keyId=\"#{full_url}/pub/actor/lazar\""
+			keyId = "keyId=\"#{full_url}/pub/actor/lazar#publicKey\""
 			headers = "headers=\"(request-target) host date\""
 			sig = "signature=\"#{signature}\""
 
@@ -21,10 +23,6 @@ module Pub
 			{ Host: host, Date: date, Signature: sig_header }
 		end
 
-#     let stringToSign = `(request-target): post ${inboxFragment}\n
-# host: ${targetDomain}\n
-# date: ${d.toUTCString()}\n
-# digest: SHA-256=${digest}`;
 		def sig_check(headers)
 			if !headers['Signature']
 				p "Signature failed due to lack of signature header"

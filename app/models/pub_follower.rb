@@ -21,6 +21,10 @@ class PubFollower < ApplicationRecord
 		actor_url + "/inbox"
 	end
 
+	def host
+		URI.parse(actor_url).host
+	end
+
 	# What should I do if the user gets deleted or moved?
 	def full_actor
 		response = HTTP.headers(
