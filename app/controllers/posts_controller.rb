@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+	include Pub::ActivityPubHelper
+
 	def index
 		@posts = Post
 			.limit(30)
@@ -10,6 +12,11 @@ class PostsController < ApplicationController
 	def show
 		@post = Post.with_everything(Current.user, params).find(params[:id])
 		@new_post = Post.new
+		
+		respond_to do |format|
+			format.html
+			format.json { render json: @post.to_note(full_url) }
+		end
 	end
 
 	def new

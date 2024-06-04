@@ -6,7 +6,6 @@ module Pub
 		def inbox
 			body = JSON.parse(request.raw_post)
 			if helpers.sig_check(request.headers)
-				p "Inbox Request #{body}"
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create_from_activity(body)
 					inbox = follower.inbox
@@ -33,7 +32,6 @@ module Pub
 
 				render plain: 'OK', status: 200
 			else
-				p "Invalid request to inbox"
 				render plain: 'Request signature could not be verified', status: 401
 			end
 		end

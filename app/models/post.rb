@@ -88,7 +88,7 @@ class Post < ApplicationRecord
 		{
 			"@context" => "https://www.w3.org/ns/activitystreams",
 			type: "Note",
-			id: "#{full_url}/posts/#{id}",
+			id: "#{full_url}/posts/#{id}.json",
 			summary: nil,
 			# Could link to the parent
 			inReplyTo: nil,
