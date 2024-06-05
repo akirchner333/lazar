@@ -1,4 +1,5 @@
 class PubFollower < ApplicationRecord
+	validates :actor_url, uniqueness: true
 
 	# {
 	# 	"@context":"https://www.w3.org/ns/activitystreams",
@@ -10,7 +11,7 @@ class PubFollower < ApplicationRecord
 	def self.create_from_activity(params)
 		# Sometimes it'll be a url and sometimes it'll be a hash?
 		# Am I remembering that correctly?
-		create(
+		find_or_create_by(
 			follower: params["actor"].split("/").last,
 			actor_url: params["actor"],
 			user_id: nil

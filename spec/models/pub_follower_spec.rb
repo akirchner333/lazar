@@ -17,6 +17,22 @@ RSpec.describe PubFollower, type: :model do
     expect(follower.actor_url).to eq("https://example.test/users/example_follower")
   end
 
+  it 'does not create a follower if they already exist' do
+    body = JSON.parse('{
+      "@context":"https://www.w3.org/ns/activitystreams",
+      "id":"https://example.test/9f1fc955-6251-4fe0-8bd9-b56b82486c4a",
+      "type":"Follow",
+      "actor":"https://example.test/users/example_follower",
+      "object":"https://lazar.social/users/lazar"
+    }')
+
+    PubFollower.create_from_activity(body)
+    expect(PubFollower.count).to equal(1)
+
+    PubFollower.create_from_activity(body)
+    expect(PubFollower.count).to equal(1)
+  end
+
   it 'provides the inbox url' do
     expect(follower.inbox).to eq("https://example.test/users/example_follower/inbox")
   end

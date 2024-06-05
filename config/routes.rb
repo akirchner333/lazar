@@ -14,10 +14,6 @@ Rails.application.routes.draw do
     post '/inbox', to: 'inbox#inbox'
   end
 
-  if ENV['SITE_LIVE'] != 'true'
-    get '*path', to: redirect('/')
-  end
-
   resources :posts, only: %i[index show create]
   get 'posts/:id/new', to: 'posts#new'
   resources :users, only: %i[new create update show]

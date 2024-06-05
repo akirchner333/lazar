@@ -7,8 +7,12 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by(email: params[:email])
 		if user.present? && user.authenticate(params[:password])
-			session[:user_id] = user.id
-			redirect_to root_path, notice: "Logged in"
+			if !user.admin && !live?
+				not_live
+			else
+				session[:user_id] = user.id
+				redirect_to root_path, notice: "Logged in"
+			end
 		else
 			login_failure
 		end
@@ -30,6 +34,11 @@ class SessionsController < ApplicationController
 	end
 
 	private
+	def not_live
+		flash.alert = "Lazar is currently at rest and cannot be accessed"
+		redirect_to sign_in_path
+	end
+
 	def login_failure
 		flash.alert = "We were unable to log you in. Please try again or make a new account."
 		redirect_to sign_in_path
