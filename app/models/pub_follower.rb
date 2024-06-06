@@ -19,11 +19,17 @@ class PubFollower < ApplicationRecord
 	end
 
 	def inbox
-		actor_url + "/inbox"
+		URI.parse(actor_url + "/inbox")
 	end
 
 	def host
 		URI.parse(actor_url).host
+	end
+
+	def self.shared_inboxes
+		all
+			.map { |follower| "https://" + follower.host + "/inbox" }
+			.uniq
 	end
 
 	# What should I do if the user gets deleted or moved?

@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   namespace :pub do
     get '/actor/:id', to: 'actor#actor'
     get '/actor/:id/collections/featured', to: 'actor#featured'
+    get '/actor/:id/collections/followers', to: 'actor#followers'
     post '/reply', to: 'actor#reply'
     post '/inbox', to: 'inbox#inbox'
+    get '/outbox', to: "inbox#outbox"
   end
 
   resources :posts, only: %i[index show create]

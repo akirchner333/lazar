@@ -4,7 +4,13 @@ module Pub
 			"http#{Rails.env == "production" && ENV['HTTPS'] == 'true' ? 's' : ''}://#{ENV['URL']}"
 		end
 
-		def http_signature(uri, body)
+		def activity_post(uri, body)
+			HTTP
+				.headers(http_signature_headers(uri, body))
+				.post(uri, body: body)
+		end
+
+		def http_signature_headers(uri, body)
 			date = Time.now.utc.httpdate
 			keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 			host = uri.host

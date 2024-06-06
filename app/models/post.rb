@@ -29,6 +29,7 @@ class Post < ApplicationRecord
 
 	# ~~~~~ Callbacks ~~~~~~~~
 	before_validation :set_root_and_distance
+	after_create :send_to_pub
 
 	def self.with_everything(user, params)
 		scope = limit(30)
@@ -84,31 +85,8 @@ class Post < ApplicationRecord
 		# This is probably enough for now
 	end
 
-	def to_note(full_url)
-		{
-			"@context" => "https://www.w3.org/ns/activitystreams",
-			type: "Note",
-			id: "#{full_url}/posts/#{id}.json",
-			summary: nil,
-			# Could link to the parent
-			inReplyTo: nil,
-			published: created_at,
-			url: "#{full_url}/posts/#{id}",
-			to: [],
-			cc: [],
-			sensitive: false,
-			#atomUri: "...",
-			#inReplyToAtomUri: nil,
-			# conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
-			content: "<p>#{words.html_safe}</p>",
-			contentMap: {
-				en: "<p>#{words.html_safe}</p>"
-			},
-			attachment: [],
-			tag: [],
-			# Could set up something here to link all the posts together
-			replies: []
-		}
+	def to_note
+		Pub::Note.new(self)
 	end
 
 	private
@@ -149,5 +127,36 @@ class Post < ApplicationRecord
 		self.root_id = parent.root_id || self.parent_id
 		root = Post.find(self.root_id)
 		self.distance = levenshtein_distance(root.words, self.words)
+	end
+
+	def send_to_pub
+		date = Time.now.utc.httpdate
+		body = {
+			"@context":[
+				"https://www.w3.org/ns/activitystreams"
+			],
+			# "id":"https://instance.digital/users/an_alexa_k/statuses/112564990610802835/activity",
+			"id":"???",
+			"type":"Create",
+			"actor":"https://#{ENV['URL']}/pub/actors/lazar",
+			"published": date,
+			"to":[
+				"https://www.w3.org/ns/activitystreams#Public"
+			],
+			"cc":[
+				# "https://instance.digital/users/an_alexa_k/followers"
+				"A url for lazar's followers?"
+			],
+			"object": to_note,
+			signature: {
+				"type":"RsaSignature2017",
+				"creator":"https://#{ENV['URL']}/pub/actors/lazar#main-key",
+				"created": date,
+				"signatureValue":"????"
+			}
+		}
+		PubFollower.shared_inboxes.each do |inbox|
+			HTTP.headers({}).post(inbox, JSON.generate(body))
+		end
 	end
 end

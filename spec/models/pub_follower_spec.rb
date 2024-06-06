@@ -44,4 +44,13 @@ RSpec.describe PubFollower, type: :model do
   it 'has an id' do
     expect(follower).to have_attribute(:id)
   end
+
+  it 'provides a list of all inboxes' do
+    create :pub_follower, actor_url: "https://example.test/users/follower1"
+    create :pub_follower, actor_url: "https://example.test/users/follower2"
+    create :pub_follower, actor_url: "https://example2.test/users/follower3"
+
+    inboxes = PubFollower.shared_inboxes
+    expect(inboxes).to contain_exactly("https://example.test/inbox", "https://example2.test/inbox")
+  end
 end
