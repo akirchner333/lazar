@@ -37,11 +37,14 @@ module Pub
 					collection = Pub::OrderedCollectionRoot.new(total, id)
 					render :json => collection.to_h
 				else
-					collection = Pub::OrderedCollectionPage.ends_with(
+					collection = Pub::OrderedCollectionPage.new(
 						total,
 						id,
-						params[:page],
-						PubFollower.limit(10).offset(10 * params[:page]).pluck(:actor_url)
+						params[:page].to_i,
+						PubFollower
+							.limit(10)
+							.offset(10 * (params[:page].to_i - 1))
+							.pluck(:actor_url)
 					)
 					render :json => collection.to_h
 				end

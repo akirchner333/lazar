@@ -2,7 +2,7 @@ module Pub
 	class OrderedCollectionRoot < BaseObject
 		Type = "OrderedCollection"
 
-		def initialized(total, id)
+		def initialize(total, id)
 			@total = total
 			@id = id
 		end

@@ -3,7 +3,7 @@ module Pub
 		Type = "OrderedCollectionPage"
 		Count = 10
 
-		def initialized(total, id, page, items)
+		def initialize(total, id, page, items)
 			@total = total
 			@id = id
 			@page = page
@@ -22,12 +22,12 @@ module Pub
 			page = {
 				**super,
 				totalItems: @total,
-				orderedItems: @items
+				orderedItems: @items,
 				partOf: parent_collection
 			}
 
-			page[:next] = "#{parent_collection}?page=#{@page + 1}" if page * Count < @total
-			page[:prev] = "#{parent_collection}?page=#{@page - 1}" if page > 1
+			page[:next] = "#{parent_collection}?page=#{@page + 1}" if @page * Count < @total
+			page[:prev] = "#{parent_collection}?page=#{@page - 1}" if @page > 1
 
 			page
 		end

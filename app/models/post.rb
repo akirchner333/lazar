@@ -89,6 +89,10 @@ class Post < ApplicationRecord
 		Pub::Note.new(self)
 	end
 
+	def create_object
+		Pub::Create.new(self)
+	end
+
 	private
 
 	# These should be sanitized somewhat
@@ -130,33 +134,8 @@ class Post < ApplicationRecord
 	end
 
 	def send_to_pub
-		date = Time.now.utc.httpdate
-		body = {
-			"@context":[
-				"https://www.w3.org/ns/activitystreams"
-			],
-			# "id":"https://instance.digital/users/an_alexa_k/statuses/112564990610802835/activity",
-			"id":"???",
-			"type":"Create",
-			"actor":"https://#{ENV['URL']}/pub/actors/lazar",
-			"published": date,
-			"to":[
-				"https://www.w3.org/ns/activitystreams#Public"
-			],
-			"cc":[
-				# "https://instance.digital/users/an_alexa_k/followers"
-				"A url for lazar's followers?"
-			],
-			"object": to_note,
-			signature: {
-				"type":"RsaSignature2017",
-				"creator":"https://#{ENV['URL']}/pub/actors/lazar#main-key",
-				"created": date,
-				"signatureValue":"????"
-			}
-		}
 		PubFollower.shared_inboxes.each do |inbox|
-			HTTP.headers({}).post(inbox, JSON.generate(body))
+			HTTP.headers({}).post(inbox, create_object.to_s)
 		end
 	end
 end
