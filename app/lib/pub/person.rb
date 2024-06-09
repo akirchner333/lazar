@@ -1,6 +1,6 @@
 module Pub
-	class Organization < SecureObject
-		Type = "Organization"
+	class Person < SecureObject
+		Type = "Person"
 
 		def initialize
 			super

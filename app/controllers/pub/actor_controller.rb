@@ -6,7 +6,7 @@ module Pub
 
 		def actor
 			if params[:id] == "lazar"
-				render :json => Pub::Organization.new.to_h
+				render :json => Pub::Person.new.to_h
 			else
 				render :json => {
 					error: "not found"
