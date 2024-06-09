@@ -16,6 +16,7 @@ module Pub
 		def to_h
 			date = Time.now.utc.httpdate
 			{
+				**super,
 				actor:"#{full_url}/pub/actors/#{@actor}",
 				published: date,
 				to:[
@@ -24,7 +25,7 @@ module Pub
 				cc:[
 					"#{full_url}/pub/actors/#{@actor}/collections/followers"
 				],
-				object: @object,
+				object: @post.to_note.to_h,
 				signature: {
 					"type":"RsaSignature2017",
 					"creator":"https://#{ENV['URL']}/pub/actors/lazar#main-key",
