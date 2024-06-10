@@ -40,6 +40,15 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def destroy
+		if Current.user.admin
+			@post = Post.find(params[:id])
+			@post.destroy
+		end
+
+		redirect_to "/posts"
+	end
+
 	def random
 		id = Post.offset(rand(Post.count)).limit(1).pluck(:id)
 		redirect_to "/posts/#{id[0]}"

@@ -5,6 +5,7 @@ module Pub
 
 		def inbox
 			body = JSON.parse(request.raw_post)
+			
 			if helpers.sig_check(request.headers)
 				if body['type'] == "Follow" && body['object'].ends_with?('lazar')
 					follower = PubFollower.create_from_activity(body)

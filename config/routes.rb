@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get '/outbox', to: "inbox#outbox"
   end
 
-  resources :posts, only: %i[index show create]
+  resources :posts, only: %i[index show create destroy]
   get 'posts/:id/new', to: 'posts#new'
   resources :users, only: %i[new create update show]
 

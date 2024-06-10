@@ -18,6 +18,9 @@
 		</div>
 		<% if Current.user %>
 			<div class="post-interactions">
+				<% if Current.user.admin %>
+					<%= button_to "delete", post, method: :delete %>
+				<% end %>
 				<%= link_to "/posts/#{post.id}/new" do %>
 					<div class="reply-button" data-id="<%= post.id %>">
 						<%= svg('edit') %>
