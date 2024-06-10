@@ -22,7 +22,7 @@ RSpec.describe Pub::ActivityPubHelper do
 		let(:uri) { URI.parse("https://example.com")}
 
 		it("generates headers") do
-			headers = helper.http_signature(uri, JSON.generate(body))
+			headers = helper.http_signature_headers(uri, JSON.generate(body))
 			expect(headers[:Host]).to eq("example.com")
 			# Check the date
 			# Check the digest

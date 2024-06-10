@@ -13,6 +13,9 @@
     <%= javascript_import_module_tag "diff" %>
     <%= javascript_import_module_tag "form" %>
     <%= favicon_link_tag asset_path('icon.png') %>
+    <script>
+      const maxVariance = <%= ENV['VARIANCE'] %>
+    </script>
   </head>
 
   <body>

@@ -60,7 +60,7 @@ function runPostForm(){
 			const dist = distance(currentWords, rootWords);
 
 			elements.distanceSpan.innerHTML = dist;
-			if(dist > 15){
+			if(dist > maxVariance){
 				elements.distanceDiv.classList.add('red');
 				elements.form.disabled = true;
 				elements.submitButton.disabled = true;

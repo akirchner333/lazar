@@ -34,7 +34,7 @@ RSpec.describe PubFollower, type: :model do
   end
 
   it 'provides the inbox url' do
-    expect(follower.inbox).to eq("https://example.test/users/example_follower/inbox")
+    expect(follower.inbox.path).to eq("/users/example_follower/inbox")
   end
 
   it 'provides the host' do

@@ -21,7 +21,7 @@ class Post < ApplicationRecord
 	validates_each :words do |record, attr, value|
 		parent = Post.find(record.parent_id)
 		distance = levenshtein_distance(parent.words, value)
-		if record.parent_id && distance > 15
+		if record.parent_id && distance > ENV['VARIANCE'].to_i
 			record.errors.add(
 				attr,
 				"have a variance rating of #{distance} and must be 15 or less."
