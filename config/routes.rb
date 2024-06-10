@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/actor/:id', to: 'actor#actor'
     get '/actor/:id/collections/featured', to: 'actor#featured'
     get '/actor/:id/collections/followers', to: 'actor#followers'
+    get '/actor/:id/collections/following', to: 'actor#following'
     post '/reply', to: 'actor#reply'
     post '/inbox', to: 'inbox#inbox'
     get '/outbox', to: "inbox#outbox"

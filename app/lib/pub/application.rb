@@ -18,7 +18,7 @@ module Pub
 			@preferredUsername = "lazar"
 			@url = "https://lazar.social"
 			@icon = 'lazar_icon.png'
-			@published = "1960-11-24T00:00:00Z" # The day Oulipo was founded
+			@published = "1960-11-24T00:00:00Z" # The day Oulipo was founded!
 			@attachments = [
 				{
 					type: "PropertyValue",
@@ -33,13 +33,14 @@ module Pub
 		end
 
 		def id
-			"#{full_url}/pub/actors/lazar"
+			"#{full_url}/pub/actor/#{@username}"
 		end
 
 		def to_h
 			{
 				**super,
 				followers: "#{full_url}/pub/actor/#{@username}/collections/followers",
+				following: "#{full_url}/pub/actor/#{@username}/collections/following",
 				inbox: "#{full_url}/pub/inbox",
 				outbox: "#{full_url}/pub/outbox",
 				featured: "#{full_url}/pub/actor/#{@username}/collections/featured",

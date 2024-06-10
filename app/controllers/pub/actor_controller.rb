@@ -50,5 +50,16 @@ module Pub
 				end
 			end
 		end
+
+		def following
+			id = "actor/#{params[:id]}/collections/following"
+			if(params[:page].nil?)
+				collection = Pub::OrderedCollectionRoot.new(0, id)
+				render :json => collection.to_h
+			else
+				collection = Pub::OrderedCollectionPage.new(0, id, params[:page].to_i, [])
+				render :json => collection.to_h
+			end
+		end
 	end
 end
