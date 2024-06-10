@@ -1,6 +1,8 @@
 include Gem::Text
+include Pub::ActivityPubHelper
 
 class Post < ApplicationRecord
+
 	# ~~~~~ Associations ~~~~~~~~
 	belongs_to :user
 	
@@ -134,8 +136,9 @@ class Post < ApplicationRecord
 	end
 
 	def send_to_pub
+		body = create_object.to_s
 		PubFollower.shared_inboxes.each do |inbox|
-			HTTP.headers({}).post(inbox, create_object.to_s)
+			activity_post(URI.parse(inbox), body)
 		end
 	end
 end

@@ -26,12 +26,12 @@ module Pub
 					"#{full_url}/pub/actors/#{@actor}/collections/followers"
 				],
 				object: @post.to_note.to_h,
-				signature: {
-					"type":"RsaSignature2017",
-					"creator":"https://#{ENV['URL']}/pub/actors/lazar#main-key",
-					"created": date,
-					"signatureValue":"????"
-				}
+				# signature: {
+				# 	"type":"RsaSignature2017",
+				# 	"creator":"https://#{ENV['URL']}/pub/actors/lazar#main-key",
+				# 	"created": date,
+				# 	"signatureValue":"????"
+				# }
 			}
 		end
 	end
