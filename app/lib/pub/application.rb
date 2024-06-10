@@ -1,6 +1,6 @@
 module Pub
-	class Person < SecureObject
-		Type = "Person"
+	class Application < SecureObject
+		Type = "Application"
 
 		def initialize
 			super
@@ -13,7 +13,7 @@ module Pub
 				cutting edge social media experiments.
 			</p>
 			HTML
-			@name = "Lazar Firehouse"
+			@name = "Lazar Firehose"
 			@username = "lazar"
 			@preferredUsername = "lazar"
 			@url = "https://lazar.social"
@@ -39,11 +39,12 @@ module Pub
 		def to_h
 			{
 				**super,
-				preferredUsername: @preferredUsername,
-				name: @name,
+				followers: "#{full_url}/pub/actor/#{@username}/collections/followers",
 				inbox: "#{full_url}/pub/inbox",
 				outbox: "#{full_url}/pub/outbox",
 				featured: "#{full_url}/pub/actor/#{@username}/collections/featured",
+				name: @name,
+				preferredUsername: @preferredUsername,
 				summary: @summary,
 				url: @url,
 				manuallyApprovesFollowers: false,
@@ -61,7 +62,6 @@ module Pub
 				},
 				attachment: @attachments,
 				# following: "",
-				followers: "#{full_url}/pub/actor/#{@username}/collections/followers",
 				# image: { //Put a header here
 				# 	type: "Image",
 				# 	mediaType: "image/png",
