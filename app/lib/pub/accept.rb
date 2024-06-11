@@ -1,6 +1,6 @@
 module Pub
 	class Accept < BaseObject
-		Type = "accept"
+		Type = "Accept"
 
 		def initialize(follower, object)
 			@follower = follower

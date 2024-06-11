@@ -4,6 +4,7 @@ module Pub
 
 		def initialize(post)
 			@post = post
+			@actor = "lazar"
 		end
 
 		def id
@@ -18,9 +19,13 @@ module Pub
 				published: @post.created_at,
 				summary: nil,
 				url: "#{full_url}/posts/#{@post.id}",
-				attributedTo:"#{full_url}/pub/actors/lazar",
-				to: [],
-				cc: [],
+				attributedTo:"#{full_url}/pub/actor/#{@actor}}",
+				to:[
+					"https://www.w3.org/ns/activitystreams#Public"
+				],
+				cc:[
+					"#{full_url}/pub/actor/#{@actor}/collections/followers"
+				],
 				sensitive: false,
 				localOnly: false,
 				content: content,

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     post '/reply', to: 'actor#reply'
     post '/inbox', to: 'inbox#inbox'
     get '/outbox', to: "inbox#outbox"
+
+    resources :activities, only: %i[show]
   end
 
   resources :posts, only: %i[index show create destroy]
