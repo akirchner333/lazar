@@ -9,10 +9,10 @@ module Pub
 			# But for now are hardcoded (cause I only have one actor)
 			@summary = <<~HTML
 			<p>
-				Every post made by anyone on lazar.social, the home of a series of
-				cutting edge social media experiments.
+				Every post made by anyone on lazar.social, the avant guarde of social media.
 			</p>
 			HTML
+			.gsub(/[\t\n]/, "")
 			@name = "Lazar Firehose"
 			@username = "lazar"
 			@preferredUsername = "lazar"

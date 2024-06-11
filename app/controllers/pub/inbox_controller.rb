@@ -32,24 +32,27 @@ module Pub
 			if total <= 10
 				collection = Pub::OrderedCollection.new(
 					id,
-					Post.all.map { |p| p.create_object }
+					Post.order(created_at: :desc)
+						.all
+						.map { |p| p.create_object }
 				)
 
-				render :json => collection.to_h
+				render :json => collection
 			else
 				if(params[:page].nil?)
 					collection = Pub::OrderedCollectionRoot.new(total, id)
-					render :json => collection.to_h
+					render :json => collection
 				else
 					collection = Pub::OrderedCollectionPage.new(
 						total,
 						id,
 						params[:page].to_i,
-						Post.limit(10)
+						Post.order(created_at: :desc)
+							.limit(10)
 							.offset(10 * (params[:page].to_i - 1))
 							.map { |p| p.create_object }
 					)
-					render :json => collection.to_h
+					render :json => collection
 				end
 			end
 		end

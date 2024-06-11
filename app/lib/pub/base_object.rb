@@ -21,7 +21,7 @@ module Pub
 			JSON.generate(to_h)
 		end
 
-		def attributes
+		def to_json(options)
 			JSON.generate(to_h, **options)
 		end
 	end

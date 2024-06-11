@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 		
 		respond_to do |format|
 			format.html
-			format.json { render json: @post.to_note.to_h }
+			format.json { render json: @post.to_note }
 		end
 	end
 

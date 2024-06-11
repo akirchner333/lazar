@@ -6,7 +6,7 @@ module Pub
 
 		def actor
 			if params[:id] == "lazar"
-				render :json => Pub::Application.new.to_h
+				render :json => Pub::Application.new
 			else
 				render :json => {
 					error: "not found"
@@ -19,7 +19,7 @@ module Pub
 				"actor/#{params[:id]}/collections/featured",
 				Post.limit(5).map { |p| p.to_note.to_h }
 			)
-			render :json => collection.to_h
+			render :json => collection
 		end
 
 		def followers
@@ -31,11 +31,11 @@ module Pub
 					PubFollower.pluck(:actor_url)
 				)
 
-				render :json => collection.to_h
+				render :json => collection
 			else
 				if(params[:page].nil?)
 					collection = Pub::OrderedCollectionRoot.new(total, id)
-					render :json => collection.to_h
+					render :json => collection
 				else
 					collection = Pub::OrderedCollectionPage.new(
 						total,
@@ -46,7 +46,7 @@ module Pub
 							.offset(10 * (params[:page].to_i - 1))
 							.pluck(:actor_url)
 					)
-					render :json => collection.to_h
+					render :json => collection
 				end
 			end
 		end

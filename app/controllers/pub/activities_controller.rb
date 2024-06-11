@@ -9,7 +9,7 @@ module Pub
 			# So I can just treat this as another way to get posts
 			post = Post.find(params[:id])
 			if !post.nil?
-				render :json => post.create_object.to_h
+				render :json => post.create_object
 			else
 				render :json => {
 					error: 'not found'

@@ -11,9 +11,16 @@ module Pub
 			"#{full_url}/posts/#{@post.id}.json"
 		end
 
-		def to_h
-			content = "<p>#{@post.user.username.html_safe}: \"#{@post.words.html_safe}\"</p>"
+		def content
+			<<~HTML
+				<p>
+					<strong>#{@post.user.username.html_safe}<strong>: "#{@post.words.html_safe}"
+				</p>
+			HTML
+			.gsub(/[\t\n]/, "")
+		end
 
+		def to_h
 			{
 				**super,
 				published: @post.created_at,
