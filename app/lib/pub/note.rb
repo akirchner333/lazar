@@ -19,7 +19,7 @@ module Pub
 				published: @post.created_at,
 				summary: nil,
 				url: "#{full_url}/posts/#{@post.id}",
-				attributedTo:"#{full_url}/pub/actor/#{@actor}}",
+				attributedTo:"#{full_url}/pub/actor/#{@actor}",
 				to:[
 					"https://www.w3.org/ns/activitystreams#Public"
 				],
@@ -34,9 +34,11 @@ module Pub
 				},
 				attachment: [],
 				tag: [],
-				inReplyTo: @post.parent_id ? "#{full_url}/posts/#{@post.parent_id}.json" : nil,
+				# inReplyTo: @post.parent_id ? "#{full_url}/posts/#{@post.parent_id}.json" : nil,
+				inReplyTo: nil,
 				# on Mastodon this links to a collection of replies. But see if direct links work
-				replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
+				# replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
+				replies: []
 				#atomUri: "...",
 				#inReplyToAtomUri: nil,
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
