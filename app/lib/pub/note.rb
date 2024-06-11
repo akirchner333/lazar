@@ -45,7 +45,7 @@ module Pub
 				inReplyTo: nil,
 				# on Mastodon this links to a collection of replies. But see if direct links work
 				# replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
-				replies: nil
+				replies: nil,
 				#atomUri: "...",
 				inReplyToAtomUri: nil,
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
