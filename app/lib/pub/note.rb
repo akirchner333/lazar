@@ -23,7 +23,7 @@ module Pub
 		def to_h
 			{
 				**super,
-				published: @post.created_at,
+				published: @post.created_at.iso8601,
 				summary: nil,
 				url: "#{full_url}/posts/#{@post.id}",
 				attributedTo:"#{full_url}/pub/actor/#{@actor}",
@@ -45,9 +45,9 @@ module Pub
 				inReplyTo: nil,
 				# on Mastodon this links to a collection of replies. But see if direct links work
 				# replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
-				replies: []
+				replies: nil
 				#atomUri: "...",
-				#inReplyToAtomUri: nil,
+				inReplyToAtomUri: nil,
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
 			}
 		end

@@ -13,7 +13,7 @@ module Pub
 		end
 
 		def to_h
-			date = Time.now.utc.httpdate
+			date = Time.now.utc.iso8601
 			{
 				**super,
 				actor:"#{full_url}/pub/actor/#{@actor}",
