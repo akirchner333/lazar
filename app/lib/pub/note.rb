@@ -14,7 +14,7 @@ module Pub
 		def content
 			<<~HTML
 				<p>
-					<strong>#{@post.user.username.html_safe}<strong>: "#{@post.words.html_safe}"
+					<strong>#{@post.user.username.html_safe}</strong>: "#{@post.words.html_safe}"
 				</p>
 			HTML
 			.gsub(/[\t\n]/, "")
