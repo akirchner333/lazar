@@ -9,7 +9,7 @@
 		<% end %>
 	</div>
 	<%= form_with model: @new_post, id: 'post-form' do |form| %>
-		<div class="diff"><span id="original-text"><%= @parent.words %></span></div>
+		<div class="diff"><%= @parent.words %></div>
 		<div class="variance">
 			Current Variance: <span id="distance">0</span>/<%= ENV['VARIANCE'] %>
 		</div>
@@ -18,6 +18,7 @@
 		<%= form.text_area :words, value: @parent.words, minlength: 4, maxlength: 241 %>
 
 		<%= form.hidden_field :parent, value: @parent.id %>
+		<%= form.hidden_field :original, value: @parent.words %>
 
 		<div class="form-buttons">
 			<button id="reset-button">RESET</button>

@@ -15,10 +15,10 @@ function runPostForm(){
 			distanceDiv: document.querySelector('#distance').parentNode,
 			resetButton: document.querySelector('#reset-button'),
 			submitButton: document.querySelector('#submit-button'),
-			originalText: document.querySelector('#original-text')
+			diffDisplay: document.querySelector('.diff')
 		};
 
-		let rootWords = elements.originalText.textContent;
+		let rootWords = document.querySelector('#post_original').value;
 
 		setDiff();
 
@@ -29,7 +29,7 @@ function runPostForm(){
 			event.stopPropagation();
 			setForm(rootWords);
 			updateFromDistance();
-			elements.originalText.innerHTML = rootWords;
+			elements.diffDisplay.innerHTML = rootWords;
 			return false;
 		});
 
@@ -37,7 +37,7 @@ function runPostForm(){
 			updateFromDistance();
 			var text = elements.textArea.value;
 			var dif = textDiff(rootWords, text);
-			elements.originalText.innerHTML = "";
+			elements.diffDisplay.innerHTML = "";
 			dif.forEach(c => {
 				const div = document.createElement('div')
 				div.textContent = c.char;
@@ -51,7 +51,7 @@ function runPostForm(){
 				if(c.insert){
 					div.classList.add('insert')
 				}
-				elements.originalText.appendChild(div);
+				elements.diffDisplay.appendChild(div);
 			});
 		}
 
