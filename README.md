@@ -7,4 +7,4 @@
 
 [Generation 6: Ply and Reply](https://github.com/akirchner333/lazar/tree/gen-6-ply)
 
-[Generation 7: Variance](https://github.com/akirchner333/lazar/tree/gen-7-distance)
+[Generation 7: Variance](https://github.com/akirchner333/lazar/tree/gen-7-variance)
