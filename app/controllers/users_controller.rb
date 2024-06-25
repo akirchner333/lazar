@@ -9,7 +9,8 @@ class UsersController < ApplicationController
 			session[:user_id] = @user.id
 			redirect_to root_path, notice: 'Account Created!'
 		else
-			render :new
+			flash[:alert] = @user.errors.map { |e| e.full_message } .join(", ")
+			redirect_to new_user_path
 		end
 	end
 

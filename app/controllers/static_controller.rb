@@ -3,7 +3,7 @@ class StaticController < ApplicationController
 	end
 
 	def landing
-		@posts = Post.limit(5)
+		@posts = Post.limit(5).order(created_at: :desc)
 		if ENV['SITE_LIVE'] != 'true'
 			render 'not_live'
 		elsif Current.user
