@@ -1,10 +1,16 @@
 <section id="timeline">
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @plies, up: true} %>
-	
-	<div class="show-post">
-			<%= render partial: 'posts/post', locals: {post: @post} %>
-	</div>
-	<%= render partial: 'carousel', locals:  {post_id: @post.id, posts: @replies, up: false} %>
+	<% if @post.ply %>
+		<% if @post.ply.ply %>
+			<%= render partial: 'posts/post', locals: {post: @post.ply.ply} %>
+			<div class="line-box">
+				<div class="line"></div>
+			</div>
+		<% end %>
+		<%= render partial: 'posts/post', locals: {post: @post.ply} %>
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+	<% end %>
+	<%= render partial: 'posts/post', locals: {post: @post, class: "show-post"} %>
+	<%= render partial: 'posts/posts', locals: {posts: @post.replies, myclass: "reply-column"} %>
 </section>
-
-<%= render partial: 'posts/form' %>

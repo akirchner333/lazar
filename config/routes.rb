@@ -1,13 +1,26 @@
 Rails.application.routes.draw do
   root "static#landing"
 
-  if ENV['SITE_LIVE'] != 'true'
-    get '*path', to: redirect('/')
+  # --------------- ActivityPub ----------------------
+  scope module: 'pub' do
+    get '/.well-known/webfinger', to: 'finger#webfinger'
+    post '/inbox', to: 'inbox#inbox'
   end
 
-  resources :posts, only: %i[index show create]
-  get '/posts/:id/replies', to: 'posts#replies'
-  get '/posts/:id/plies', to: 'posts#plies'
+  namespace :pub do
+    get '/actor/:id', to: 'actor#actor'
+    get '/actor/:id/collections/featured', to: 'actor#featured'
+    get '/actor/:id/collections/followers', to: 'actor#followers'
+    get '/actor/:id/collections/following', to: 'actor#following'
+    post '/reply', to: 'actor#reply'
+    post '/inbox', to: 'inbox#inbox'
+    get '/outbox', to: "inbox#outbox"
+
+    resources :activities, only: %i[show]
+  end
+
+  resources :posts, only: %i[index show create destroy]
+  get 'posts/:id/new', to: 'posts#new'
   resources :users, only: %i[new create update show]
 
   get 'sign_up', to: 'users#new'
@@ -26,7 +39,11 @@ Rails.application.routes.draw do
   get 'random', to: 'posts#random'
 
   get 'help', to: 'static#help'
+  get 'museum', to: 'static#museum'
+  get 'rotate', to: 'static#rotate'
+
+  
 
   # Should let people update / restore their passwords, so there'd be paths for that
-  # But that can wait till later
+  # Until then, we lose access to our accounts like men
 end

@@ -1,113 +1,81 @@
+import distance from 'distance';
+import textDiff from 'diff';
 
-document.addEventListener('turbo:load', () => {
-	const modal = document.getElementById("modal-background");
-	let plies = [];
-	let replies = [];
+document.addEventListener('turbo:load', () => runPostForm());
+document.addEventListener('turbo:render', () => runPostForm());
 
-	if(modal){
-		modal.addEventListener('click', (event) => {
-			if(event.target.getAttribute('id') === 'modal-background'){
-				closeForm();
-			}
+function runPostForm(){
+	const form = document.getElementById("new-post");
+
+	if(form){
+		const elements = {
+			form: document.querySelector('#post-form'),
+			textArea: document.querySelector('#post_words'),
+			distanceSpan: document.querySelector('#distance'),
+			distanceDiv: document.querySelector('#distance').parentNode,
+			resetButton: document.querySelector('#reset-button'),
+			submitButton: document.querySelector('#submit-button'),
+			diffDisplay: document.querySelector('.diff')
+		};
+
+		let rootWords = document.querySelector('#post_original').value;
+
+		setDiff();
+
+		elements.textArea.addEventListener('input', (event) => setDiff());
+
+		elements.resetButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			setForm(rootWords);
+			updateFromDistance();
+			elements.diffDisplay.innerHTML = rootWords;
+			return false;
 		});
 
-		enableButtons(document);
-		document.addEventListener('turbo:frame-render', (event) => {
-			enableButtons(event.target);
-		});
-
-		document.querySelector("#likes").addEventListener('turbo:frame-load', (event) => {
-			document.querySelectorAll("#likes .add-post").forEach((item) => {
-				item.addEventListener('click', (event) => {
-					addPost(item)
-				})
-
-				const id = item.getAttribute('data-id');
-				if(plies.includes(id) || replies.includes(id)){
-					item.parentElement.parentElement.classList.add('selected');
+		function setDiff(){
+			updateFromDistance();
+			var text = elements.textArea.value;
+			var dif = textDiff(rootWords, text);
+			elements.diffDisplay.innerHTML = "";
+			dif.forEach(c => {
+				const div = document.createElement('div')
+				div.textContent = c.char;
+				div.classList.add('char');
+				if(c.char == ' '){
+					div.classList.add('space');
 				}
+				if(c.delete){
+					div.classList.add('delete')
+				}
+				if(c.insert){
+					div.classList.add('insert')
+				}
+				elements.diffDisplay.appendChild(div);
 			});
-		});
-	}
+		}
 
-	function enableButtons(target){
-		[
-			...target.querySelectorAll(".reply-button"),
-			...target.querySelectorAll(".ply-button")
-		].forEach((item) => {
-			item.addEventListener('click', (event) => {
-				openForm(item);
-			})
-		});
-	}
+		function updateFromDistance(){
+			const currentWords = elements.textArea.value;
+			const dist = distance(currentWords, rootWords);
 
-	function closeForm(){
-		modal.classList.add("hide");
-		document.querySelectorAll('.list-post').forEach(item => item.remove())
-
-		plies = [];
-		replies = [];
-		setResponses();
-		document.querySelector('#likes').innerHTML = "";
-	}
-
-	function openForm(item){
-		modal.classList.remove('hide');
-		addPost(item);
-	}
-
-	function addPost(item){
-		const ply = !item.getAttribute('class').includes('reply-button');
-		const responses = getResponses(ply)
-		const id = item.getAttribute('data-id');
-
-		if(!responses.includes(id)){
-			if(ply){
-				plies = [...plies, id]
-			}else{
-				replies = [...replies, id]
+			elements.distanceSpan.innerHTML = dist;
+			if(dist > maxVariance){
+				elements.distanceDiv.classList.add('red');
+				elements.form.disabled = true;
+				elements.submitButton.disabled = true;
+			} else if(dist <= 0){
+				elements.submitButton.disabled = true;
+			} else {
+				elements.distanceDiv.classList.remove('red');
+				elements.form.disabled = false;
+				elements.submitButton.disabled = false;
 			}
-			setResponses();
-			item.parentElement.parentElement.classList.add('selected');
+		}
 
-			const words = item.parentElement.parentElement.querySelector(".words").innerHTML;
-
-			const postItem = document.createElement('li');
-			postItem.innerHTML = words;
-			postItem.setAttribute('data-id', id)
-			postItem.setAttribute('class', 'list-post')
-			
-			const list = document.querySelector(ply ? ".plies-list" : ".replies-list");
-			list.appendChild(postItem)
-
-			postItem.addEventListener('click', () => {
-				removePost(id, postItem, ply, item.parentElement.parentElement);
-			});
+		function setForm(value){
+			elements.textArea.innerHTML = value;
+			elements.textArea.value = value;
 		}
 	}
-
-	function removePost(id, item, ply, parent){
-		item.remove();
-		if(ply){
-			const index = plies.indexOf(id);
-			plies.splice(index, 1);
-		}else{
-			const index = replies.indexOf(id);
-			replies.splice(index, 1);
-		}
-		setResponses();
-
-		if(!replies.includes(id) && !plies.includes(id)){
-			parent.classList.remove('selected');
-		}
-	}
-
-	function getResponses(ply){
-		return ply ? plies : replies;
-	}
-
-	function setResponses(){
-		document.querySelector("#post_plies").setAttribute('value', plies.join(' '));
-		document.querySelector("#post_replies").setAttribute('value', replies.join(' '));
-	}
-});
+}

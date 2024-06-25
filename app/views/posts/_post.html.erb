@@ -1,42 +1,32 @@
-<div class="post" data-id="<%= post.id %>">
+<div class="post <%= local_assigns.fetch(:class, '') %>" data-id="<%= post.id %>">
 	<div class="post-header">
 		<div class="user-link">
 			<%= link_to post.user.username, user_path(post.user.id), data: { turbo_frame: "_top" } %>
 		</div>
-		<div>
-			<%= post.created_at.strftime('%m/%d %H:%M') %>
-		</div>
+		
 		<div class="link"><%= link_to "(_)", post, data: { turbo_frame: "_top" } %></div>
 	</div>
 	<div class="words">
 		<%= post.words %>
 	</div>
-	<% if Current.user %>
-		<div class="post-interactions">
-			<div class="reply-button add-post" data-id="<%= post.id %>">
-				<%= svg('ply') %>
-			</div>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'crab',
-				count: post.crab_count,
-				liked: post.crab_liked
-			} %>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'microphone',
-				count: post.microphone_count,
-				liked: post.microphone_liked
-			} %>
-			<%= render partial: 'likes/like_button', locals: {
-				post_id: post.id,
-				reaction: 'obelisk',
-				count: post.obelisk_count,
-				liked: post.obelisk_liked
-			} %>
-			<div class="ply-button add-post" data-id="<%= post.id %>">
-				<%= svg('reply') %>
-			</div>
+	<div class="post-footer">
+		<div>
+			<%= post.distance %> to <%= link_to "root", post.root, data: { turbo_frame: "_top" } %>.
 		</div>
-	<% end %>
+		<div>
+			<%= post.created_at.strftime('%m/%d %H:%M') %>
+		</div>
+		<% if Current.user %>
+			<div class="post-interactions">
+				<% if Current.user.admin %>
+					<%= button_to "delete", post, method: :delete %>
+				<% end %>
+				<%= link_to "/posts/#{post.id}/new" do %>
+					<div class="reply-button" data-id="<%= post.id %>">
+						<%= svg('edit') %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
 </div>

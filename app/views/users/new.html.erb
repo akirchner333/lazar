@@ -1,6 +1,6 @@
-<h2>Sign Up</h2>
-
 <div class="user-form interactable-zone">
+	<h2>Sign Up</h2>
+
 	<%= form_with model: @user, local: true, url: sign_up_path do |f| %>
 		<div>
 			<%= f.label 'email' %>
@@ -19,12 +19,10 @@
 		</div>
 	<% end %>
 
+	<h2>Or</h2>
 	<div class="sso">
 		<div class="sso-box sso-google">
 			<%= link_to "Log In with Google", '/auth/google_oauth2' %>
-		</div>
-		<div class="sso-box sso-twitter">
-			<%= link_to "Log In with Twitter", '/auth/twitter' %>
 		</div>
 	</div>
 </div>

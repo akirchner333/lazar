@@ -1,51 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-require 'csv'
+user = User.first_or_create(
+	email: "admin@admin.com",
+	admin: true,
+	username: "ADMIN",
+	password: ENV['ADMIN_PASSWORD'],
+	password_confirmation: ENV['ADMIN_PASSWORD']
+)
 
 Post.where(generation: 6).delete_all
-
-def load_play(file, start, offset)
-	previous = false
-	CSV.foreach("./db/#{file}.csv", headers: true) do |line|
-		character = User.find_or_initialize_by(
-			username: line['character'],
-			email: "#{line['character'].downcase.gsub(" ", "_")}@macbeth.com"
-		)
-		if character.has_changes_to_save?
-			character.password = "#{line[:character]}_4bx9s"
-			character.password_confirmation = "#{line[:character]}_4bx9s"
-			character.save
-		end
-
-		words = line['line']
-		if words.length < 4
-			words += "    "
-		end				
-		post = Post.new(
-			words: line['line'],
-			user_id: character.id,
-			generation: 6,
-			created_at: start + (line['num'].to_i + offset).seconds,
-			css: ""
-		)
-		if post.save
-			if previous
-				previous.replies << post
-			end
-			previous = post
-		else
-			p post.errors
-			p words
-		end
-	end
-	p "Saved #{file} to database"
+[
+	'Nine rows of soldiers stood in line.',
+    'The beach is dry and shallow at low tide.',
+    'The idea is to sew both edges straight.',
+    'The kitten chased the dog down the street.',
+    'Pages bound in cloth make a book.',
+    'Try to trace the fine lines of the painting.',
+    'Women form less than half of the group.',
+    'The zones merge in the central part of town.',
+    'A gem in the rough needs work to polish.',
+    'Code is used when secrets are sent.'
+].each do |words|
+	p words
+	post = Post.new(
+		words: words,
+		generation: 7,
+		user_id: user.id,
+		css: ''
+	)
+	post.save(validate: false)
 end
-
-start = DateTime.now
-load_play('macbeth', start, 0)
-load_play('tempest', start, 0.5)

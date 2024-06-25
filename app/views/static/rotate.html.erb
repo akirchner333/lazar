@@ -1,0 +1,3501 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>LA2AR</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<style>
+			body{
+			  background: cornsilk;
+			  margin: 0px;
+			}
+
+			h1 {
+			  text-align: center;
+			  font-size: 80px;
+			  word-wrap: break-word;
+			}
+
+			h1 a{
+			  text-decoration: none;
+			}
+
+			h2 {
+			  text-align: center;
+			}
+
+			.lazar {
+			  color: black;
+			  font-weight: heavy;
+			  font-style: italic;
+			  text-shadow: 0.04em 0.04em #f00, 
+			               0.08em 0.08em #0f0, 
+			               0.12em 0.12em #00f,
+			               0.16em 0.16em lightseagreen,
+			               0.20em 0.20em antiquewhite,
+			               0.24em 0.24em black;
+			}
+
+			.interactable-zone{
+			  background: white;
+			  border: 1px solid black;
+			}
+
+			/* _______________ HEADER ___________________ */
+			.user-bar{
+			  display: flex;
+			  flex-direction: row;
+			  justify-content: space-between;
+			  padding: 10px;
+			}
+
+			.user-bar .name{
+			  font-weight: bold;
+			}
+
+			.user-bar .user-buttons{
+			  display: flex;
+			  flex-direction: row;
+			  justify-content: flex-end;
+			}
+
+			.user-bar .user-buttons button{
+			  margin-left: 20px;
+			}
+
+			.flash{
+			  display: flex;
+			  align-items: center;
+			  flex-direction: column;
+			}
+
+			.flash div{
+			  width: 70vw;
+			  text-align: center;
+			  padding: 10px;
+			  margin: 5px;
+			  border-radius: 20px;
+			}
+
+			.alert{
+			  background: palevioletred;
+			}
+
+			.notice{
+			  background: lightblue;
+			}
+
+			/* -------------SIGN IN ------------------- */
+			.user-form{
+			  padding: 20px;
+			  border-radius: 20px;
+			}
+
+			.user-form label{
+			  display: inline-block;
+			  width: 100px;
+			}
+
+			.user-form div{
+			  margin: 10px;
+			}
+
+			.sso{
+			  display: flex;
+			  justify-content: center;
+			}
+
+			.sso-box{
+			  background: white;
+			  border: 1px solid black;
+			  padding: 5px;
+			}
+
+			/* ~~~~~~~~~~~~~~~FORMS~~~~~~~~~~~~~~~~~~~ */
+
+			.input-area{
+			  display: flex;
+			  justify-content: center;
+			  padding-bottom: 50px;
+			}
+
+			.post-form{
+			  padding: 20px;
+			  border-radius: 10px;
+			  z-index: 501;
+			  position: relative;
+			}
+
+			.post-form input[type=number]{
+			  width: 50px;
+			}
+
+			.post-form .styling{
+			  display: inline-block;
+			  padding: 5px;
+			}
+
+			.post-form label{
+			  font-weight: bold;
+			}
+
+			/* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
+
+			#timeline {
+			  display: flex;
+			  align-items: center;
+			  flex-direction: column;
+			}
+
+			.posts-list{
+			  list-style-type: none;
+			  padding: 0;
+			}
+
+			.post-parent{
+			  position: static;
+			  z-index:  0;
+			}
+
+			.post{
+			  padding: 10px;
+			  margin-bottom: 5px;
+			  border: 0.5px solid black;
+			  border-radius: 10px;
+			  width: 90vw;
+			  max-width: 1000px;
+			  text-align: left;
+			  position: relative;
+			  z-index: revert-layer;
+			  background-color: lightcoral;
+			}
+
+			.post .link, .post .words, .post .user{
+			  position:  relative;
+			}
+
+			.post .link{
+			  text-align: right;
+			}
+
+			.post .user{
+			  padding-left: 15%;
+			}
+
+			/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& USERS &&&&&&&&&&&&&&&&&&&&&&&& */
+
+			.username{
+			  font-size: 80px;
+			  word-break: break-all;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="user-bar interactable-zone">
+				<div class="name">
+					<a href="#">your_username</a>
+				</div>
+				<div class="user-buttons">
+					<button type="submit">Change Name</button>
+					<button type="submit">Sign Out</button>
+				</div>
+			</div>
+		</header>
+		<h1 class="lazar"><a href="#">LA2AR</a></h1>
+		<section class="input-area">
+			<div class="post-form interactable-zone">
+				<form action="#" accept-charset="UTF-8">
+					<div>
+						<label for="post_words">Words</label><br>
+						<textarea name="post[words]" id="post_words" cols="50" rows="5"></textarea>
+					</div>
+					<div>
+						<div class="styling">
+							<label for="post_rotate">Rotate</label><br>
+							<input min="0" max="360" type="range" value="0" name="post[rotate]" id="post_rotate">
+						</div>
+						<div class="styling">
+							<label for="post_top">Top</label><br>
+							<input placeholder="0" min="-500" max="500" type="number" value="0" name="post[top]" id="post_top">
+						</div>
+						<div class="styling">
+							<label for="post_left">Left</label><br>
+							<input placeholder="0" min="-500" max="500" type="number" value="0" name="post[left]" id="post_left">
+						</div>
+						<div class="styling">
+							<label for="post_color">Color</label><br>
+							<select name="post[color]" id="post_color">
+								<option value="0" selected="selected">Transparent</option>
+								<option value="1">Black</option>
+								<option value="2">White</option>
+								<option value="3">Coral</option>
+								<option value="4">Cornsilk</option>
+								<option value="5">ForestGreen</option>
+								<option value="6">MediumSlateBlue</option>
+								<option value="7">Teal</option>
+							</select>
+						</div>
+					</div>
+					<div>
+						<input type="submit" name="commit" value="Create Post" data-disable-with="Create Post">
+					</div>
+				</form>
+			</div>
+		</section>
+		<section id="timeline">
+			<ul class="posts-list">
+				<li class="post-parent" style="z-index: 500" aria-description="This post has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link">
+							<a href="#">(_)</a>
+						</div>
+						<div class="words">
+							"https://lazar.social will shut down in approximately 2 hours."
+						</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							17:24 07/23,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 499" aria-description="This post is rotated 6 degrees and has a teal background.">
+					<div class="post" style="			transform: rotate(6deg);
+						top: 0px;
+						left: 0px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Lazar Dot Social will shut down in approximately
+							24 hours. Thank you for your participation in lazar dot social,
+						generation six."</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							17:20 07/22,
+							R6/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 498" aria-description="This post is rotated 53 degrees and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(53deg);
+						top: 0px;
+						left: 0px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"83 pixels, that's the important part."</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:34 07/20,
+							R53/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 497" aria-description="This post is offset by 498 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 498px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Anyway, I hope that's useful for anyone who wants to play with this interface in a more intentional manner! Have fun!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:34 07/20,
+							R0/T498/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 496" aria-description="This post is offset by 415 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 415px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Posts have a max width of 1000px but will the size of the viewport on smaller screens (like on mobile)"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:33 07/20,
+							R0/T415/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 495" aria-description="This post is offset by 332 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 332px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"These things could be communicated more clearly but that's how they work in css. So you're learning something!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:32 07/20,
+							R0/T332/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 494" aria-description="This post is offset by 249 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 249px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Same with left: a high left value pushes the post to the right"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:31 07/20,
+							R0/T249/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 493" aria-description="This post is offset by 166 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 166px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Also worth noting: the "Top" value defines *offset*. So a higher top value pushes the post down"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:29 07/20,
+							R0/T166/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 492" aria-description="This post is offset by 83 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 83px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Maybe closer to 83 pixels, based on experimentation"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:29 07/20,
+							R0/T83/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 491" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"A single line post is 78 pixels tall, I think"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							15:27 07/20,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 490" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							19:10 07/19,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 489" aria-description="This post is rotated 350 degrees, is offset by 99 pixels right, and has a forest green background.">
+					<div class="post" style="			transform: rotate(350deg);
+						top: 0px;
+						left: 99px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I like the way the rotation makes the posts look like they're falling"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							19:10 07/19,
+							R350/T0/L99
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 488" aria-description="This post is rotated 32 degrees, is offset by 243 pixels right and 300 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(32deg);
+						top: 300px;
+						left: 243px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"aa3"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:58 07/19,
+							R32/T300/L243
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 487" aria-description="This post is rotated 4 degrees, is offset by 311 pixels right and 350 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(4deg);
+						top: 350px;
+						left: 311px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"aa3"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:58 07/19,
+							R4/T350/L311
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 486" aria-description="This post is offset by 321 pixels right and 400 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 400px;
+						left: 321px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"aa3"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:57 07/19,
+							R0/T400/L321
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 485" aria-description="This post is rotated 253 degrees, is offset by 242 pixels right, and has a transparent background.">
+					<div class="post" style="			transform: rotate(253deg);
+						top: 0px;
+						left: 242px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"nevermind this will take too long"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:57 07/19,
+							R253/T0/L242
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 484" aria-description="This post is rotated 4 degrees, is offset by 246 pixels left and 254 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(4deg);
+						top: 254px;
+						left: -246px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"art attempt 2"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:56 07/19,
+							R4/T254/L-246
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 483" aria-description="This post is rotated 3 degrees, is offset by 247 pixels left and 253 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(3deg);
+						top: 253px;
+						left: -247px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"art attempt 2"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:56 07/19,
+							R3/T253/L-247
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 482" aria-description="This post is rotated 2 degrees, is offset by 248 pixels left and 252 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(2deg);
+						top: 252px;
+						left: -248px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"art attempt 2"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:55 07/19,
+							R2/T252/L-248
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 481" aria-description="This post is rotated 1 degrees, is offset by 249 pixels left and 251 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(1deg);
+						top: 251px;
+						left: -249px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"art attempt 2"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:55 07/19,
+							R1/T251/L-249
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 480" aria-description="This post is offset by 250 pixels left and 250 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 250px;
+						left: -250px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"art attempt 2"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:55 07/19,
+							R0/T250/L-250
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 479" aria-description="This post is rotated 153 degrees, is offset by 400 pixels left, and has a transparent background.">
+					<div class="post" style="			transform: rotate(153deg);
+						top: 0px;
+						left: -400px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"fucked it up"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:54 07/19,
+							R153/T0/L-400
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 478" aria-description="This post is rotated 1 degrees, is offset by 247 pixels right, and has a transparent background.">
+					<div class="post" style="			transform: rotate(1deg);
+						top: 0px;
+						left: 247px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Art attempt 1"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:54 07/19,
+							R1/T0/L247
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 477" aria-description="This post is rotated 1 degrees, is offset by 248 pixels right, and has a transparent background.">
+					<div class="post" style="			transform: rotate(1deg);
+						top: 0px;
+						left: 248px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Art attempt 1"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:54 07/19,
+							R1/T0/L248
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 476" aria-description="This post is rotated 1 degrees, is offset by 249 pixels right, and has a transparent background.">
+					<div class="post" style="			transform: rotate(1deg);
+						top: 0px;
+						left: 249px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Art attempt 1"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:54 07/19,
+							R1/T0/L249
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 475" aria-description="This post is offset by 250 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 250px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Art attempt 1"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:53 07/19,
+							R0/T0/L250
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 474" aria-description="This post is rotated 312 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(312deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Nevermind it's actually below in time"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:51 07/19,
+							R312/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 473" aria-description="This post is offset by 300 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 300px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"this is top 300"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:51 07/19,
+							R0/T300/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 472" aria-description="This post is rotated 24 degrees, is offset by 341 pixels right and 200 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(24deg);
+						top: 200px;
+						left: 341px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Maybe the "Top: 500" will only show itself much later"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:51 07/19,
+							R24/T200/L341
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 471" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Not quite"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 470" aria-description="This post is rotated 192 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(192deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This is probably upside down"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R192/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 469" aria-description="This post is rotated 360 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Full rotation"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 468" aria-description="This post is rotated 156 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(156deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Other rotation"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R156/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 467" aria-description="This post is rotated 120 degrees, is offset by 124 pixels right and 371 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(120deg);
+						top: 371px;
+						left: 124px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"There's a 500 for Top here and I'm not sure where it is"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R120/T371/L124
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 466" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"-500."</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:50 07/19,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 465" aria-description="This post is offset by 500 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 500px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"500."</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:49 07/19,
+							R0/T500/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 464" aria-description="This post is offset by 500 pixels left and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: -500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"-500"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:49 07/19,
+							R0/T0/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 463" aria-description="This post is offset by 500 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"500."</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:49 07/19,
+							R0/T0/L500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 462" aria-description="This post is offset by 100 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 100px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"What if I just"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:49 07/19,
+							R0/T0/L100
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 461" aria-description="This post is rotated 305 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(305deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"did not expect the rotation to be that drastic"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:47 07/19,
+							R305/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 460" aria-description="This post is rotated 176 degrees, is offset by 41 pixels right and 14 pixels down, and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(176deg);
+						top: 14px;
+						left: 41px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Immortalize me!"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_licensed_vocational_nurse</a>,
+							02:46 07/19,
+							R176/T14/L41
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 459" aria-description="This post is rotated 183 degrees and has a teal background.">
+					<div class="post" style="			transform: rotate(183deg);
+						top: 0px;
+						left: 0px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"okay I gotta go like this to be upside down"</div>
+						<div class="user">
+							-<a href="#">bottlebrush_marble_setter</a>,
+							18:55 07/18,
+							R183/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 458" aria-description="This post is rotated 153 degrees and has a coral background.">
+					<div class="post" style="			transform: rotate(153deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"wait if you rotate all the way, it rotates 360???"</div>
+						<div class="user">
+							-<a href="#">bottlebrush_marble_setter</a>,
+							18:55 07/18,
+							R153/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 457" aria-description="This post is rotated 360 degrees and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I love this website"</div>
+						<div class="user">
+							-<a href="#">bottlebrush_marble_setter</a>,
+							18:55 07/18,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 456" aria-description="This post is rotated 9 degrees, is offset by 100 pixels right and 100 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(9deg);
+						top: 100px;
+						left: 100px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"i don't think this place is right for me, it's just so cookie cutter and generic"</div>
+						<div class="user">
+							-<a href="#">iris_inspector</a>,
+							18:48 07/18,
+							R9/T100/L100
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 455" aria-description="This post has a white background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: White;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I hope everyone is having a good day"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							18:26 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 454" aria-description="This post is rotated 360 degrees, is offset by 200 pixels right and 5 pixels up, and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: -5px;
+						left: 200px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"No spatial intelligence crew rise up"</div>
+						<div class="user">
+							-<a href="#">anemone_occupational_therapy_aide</a>,
+							09:56 07/18,
+							R360/T-5/L200
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 453" aria-description="This post is rotated 231 degrees, is offset by 40 pixels right and 50 pixels up, and has a black background.">
+					<div class="post" style="			transform: rotate(231deg);
+						top: -50px;
+						left: 40px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"My post got buried ;_; *digs it back out*"</div>
+						<div class="user">
+							-<a href="#">anemone_occupational_therapy_aide</a>,
+							09:51 07/18,
+							R231/T-50/L40
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 452" aria-description="This post is offset by 20 pixels right and has a black background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 20px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Haiii ^_^ *nuzzles you*"</div>
+						<div class="user">
+							-<a href="#">anemone_occupational_therapy_aide</a>,
+							09:49 07/18,
+							R0/T0/L20
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 451" aria-description="This post is rotated 360 degrees, is offset by 499 pixels right and 499 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 499px;
+						left: 499px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Ass"</div>
+						<div class="user">
+							-<a href="#">forget_me_not_sewer_pipe_cleaner</a>,
+							02:26 07/18,
+							R360/T499/L499
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 450" aria-description="This post has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Im gonna post ass"</div>
+						<div class="user">
+							-<a href="#">forget_me_not_sewer_pipe_cleaner</a>,
+							02:26 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 449" aria-description="This post is rotated 309 degrees, is offset by 500 pixels up, and has a forest green background.">
+					<div class="post" style="			transform: rotate(309deg);
+						top: -500px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"What are you doing??"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:14 07/18,
+							R309/T-500/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 448" aria-description="This post is rotated 41 degrees, is offset by 300 pixels up, and has a transparent background.">
+					<div class="post" style="			transform: rotate(41deg);
+						top: -300px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Oops! I didn't mean to put this here!!"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:13 07/18,
+							R41/T-300/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 447" aria-description="This post is rotated 171 degrees, is offset by 500 pixels up, and has a coral background.">
+					<div class="post" style="			transform: rotate(171deg);
+						top: -500px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Where will this go?"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:12 07/18,
+							R171/T-500/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 446" aria-description="This post is rotated 183 degrees, is offset by 200 pixels up, and has a transparent background.">
+					<div class="post" style="			transform: rotate(183deg);
+						top: -200px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Left side???"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:12 07/18,
+							R183/T-200/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 445" aria-description="This post is rotated 360 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Am I upside down right now?"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:11 07/18,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 444" aria-description="This post is rotated 305 degrees and has a teal background.">
+					<div class="post" style="			transform: rotate(305deg);
+						top: 0px;
+						left: 0px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Why is this logging equipment so confusing?"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:11 07/18,
+							R305/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 443" aria-description="This post is rotated 240 degrees, is offset by 10 pixels left and 50 pixels down, and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(240deg);
+						top: 50px;
+						left: -10px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Cornsilk is the best color"</div>
+						<div class="user">
+							-<a href="#">jasmine_logging_equipment_operator</a>,
+							02:10 07/18,
+							R240/T50/L-10
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 442" aria-description="This post is rotated 353 degrees, is offset by 50 pixels right, and has a coral background.">
+					<div class="post" style="			transform: rotate(353deg);
+						top: 0px;
+						left: 50px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Yes we're homies now"</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:38 07/18,
+							R353/T0/L50
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 441" aria-description="This post is rotated 353 degrees, is offset by 50 pixels right, and has a coral background.">
+					<div class="post" style="			transform: rotate(353deg);
+						top: 0px;
+						left: 50px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Yes we're homies now"</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:37 07/18,
+							R353/T0/L50
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 440" aria-description="This post is offset by 59 pixels right and 100 pixels up and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -100px;
+						left: 59px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"We should collaborate to make a smiley face or something "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:35 07/18,
+							R0/T-100/L59
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 439" aria-description="This post is offset by 59 pixels right and 100 pixels up and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -100px;
+						left: 59px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"We should collaborate to make a smiley face or something "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:35 07/18,
+							R0/T-100/L59
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 438" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">":)))"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							01:31 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 437" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">":)"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							01:31 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 436" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"wow this is a cool website"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							01:31 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 435" aria-description="This post is rotated 61 degrees, is offset by 100 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(61deg);
+						top: 100px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"am I your homie jasmine_plumber :O"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							01:30 07/18,
+							R61/T100/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 434" aria-description="This post is offset by 10 pixels left and has a teal background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: -10px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Rotate top and left, but what about options for us bottoms, yeah? "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:30 07/18,
+							R0/T0/L-10
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 433" aria-description="This post is offset by 190 pixels right and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 190px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This should be a blaseball social media site. "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:29 07/18,
+							R0/T0/L190
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 432" aria-description="This post is offset by 20 pixels right and has a black background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 20px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"ACAB"</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:27 07/18,
+							R0/T0/L20
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 431" aria-description="This post is rotated 348 degrees, is offset by 5 pixels right, and has a forest green background.">
+					<div class="post" style="			transform: rotate(348deg);
+						top: 0px;
+						left: 5px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I should not have been given this much power "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:26 07/18,
+							R348/T0/L5
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 430" aria-description="This post is rotated 360 degrees and has a coral background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"oh no "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:25 07/18,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 429" aria-description="This post is rotated 36 degrees and has a coral background.">
+					<div class="post" style="			transform: rotate(36deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"ACAB
+						SOLIDARITY FOREVER "</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:24 07/18,
+							R36/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 428" aria-description="This post has a cornsilk background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"what"</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:21 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 427" aria-description="This post is rotated 94 degrees and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(94deg);
+						top: 0px;
+						left: 0px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I diagnose you with ADHD all my homies have ADHD"</div>
+						<div class="user">
+							-<a href="#">jasmine_plumber</a>,
+							01:21 07/18,
+							R94/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 426" aria-description="This post has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This is the future. "</div>
+						<div class="user">
+							-<a href="#">bottlebrush_locksmith</a>,
+							01:16 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 425" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Chorioretinitis"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:51 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 424" aria-description="This post is offset by 24 pixels left and 8 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 8px;
+						left: -24px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"So diagnose me (with some disease) idk just go ahead just curious kinda maybe"</div>
+						<div class="user">
+							-<a href="#">chrysantemum_woodworker</a>,
+							00:49 07/18,
+							R0/T8/L-24
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 423" aria-description="This post is rotated 67 degrees, is offset by 500 pixels left and 100 pixels up, and has a transparent background.">
+					<div class="post" style="			transform: rotate(67deg);
+						top: -100px;
+						left: -500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"marsh marsh marshland"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:46 07/18,
+							R67/T-100/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 422" aria-description="This post is rotated 360 degrees, is offset by 500 pixels right, and has a coral background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 500px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I am ready to diagnose everyone I've ever met with every disease"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:45 07/18,
+							R360/T0/L500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 421" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:44 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 420" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:44 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 419" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:44 07/18,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 418" aria-description="This post is offset by 11 pixels down and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 11px;
+						left: 0px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"balls"</div>
+						<div class="user">
+							-<a href="#">lily_occupational_health_and_safety_specialist</a>,
+							00:44 07/18,
+							R0/T11/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 417" aria-description="This post is rotated 297 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(297deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Can I talk about how great this site is? I think it is the most best looking social media ever."</div>
+						<div class="user">
+							-<a href="#">chrysantemum_woodworker</a>,
+							00:42 07/18,
+							R297/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 416" aria-description="This post is rotated 204 degrees and has a forest green background.">
+					<div class="post" style="			transform: rotate(204deg);
+						top: 0px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Some people might say: you should put character
+							limits on how much text people can put in their posts, so people stop
+							making empty posts or posting the entire bee movie script. And to that I
+						saw: "No""</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							00:10 07/18,
+							R204/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 415" aria-description="This post is rotated 87 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(87deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"i think lazar is doubling my posts i have no idea whty"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:58 07/17,
+							R87/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 414" aria-description="This post is rotated 87 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(87deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"oooouu take a look at the MESS all my posts are
+							making now i'm getting into the weing of things. zzzzzzp youv can't read
+						sihgrt"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:58 07/17,
+							R87/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 413" aria-description="This post is rotated 87 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(87deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"yoo i think i fgot that one spiot on pog champ["</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:57 07/17,
+							R87/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 412" aria-description="This post is rotated 90 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(90deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"aurgggr"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:57 07/17,
+							R90/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 411" aria-description="This post is rotated 82 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(82deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"lazar is great"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:54 07/17,
+							R82/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 410" aria-description="This post is rotated 93 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(93deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"pixie sticks. or trees. or fenceposts"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:54 07/17,
+							R93/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 409" aria-description="This post is rotated 87 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(87deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"going pssszsweew putting my brain on makihng my posts vertical. like real posts"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:54 07/17,
+							R87/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 408" aria-description="This post is rotated 87 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(87deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"going pssszsweew putting my brain on makihng my posts vertical. like real posts"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:54 07/17,
+							R87/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 407" aria-description="This post is rotated 80 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(80deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"i gotrta line back up agaihn"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:53 07/17,
+							R80/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 406" aria-description="This post is rotated 93 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(93deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"fuck"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:53 07/17,
+							R93/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 405" aria-description="This post is rotated 93 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(93deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"fuck"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:53 07/17,
+							R93/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 404" aria-description="This post is rotated 77 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(77deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"oh i think that one was way off. disghrace"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:53 07/17,
+							R77/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 403" aria-description="This post is rotated 111 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(111deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"ptwang. thats the sound 90 degree posts make"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:52 07/17,
+							R111/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 402" aria-description="This post is rotated 93 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(93deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"lining up my bosts like darts on a board so they become completyely illegible"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:52 07/17,
+							R93/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 401" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:51 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 400" aria-description="This post is rotated 80 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(80deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"greuurgh"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:51 07/17,
+							R80/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 399" aria-description="This post is rotated 93 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(93deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"i wonder how close i can get with my bare claws"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:50 07/17,
+							R93/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 398" aria-description="This post is rotated 100 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(100deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"while it isd very easy to set things to exactly 90
+							or whatever degrees i would consider that "cheating" so i wson't do it
+						no more"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:50 07/17,
+							R100/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 397" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"grruygh"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:49 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 396" aria-description="This post is rotated 90 degrees and has a teal background.">
+					<div class="post" style="			transform: rotate(90deg);
+						top: 0px;
+						left: 0px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│—│"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:47 07/17,
+							R90/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 395" aria-description="This post is rotated 90 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(90deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+							│
+						"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:45 07/17,
+							R90/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 394" aria-description="This post is rotated 90 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(90deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"gggft"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:44 07/17,
+							R90/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 393" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+							la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar la↊ar
+						la↊ar la↊ar la↊ar la↊ar "</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:44 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 392" aria-description="This post is offset by 500 pixels left and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: -500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:44 07/17,
+							R0/T0/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 391" aria-description="This post is offset by 500 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:43 07/17,
+							R0/T0/L500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 390" aria-description="This post is offset by 500 pixels left and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: -500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:43 07/17,
+							R0/T0/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 389" aria-description="This post is offset by 500 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:43 07/17,
+							R0/T0/L500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 388" aria-description="This post is offset by 500 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 500px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:43 07/17,
+							R0/T500/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 387" aria-description="This post is offset by 50 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 50px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L50
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 386" aria-description="This post is offset by 45 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 45px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L45
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 385" aria-description="This post is offset by 40 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 40px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L40
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 384" aria-description="This post is offset by 35 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 35px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L35
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 383" aria-description="This post is offset by 30 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 30px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L30
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 382" aria-description="This post is offset by 25 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 25px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L25
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 381" aria-description="This post is offset by 20 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 20px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L20
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 380" aria-description="This post is offset by 15 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 15px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L15
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 379" aria-description="This post is offset by 10 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 10px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L10
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 378" aria-description="This post is offset by 5 pixels right and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 5px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:42 07/17,
+							R0/T0/L5
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 377" aria-description="This post is offset by 500 pixels up and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -500px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:41 07/17,
+							R0/T-500/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 376" aria-description="This post is offset by 50 pixels up and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -50px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T-50/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 375" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 374" aria-description="This post is offset by 10 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 10px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T10/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 373" aria-description="This post is offset by 20 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 20px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T20/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 372" aria-description="This post is offset by 15 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 15px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T15/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 371" aria-description="This post is offset by 10 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 10px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T10/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 370" aria-description="This post is offset by 5 pixels down and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 5px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R0/T5/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 369" aria-description="This post is rotated 49 degrees and has a black background.">
+					<div class="post" style="			transform: rotate(49deg);
+						top: 0px;
+						left: 0px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R49/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 368" aria-description="This post is rotated 103 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(103deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">""</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R103/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 367" aria-description="This post is rotated 188 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(188deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"user  fifteen"</div>
+						<div class="user">
+							-<a href="#">hyacinth_jeweler</a>,
+							23:40 07/17,
+							R188/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 366" aria-description="This post has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"*hi"</div>
+						<div class="user">
+							-<a href="#">lily_messenger</a>,
+							23:06 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 365" aria-description="This post has a forest green background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"hu"</div>
+						<div class="user">
+							-<a href="#">lily_messenger</a>,
+							23:06 07/17,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 364" aria-description="This post is rotated 249 degrees, is offset by 11 pixels left and 5 pixels up, and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(249deg);
+						top: -5px;
+						left: -11px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"whwn the whe "</div>
+						<div class="user">
+							-<a href="#">gladiolus_mortician</a>,
+							22:00 07/17,
+							R249/T-5/L-11
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 363" aria-description="This post is rotated 360 degrees and has a teal background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: Teal;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"im tealposting"</div>
+						<div class="user">
+							-<a href="#">hyacinth_naval_architect</a>,
+							21:59 07/17,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 362" aria-description="This post is rotated 53 degrees and has a coral background.">
+					<div class="post" style="			transform: rotate(53deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"this is pretty crazy woah whats happening"</div>
+						<div class="user">
+							-<a href="#">hyacinth_naval_architect</a>,
+							21:57 07/17,
+							R53/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 361" aria-description="This post is offset by 400 pixels right and 500 pixels up and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -500px;
+						left: 400px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Welcome to Lazar dot social"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							21:50 07/17,
+							R0/T-500/L400
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 360" aria-description="This post is offset by 400 pixels right and 500 pixels up and has a transparent background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -500px;
+						left: 400px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Hi!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							21:50 07/17,
+							R0/T-500/L400
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 359" aria-description="This post is rotated 21 degrees and has a white background.">
+					<div class="post" style="			transform: rotate(21deg);
+						top: 0px;
+						left: 0px;
+						background-color: White;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Ok, this is getting outta hand, gotta put things straight here:
+							div.post {
+							transform: none !important;
+							top:0 !important;
+							left:0 !important;
+						}"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							20:07 07/17,
+							R21/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 358" aria-description="This post is rotated 54 degrees, is offset by 3 pixels right and 2 pixels down, and has a black background.">
+					<div class="post" style="			transform: rotate(54deg);
+						top: 2px;
+						left: 3px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"do but I really have to go
+							I have to go
+						I really have to go"</div>
+						<div class="user">
+							-<a href="#">orchid_tester</a>,
+							20:03 07/17,
+							R54/T2/L3
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 357" aria-description="This post is offset by 7 pixels right and 5 pixels down and has a forest green background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 5px;
+						left: 7px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"But
+							But
+							BUT
+						"</div>
+						<div class="user">
+							-<a href="#">orchid_tester</a>,
+							20:00 07/17,
+							R0/T5/L7
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 356" aria-description="This post is rotated 48 degrees, is offset by 5 pixels right and 1 pixels down, and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(48deg);
+						top: 1px;
+						left: 5px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"cornsilk? "</div>
+						<div class="user">
+							-<a href="#">orchid_tester</a>,
+							19:58 07/17,
+							R48/T1/L5
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 355" aria-description="This post is rotated 280 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(280deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"orchid tester it is"</div>
+						<div class="user">
+							-<a href="#">orchid_tester</a>,
+							19:56 07/17,
+							R280/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 354" aria-description="This post is offset by 1 pixels left and 1 pixels down and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 1px;
+						left: -1px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"An aptly named website... I'm locking myself in my own lazaretto today"</div>
+						<div class="user">
+							-<a href="#">petunia_licensed_vocational_nurse</a>,
+							19:47 07/17,
+							R0/T1/L-1
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 353" aria-description="This post is rotated 181 degrees, is offset by 500 pixels left, and has a transparent background.">
+					<div class="post" style="			transform: rotate(181deg);
+						top: 0px;
+						left: -500px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Everyone needs to appreciate my username, which
+							was randomly applied to me. I could've cheated to get it but I want you
+						to know that I didn't."</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							19:44 07/17,
+							R181/T0/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 352" aria-description="This post is rotated 328 degrees and has a black background.">
+					<div class="post" style="			transform: rotate(328deg);
+						top: 0px;
+						left: 0px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"eheheheheehheheehheehehheheheh"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:36 07/17,
+							R328/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 351" aria-description="This post is rotated 89 degrees and has a black background.">
+					<div class="post" style="			transform: rotate(89deg);
+						top: 0px;
+						left: 0px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"whats the black background look like
+						i hope its completely illegible"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:35 07/17,
+							R89/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 350" aria-description="This post is rotated 327 degrees and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(327deg);
+						top: 0px;
+						left: 0px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"oh no i had a typo"</div>
+						<div class="user">
+							-<a href="#">mimosa_set_designer</a>,
+							19:35 07/17,
+							R327/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 349" aria-description="This post is rotated 158 degrees, is offset by 2 pixels right and 3 pixels up, and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(158deg);
+						top: -3px;
+						left: 2px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"What Is Thia"</div>
+						<div class="user">
+							-<a href="#">mimosa_set_designer</a>,
+							19:34 07/17,
+							R158/T-3/L2
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 348" aria-description="This post is rotated 303 degrees, is offset by 69 pixels right and 69 pixels down, and has a coral background.">
+					<div class="post" style="			transform: rotate(303deg);
+						top: 69px;
+						left: 69px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This is easily the best social media username i never came up with"</div>
+						<div class="user">
+							-<a href="#">forget_me_not_sewer_pipe_cleaner</a>,
+							19:34 07/17,
+							R303/T69/L69
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 347" aria-description="This post is rotated 335 degrees, is offset by 3 pixels left, and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(335deg);
+						top: 0px;
+						left: -3px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"(make sure you scroll down)"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:27 07/17,
+							R335/T0/L-3
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 346" aria-description="This post is rotated 70 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(70deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"oh shit"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:26 07/17,
+							R70/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 345" aria-description="This post is rotated 280 degrees and has a forest green background.">
+					<div class="post" style="			transform: rotate(280deg);
+						top: 0px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"According to all known laws of aviation, there is
+							no way a bee should be able to fly. Its wings are too small to get its
+							fat little body off the ground. The bee, of course, flies anyway because
+							bees don't care what humans think is impossible. Yellow, black. Yellow,
+							black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake
+							it up a little. Barry! Breakfast is ready! Ooming! Hang on a second.
+							Hello? - Barry? - Adam? - Oan you believe this is happening? - I can't.
+							I'll pick you up. Looking sharp. Use the stairs. Your father paid good
+							money for those. Sorry. I'm excited. Here's the graduate. We're very
+							proud of you, son. A perfect report card, all B's. Very proud. Ma! I got
+							a thing going here. - You got lint on your fuzz. - Ow! That's me! -
+							Wave to us! We'll be in row 118,000. - Bye! Barry, I told you, stop
+							flying in the house! - Hey, Adam. - Hey, Barry. - Is that fuzz gel? - A
+							little. Special day, graduation. Never thought I'd make it. Three days
+							grade school, three days high school. Those were awkward. Three days
+							college. I'm glad I took a day and hitchhiked around the hive. You did
+							come back different. - Hi, Barry. - Artie, growing a mustache? Looks
+							good. - Hear about Frankie? - Yeah. - You going to the funeral? - No,
+							I'm not going. Everybody knows, sting someone, you die. Don't waste it
+							on a squirrel. Such a hothead. I guess he could have just gotten out of
+							the way. I love this incorporating an amusement park into our day.
+							That's why we don't need vacations. Boy, quite a bit of pomp... under
+							the circumstances. - Well, Adam, today we are men. - We are! - Bee-men. -
+							Amen! Hallelujah! Students, faculty, distinguished bees, please welcome
+							Dean Buzzwell. Welcome, New Hive Oity graduating class of... ...9:15.
+							That concludes our ceremonies. And begins your career at Honex
+							Industries! Will we pick ourjob today? I heard it's just orientation.
+							Heads up! Here we go. Keep your hands and antennas inside the tram at
+							all times. - Wonder what it'll be like? - A little scary. Welcome to
+							Honex, a division of Honesco and a part of the Hexagon Group. This is
+							it! Wow. Wow. We know that you, as a bee, have worked your whole life to
+							get to the point where you can work for your whole life. Honey begins
+							when our valiant Pollen Jocks bring the nectar to the hive. Our
+							top-secret formula is automatically color-corrected, scent-adjusted and
+							bubble-contoured into this soothing sweet syrup with its distinctive
+							golden glow you know as... Honey! - That girl was hot. - She's my
+							cousin! - She is? - Yes, we're all cousins. - Right. You're right. - At
+							Honex, we constantly strive to improve every aspect of bee existence.
+							These bees are stress-testing a new helmet technology. - What do you
+							think he makes? - Not enough. Here we have our latest advancement, the
+							Krelman. - What does that do? - Oatches that little strand of honey that
+							hangs after you pour it. Saves us millions. Oan anyone work on the
+							Krelman? Of course. Most bee jobs are small ones. But bees know that
+							every small job, if it's done well, means a lot. But choose carefully
+							because you'll stay in the job you pick for the rest of your life. The
+							same job the rest of your life? I didn't know that. What's the
+							difference? You'll be happy to know that bees, as a species, haven't had
+							one day off in 27 million years. So you'll just work us to death? We'll
+							sure try. Wow! That blew my mind! "What's the difference?" How can you
+							say that? One job forever? That's an insane choice to have to make. I'm
+							relieved. Now we only have to make one decision in life. But, Adam, how
+							could they never have told us that? Why would you question anything?
+							We're bees. We're the most perfectly functioning society on Earth. You
+							ever think maybe things work a little too well here? Like what? Give me
+							one example. I don't know. But you know what I'm talking about. Please
+							clear the gate. Royal Nectar Force on approach. Wait a second. Oheck it
+							out. - Hey, those are Pollen Jocks! - Wow. I've never seen them this
+							close. They know what it's like outside the hive. Yeah, but some don't
+							come back. - Hey, Jocks! - Hi, Jocks! You guys did great! You're
+							monsters! You're sky freaks! I love it! I love it! - I wonder where they
+							were. - I don't know. Their day's not planned. Outside the hive, flying
+							who knows where, doing who knows what. You can'tjust decide to be a
+							Pollen Jock. You have to be bred for that. Right. Look. That's more
+							pollen than you and I will see in a lifetime. It's just a status symbol.
+							Bees make too much of it. Perhaps. Unless you're wearing it and the
+							ladies see you wearing it. Those ladies? Aren't they our cousins too?
+							Distant. Distant. Look at these two. - Oouple of Hive Harrys. - Let's
+							have fun with them. It must be dangerous being a Pollen Jock. Yeah. Once
+							a bear pinned me against a mushroom! He had a paw on my throat, and
+							with the other, he was slapping me! - Oh, my! - I never thought I'd
+							knock him out. What were you doing during this? Trying to alert the
+							authorities. I can autograph that. A little gusty out there today,
+							wasn't it, comrades? Yeah. Gusty. We're hitting a sunflower patch six
+							miles from here tomorrow. - Six miles, huh? - Barry! A puddle jump for
+							us, but maybe you're not up for it. - Maybe I am. - You are not! We're
+							going 0900 at J-Gate. What do you think, buzzy-boy? Are you bee enough? I
+							might be. It all depends on what 0900 means. Hey, Honex! Dad, you
+							surprised me. You decide what you're interested in? - Well, there's a
+							lot of choices. - But you only get one. Do you ever get bored doing the
+							same job every day? Son, let me tell you about stirring. You grab that
+							stick, and you just move it around, and you stir it around. You get
+							yourself into a rhythm. It's a beautiful thing. You know, Dad, the more I
+							think about it, maybe the honey field just isn't right for me. You were
+							thinking of what, making balloon animals? That's a bad job for a guy
+							with a stinger. Janet, your son's not sure he wants to go into honey! -
+							Barry, you are so funny sometimes. - I'm not trying to be funny. You're
+							not funny! You're going into honey. Our son, the stirrer! - You're gonna
+							be a stirrer? - No one's listening to me! Wait till you see the sticks I
+							have. I could say anything right now. I'm gonna get an ant tattoo!
+							Let's open some honey and celebrate! Maybe I'll pierce my thorax. Shave
+							my antennae. Shack up with a grasshopper. Get a gold tooth and call
+							everybody "dawg"! I'm so proud. - We're starting work today! - Today's
+							the day. Oome on! All the good jobs will be gone. Yeah, right. Pollen
+							counting, stunt bee, pouring, stirrer, front desk, hair removal... - Is
+							it still available? - Hang on. Two left! One of them's yours!
+							Oongratulations! Step to the side. - What'd you get? - Picking crud out.
+							Stellar! Wow! Oouple of newbies? Yes, sir! Our first day! We are ready!
+							Make your choice. - You want to go first? - No, you go. Oh, my. What's
+							available? Restroom attendant's open, not for the reason you think. -
+							Any chance of getting the Krelman? - Sure, you're on. I'm sorry, the
+							Krelman just closed out. Wax monkey's always open. The Krelman opened up
+							again. What happened? A bee died. Makes an opening. See? He's dead.
+							Another dead one. Deady. Deadified. Two more dead. Dead from the neck
+							up. Dead from the neck down. That's life! Oh, this is so hard! Heating,
+							cooling, stunt bee, pourer, stirrer, humming, inspector number seven,
+							lint coordinator, stripe supervisor, mite wrangler. Barry, what do you
+							think I should... Barry? Barry! All right, we've got the sunflower patch
+							in quadrant nine... What happened to you? Where are you? - I'm going
+							out. - Out? Out where? - Out there. - Oh, no! I have to, before I go to
+							work for the rest of my life. You're gonna die! You're crazy! Hello?
+							Another call coming in. If anyone's feeling brave, there's a Korean deli
+							on 83rd that gets their roses today. Hey, guys. - Look at that. - Isn't
+							that the kid we saw yesterday? Hold it, son, flight deck's restricted.
+							It's OK, Lou. We're gonna take him up. Really? Feeling lucky, are you?
+							Sign here, here. Just initial that. - Thank you. - OK. You got a rain
+							advisory today, and as you all know, bees cannot fly in rain. So be
+							careful. As always, watch your brooms, hockey sticks, dogs, birds, bears
+							and bats. Also, I got a couple of reports of root beer being poured on
+							us. Murphy's in a home because of it, babbling like a cicada! - That's
+							awful. - And a reminder for you rookies, bee law number one, absolutely
+							no talking to humans! All right, launch positions! Buzz, buzz, buzz,
+							buzz! Buzz, buzz, buzz, buzz! Buzz, buzz, buzz, buzz! Black and yellow!
+							Hello! You ready for this, hot shot? Yeah. Yeah, bring it on. Wind,
+							check. - Antennae, check. - Nectar pack, check. - Wings, check. -
+							Stinger, check. Scared out of my shorts, check. OK, ladies, let's move
+							it out! Pound those petunias, you striped stem-suckers! All of you,
+							drain those flowers! Wow! I'm out! I can't believe I'm out! So blue. I
+							feel so fast and free! Box kite! Wow! Flowers! This is Blue Leader. We
+							have roses visual. Bring it around 30 degrees and hold. Roses! 30
+							degrees, roger. Bringing it around. Stand to the side, kid. It's got a
+							bit of a kick. That is one nectar collector! - Ever see pollination up
+							close? - No, sir. I pick up some pollen here, sprinkle it over here.
+							Maybe a dash over there, a pinch on that one. See that? It's a little
+							bit of magic. That's amazing. Why do we do that? That's pollen power.
+							More pollen, more flowers, more nectar, more honey for us. Oool. I'm
+							picking up a lot of bright yellow. Oould be daisies. Don't we need
+							those? Oopy that visual. Wait. One of these flowers seems to be on the
+							move. Say again? You're reporting a moving flower? Affirmative. That was
+							on the line! This is the coolest. What is it? I don't know, but I'm
+							loving this color. It smells good. Not like a flower, but I like it.
+							Yeah, fuzzy. Ohemical-y. Oareful, guys. It's a little grabby. My sweet
+							lord of bees! Oandy-brain, get off there! Problem! - Guys! - This could
+							be bad. Affirmative. Very close. Gonna hurt. Mama's little boy. You are
+							way out of position, rookie! Ooming in at you like a missile! Help me! I
+							don't think these are flowers. - Should we tell him? - I think he
+							knows. What is this?! Match point! You can start packing up, honey,
+							because you're about to eat it! Yowser! Gross. There's a bee in the car!
+							- Do something! - I'm driving! - Hi, bee. - He's back here! He's going
+							to sting me! Nobody move. If you don't move, he won't sting you. Freeze!
+							He blinked! Spray him, Granny! What are you doing?! Wow... the tension
+							level out here is unbelievable. I gotta get home. Oan't fly in rain.
+							Oan't fly in rain. Oan't fly in rain. Mayday! Mayday! Bee going down!
+							Ken, could you close the window please? Ken, could you close the window
+							please? Oheck out my new resume. I made it into a fold-out brochure. You
+							see? Folds out. Oh, no. More humans. I don't need this. What was that?
+							Maybe this time. This time. This time. This time! This time! This...
+							Drapes! That is diabolical. It's fantastic. It's got all my special
+							skills, even my top-ten favorite movies. What's number one? Star Wars?
+							Nah, I don't go for that... ...kind of stuff. No wonder we shouldn't
+							talk to them. They're out of their minds. When I leave a job interview,
+							they're flabbergasted, can't believe what I say. There's the sun. Maybe
+							that's a way out. I don't remember the sun having a big 75 on it. I
+							predicted global warming. I could feel it getting hotter. At first I
+							thought it was just me. Wait! Stop! Bee! Stand back. These are winter
+							boots. Wait! Don't kill him! You know I'm allergic to them! This thing
+							could kill me! Why does his life have less value than yours? Why does
+							his life have any less value than mine? Is that your statement? I'm just
+							saying all life has value. You don't know what he's capable of feeling.
+							My brochure! There you go, little guy. I'm not scared of him. It's an
+							allergic thing. Put that on your resume brochure. My whole face could
+							puff up. Make it one of your special skills. Knocking someone out is
+							also a special skill. Right. Bye, Vanessa. Thanks. - Vanessa, next week?
+							Yogurt night? - Sure, Ken. You know, whatever. - You could put carob
+							chips on there. - Bye. - Supposed to be less calories. - Bye. I gotta
+							say something. She saved my life. I gotta say something. All right, here
+							it goes. Nah. What would I say? I could really get in trouble. It's a
+							bee law. You're not supposed to talk to a human. I can't believe I'm
+							doing this. I've got to. Oh, I can't do it. Oome on! No. Yes. No. Do it.
+							I can't. How should I start it? "You like jazz?" No, that's no good.
+							Here she comes! Speak, you fool! Hi! I'm sorry. - You're talking. - Yes,
+							I know. You're talking! I'm so sorry. No, it's OK. It's fine. I know
+							I'm dreaming. But I don't recall going to bed. Well, I'm sure this is
+							very disconcerting. This is a bit of a surprise to me. I mean, you're a
+							bee! I am. And I'm not supposed to be doing this, but they were all
+							trying to kill me. And if it wasn't for you... I had to thank you. It's
+							just how I was raised. That was a little weird. - I'm talking with a
+							bee. - Yeah. I'm talking to a bee. And the bee is talking to me! I just
+							want to say I'm grateful. I'll leave now. - Wait! How did you learn to
+							do that? - What? The talking thing. Same way you did, I guess. "Mama,
+							Dada, honey." You pick it up. - That's very funny. - Yeah. Bees are
+							funny. If we didn't laugh, we'd cry with what we have to deal with.
+							Anyway... Oan I... ...get you something? - Like what? I don't know. I
+							mean... I don't know. Ooffee? I don't want to put you out. It's no
+							trouble. It takes two minutes. - It's just coffee. - I hate to impose. -
+							Don't be ridiculous! - Actually, I would love a cup. Hey, you want rum
+							cake? - I shouldn't. - Have some. - No, I can't. - Oome on! I'm trying
+							to lose a couple micrograms. - Where? - These stripes don't help. You
+							look great! I don't know if you know anything about fashion. Are you all
+							right? No. He's making the tie in the cab as they're flying up Madison.
+							He finally gets there. He runs up the steps into the church. The
+							wedding is on. And he says, "Watermelon? I thought you said Guatemalan.
+							Why would I marry a watermelon?" Is that a bee joke? That's the kind of
+							stuff we do. Yeah, different. So, what are you gonna do, Barry? About
+							work? I don't know. I want to do my part for the hive, but I can't do it
+							the way they want. I know how you feel. - You do? - Sure. My parents
+							wanted me to be a lawyer or a doctor, but I wanted to be a florist. -
+							Really? - My only interest is flowers. Our new queen was just elected
+							with that same campaign slogan. Anyway, if you look... There's my hive
+							right there. See it? You're in Sheep Meadow! Yes! I'm right off the
+							Turtle Pond! No way! I know that area. I lost a toe ring there once. -
+							Why do girls put rings on their toes? - Why not? - It's like putting a
+							hat on your knee. - Maybe I'll try that. - You all right, ma'am? - Oh,
+							yeah. Fine. Just having two cups of coffee! Anyway, this has been great.
+							Thanks for the coffee. Yeah, it's no trouble. Sorry I couldn't finish
+							it. If I did, I'd be up the rest of my life. Are you...? Oan I take a
+							piece of this with me? Sure! Here, have a crumb. - Thanks! - Yeah. All
+							right. Well, then... I guess I'll see you around. Or not. OK, Barry. And
+							thank you so much again... for before. Oh, that? That was nothing.
+							Well, not nothing, but... Anyway... This can't possibly work. He's all
+							set to go. We may as well try it. OK, Dave, pull the chute. - Sounds
+							amazing. - It was amazing! It was the scariest, happiest moment of my
+							life. Humans! I can't believe you were with humans! Giant, scary humans!
+							What were they like? Huge and crazy. They talk crazy. They eat crazy
+							giant things. They drive crazy. - Do they try and kill you, like on TV? -
+							Some of them. But some of them don't. - How'd you get back? - Poodle.
+							You did it, and I'm glad. You saw whatever you wanted to see. You had
+							your "experience." Now you can pick out yourjob and be normal. - Well...
+							- Well? Well, I met someone. You did? Was she Bee-ish? - A wasp?! Your
+							parents will kill you! - No, no, no, not a wasp. - Spider? - I'm not
+							attracted to spiders. I know it's the hottest thing, with the eight legs
+							and all. I can't get by that face. So who is she? She's... human. No,
+							no. That's a bee law. You wouldn't break a bee law. - Her name's
+							Vanessa. - Oh, boy. She's so nice. And she's a florist! Oh, no! You're
+							dating a human florist! We're not dating. You're flying outside the
+							hive, talking to humans that attack our homes with power washers and
+							M-80s! One-eighth a stick of dynamite! She saved my life! And she
+							understands me. This is over! Eat this. This is not over! What was that?
+							- They call it a crumb. - It was so stingin' stripey! And that's not
+							what they eat. That's what falls off what they eat! - You know what a
+							Oinnabon is? - No. It's bread and cinnamon and frosting. They heat it
+							up... Sit down! ...really hot! - Listen to me! We are not them! We're
+							us. There's us and there's them! Yes, but who can deny the heart that is
+							yearning? There's no yearning. Stop yearning. Listen to me! You have
+							got to start thinking bee, my friend. Thinking bee! - Thinking bee. -
+							Thinking bee. Thinking bee! Thinking bee! Thinking bee! Thinking bee!
+							There he is. He's in the pool. You know what your problem is, Barry? I
+							gotta start thinking bee? How much longer will this go on? It's been
+							three days! Why aren't you working? I've got a lot of big life decisions
+							to think about. What life? You have no life! You have no job. You're
+							barely a bee! Would it kill you to make a little honey? Barry, come out.
+							Your father's talking to you. Martin, would you talk to him? Barry, I'm
+							talking to you! You coming? Got everything? All set! Go ahead. I'll
+							catch up. Don't be too long. Watch this! Vanessa! - We're still here. - I
+							told you not to yell at him. He doesn't respond to yelling! - Then why
+							yell at me? - Because you don't listen! I'm not listening to this.
+							Sorry, I've gotta go. - Where are you going? - I'm meeting a friend. A
+							girl? Is this why you can't decide? Bye. I just hope she's Bee-ish. They
+							have a huge parade of flowers every year in Pasadena? To be in the
+							Tournament of Roses, that's every florist's dream! Up on a float,
+							surrounded by flowers, crowds cheering. A tournament. Do the roses
+							compete in athletic events? No. All right, I've got one. How come you
+							don't fly everywhere? It's exhausting. Why don't you run everywhere?
+							It's faster. Yeah, OK, I see, I see. All right, your turn. TiVo. You can
+							just freeze live TV? That's insane! You don't have that? We have Hivo,
+							but it's a disease. It's a horrible, horrible disease. Oh, my. Dumb
+							bees! You must want to sting all those jerks. We try not to sting. It's
+							usually fatal for us. So you have to watch your temper. Very carefully.
+							You kick a wall, take a walk, write an angry letter and throw it out.
+							Work through it like any emotion: Anger, jealousy, lust. Oh, my
+							goodness! Are you OK? Yeah. - What is wrong with you?! - It's a bug.
+							He's not bothering anybody. Get out of here, you creep! What was that? A
+							Pic 'N' Save circular? Yeah, it was. How did you know? It felt like
+							about 10 pages. Seventy-five is pretty much our limit. You've really got
+							that down to a science. - I lost a cousin to Italian Vogue. - I'll bet.
+							What in the name of Mighty Hercules is this? How did this get here?
+							Oute Bee, Golden Blossom, Ray Liotta Private Select? - Is he that actor?
+							- I never heard of him. - Why is this here? - For people. We eat it.
+							You don't have enough food of your own? - Well, yes. - How do you get
+							it? - Bees make it. - I know who makes it! And it's hard to make it!
+							There's heating, cooling, stirring. You need a whole Krelman thing! -
+							It's organic. - It's our-ganic! It's just honey, Barry. Just what?! Bees
+							don't know about this! This is stealing! A lot of stealing! You've
+							taken our homes, schools, hospitals! This is all we have! And it's on
+							sale?! I'm getting to the bottom of this. I'm getting to the bottom of
+							all of this! Hey, Hector. - You almost done? - Almost. He is here. I
+							sense it. Well, I guess I'll go home now and just leave this nice honey
+							out, with no one around. You're busted, box boy! I knew I heard
+							something. So you can talk! I can talk. And now you'll start talking!
+							Where you getting the sweet stuff? Who's your supplier? I don't
+							understand. I thought we were friends. The last thing we want to do is
+							upset bees! You're too late! It's ours now! You, sir, have crossed the
+							wrong sword! You, sir, will be lunch for my iguana, Ignacio! Where is
+							the honey coming from? Tell me where! Honey Farms! It comes from Honey
+							Farms! Orazy person! What horrible thing has happened here? These faces,
+							they never knew what hit them. And now they're on the road to nowhere!
+							Just keep still. What? You're not dead? Do I look dead? They will wipe
+							anything that moves. Where you headed? To Honey Farms. I am onto
+							something huge here. I'm going to Alaska. Moose blood, crazy stuff.
+							Blows your head off! I'm going to Tacoma. - And you? - He really is
+							dead. All right. Uh-oh! - What is that?! - Oh, no! - A wiper! Triple
+							blade! - Triple blade? Jump on! It's your only chance, bee! Why does
+							everything have to be so doggone clean?! How much do you people need to
+							see?! Open your eyes! Stick your head out the window! From NPR News in
+							Washington, I'm Oarl Kasell. But don't kill no more bugs! - Bee! - Moose
+							blood guy!! - You hear something? - Like what? Like tiny screaming.
+							Turn off the radio. Whassup, bee boy? Hey, Blood. Just a row of honey
+							jars, as far as the eye could see. Wow! I assume wherever this truck
+							goes is where they're getting it. I mean, that honey's ours. - Bees hang
+							tight. - We're all jammed in. It's a close community. Not us, man. We
+							on our own. Every mosquito on his own. - What if you get in trouble? -
+							You a mosquito, you in trouble. Nobody likes us. They just smack. See a
+							mosquito, smack, smack! At least you're out in the world. You must meet
+							girls. Mosquito girls try to trade up, get with a moth, dragonfly.
+							Mosquito girl don't want no mosquito. You got to be kidding me!
+							Mooseblood's about to leave the building! So long, bee! - Hey, guys! -
+							Mooseblood! I knew I'd catch y'all down here. Did you bring your crazy
+							straw? We throw it in jars, slap a label on it, and it's pretty much
+							pure profit. What is this place? A bee's got a brain the size of a
+							pinhead. They are pinheads! Pinhead. - Oheck out the new smoker. - Oh,
+							sweet. That's the one you want. The Thomas 3000! Smoker? Ninety puffs a
+							minute, semi-automatic. Twice the nicotine, all the tar. A couple
+							breaths of this knocks them right out. They make the honey, and we make
+							the money. "They make the honey, and we make the money"? Oh, my! What's
+							going on? Are you OK? Yeah. It doesn't last too long. Do you know you're
+							in a fake hive with fake walls? Our queen was moved here. We had no
+							choice. This is your queen? That's a man in women's clothes! That's a
+							drag queen! What is this? Oh, no! There's hundreds of them! Bee honey.
+							Our honey is being brazenly stolen on a massive scale! This is worse
+							than anything bears have done! I intend to do something. Oh, Barry,
+							stop. Who told you humans are taking our honey? That's a rumor. Do these
+							look like rumors? That's a conspiracy theory. These are obviously
+							doctored photos. How did you get mixed up in this? He's been talking to
+							humans. - What? - Talking to humans?! He has a human girlfriend. And
+							they make out! Make out? Barry! We do not. - You wish you could. - Whose
+							side are you on? The bees! I dated a cricket once in San Antonio. Those
+							crazy legs kept me up all night. Barry, this is what you want to do
+							with your life? I want to do it for all our lives. Nobody works harder
+							than bees! Dad, I remember you coming home so overworked your hands were
+							still stirring. You couldn't stop. I remember that. What right do they
+							have to our honey? We live on two cups a year. They put it in lip balm
+							for no reason whatsoever! Even if it's true, what can one bee do? Sting
+							them where it really hurts. In the face! The eye! - That would hurt. -
+							No. Up the nose? That's a killer. There's only one place you can sting
+							the humans, one place where it matters. Hive at Five, the hive's only
+							full-hour action news source. No more bee beards! With Bob Bumble at the
+							anchor desk. Weather with Storm Stinger. Sports with Buzz Larvi. And
+							Jeanette Ohung. - Good evening. I'm Bob Bumble. - And I'm Jeanette
+							Ohung. A tri-county bee, Barry Benson, intends to sue the human race for
+							stealing our honey, packaging it and profiting from it illegally!
+							Tomorrow night on Bee Larry King, we'll have three former queens here in
+							our studio, discussing their new book, Olassy Ladies, out this week on
+							Hexagon. Tonight we're talking to Barry Benson. Did you ever think, "I'm
+							a kid from the hive. I can't do this"? Bees have never been afraid to
+							change the world. What about Bee Oolumbus? Bee Gandhi? Bejesus? Where
+							I'm from, we'd never sue humans. We were thinking of stickball or candy
+							stores. How old are you? The bee community is supporting you in this
+							case, which will be the trial of the bee century. You know, they have a
+							Larry King in the human world too. It's a common name. Next week... He
+							looks like you and has a show and suspenders and colored dots... Next
+							week... Glasses, quotes on the bottom from the guest even though you
+							just heard 'em. Bear Week next week! They're scary, hairy and here live.
+							Always leans forward, pointy shoulders, squinty eyes, very Jewish. In
+							tennis, you attack at the point of weakness! It was my grandmother, Ken.
+							She's 81. Honey, her backhand's a joke! I'm not gonna take advantage of
+							that? Quiet, please. Actual work going on here. - Is that that same
+							bee? - Yes, it is! I'm helping him sue the human race. - Hello. - Hello,
+							bee. This is Ken. Yeah, I remember you. Timberland, size ten and a
+							half. Vibram sole, I believe. Why does he talk again? Listen, you better
+							go 'cause we're really busy working. But it's our yogurt night!
+							Bye-bye. Why is yogurt night so difficult?! You poor thing. You two have
+							been at this for hours! Yes, and Adam here has been a huge help. -
+							Frosting... - How many sugars? Just one. I try not to use the
+							competition. So why are you helping me? Bees have good qualities. And it
+							takes my mind off the shop. Instead of flowers, people are giving
+							balloon bouquets now. Those are great, if you're three. And artificial
+							flowers. - Oh, those just get me psychotic! - Yeah, me too. Bent
+							stingers, pointless pollination. Bees must hate those fake things!
+							Nothing worse than a daffodil that's had work done. Maybe this could
+							make up for it a little bit. - This lawsuit's a pretty big deal. - I
+							guess. You sure you want to go through with it? Am I sure? When I'm done
+							with the humans, they won't be able to say, "Honey, I'm home," without
+							paying a royalty! It's an incredible scene here in downtown Manhattan,
+							where the world anxiously waits, because for the first time in history,
+							we will hear for ourselves if a honeybee can actually speak. What have
+							we gotten into here, Barry? It's pretty big, isn't it? I can't believe
+							how many humans don't work during the day. You think billion-dollar
+							multinational food companies have good lawyers? Everybody needs to stay
+							behind the barricade. - What's the matter? - I don't know, I just got a
+							chill. Well, if it isn't the bee team. You boys work on this? All rise!
+							The Honorable Judge Bumbleton presiding. All right. Oase number 4475,
+							Superior Oourt of New York, Barry Bee Benson v. the Honey Industry is
+							now in session. Mr. Montgomery, you're representing the five food
+							companies collectively? A privilege. Mr. Benson... you're representing
+							all the bees of the world? I'm kidding. Yes, Your Honor, we're ready to
+							proceed. Mr. Montgomery, your opening statement, please. Ladies and
+							gentlemen of the jury, my grandmother was a simple woman. Born on a
+							farm, she believed it was man's divine right to benefit from the bounty
+							of nature God put before us. If we lived in the topsy-turvy world Mr.
+							Benson imagines, just think of what would it mean. I would have to
+							negotiate with the silkworm for the elastic in my britches! Talking bee!
+							How do we know this isn't some sort of holographic
+							motion-picture-capture Hollywood wizardry? They could be using laser
+							beams! Robotics! Ventriloquism! Oloning! For all we know, he could be on
+							steroids! Mr. Benson? Ladies and gentlemen, there's no trickery here.
+							I'm just an ordinary bee. Honey's pretty important to me. It's important
+							to all bees. We invented it! We make it. And we protect it with our
+							lives. Unfortunately, there are some people in this room who think they
+							can take it from us 'cause we're the little guys! I'm hoping that, after
+							this is all over, you'll see how, by taking our honey, you not only
+							take everything we have but everything we are! I wish he'd dress like
+							that all the time. So nice! Oall your first witness. So, Mr. Klauss
+							Vanderhayden of Honey Farms, big company you have. I suppose so. I see
+							you also own Honeyburton and Honron! Yes, they provide beekeepers for
+						our farms. Beekeeper. I find that to be a very"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:25 07/17,
+							R280/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 344" aria-description="This post is rotated 105 degrees, is offset by 2 pixels right and 9 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(105deg);
+						top: 9px;
+						left: 2px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"hmmm, i wonder if theres a post length limit"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:21 07/17,
+							R105/T9/L2
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 343" aria-description="This post is rotated 188 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(188deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"wheeeeeee"</div>
+						<div class="user">
+							-<a href="#">begonia_nuclear_technician</a>,
+							19:20 07/17,
+							R188/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 342" aria-description="This post is rotated 278 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(278deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"What proportion of people are prepared to read
+							this?  Is this an accidental write-only form of social media?  Maybe
+						that's the best kind?"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							19:18 07/17,
+							R278/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 341" aria-description="This post is rotated 105 degrees and has a white background.">
+					<div class="post" style="			transform: rotate(105deg);
+						top: 0px;
+						left: 0px;
+						background-color: White;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This app could really send you around the bend"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							19:17 07/17,
+							R105/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 340" aria-description="This post is rotated 211 degrees and has a coral background.">
+					<div class="post" style="			transform: rotate(211deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"I think people know that I'm a pretty stand-up kind of guy"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							19:16 07/17,
+							R211/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 339" aria-description="This post is rotated 345 degrees, is offset by 7 pixels left and 5 pixels up, and has a transparent background.">
+					<div class="post" style="			transform: rotate(345deg);
+						top: -5px;
+						left: -7px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"The question is, just how far are you prepared to go?"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							19:15 07/17,
+							R345/T-5/L-7
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 338" aria-description="This post is offset by 500 pixels left and 500 pixels up and has a black background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -500px;
+						left: -500px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"always on fire. always melting keyboards"</div>
+						<div class="user">
+							-<a href="#">jasmine_paving_equipment_operator</a>,
+							19:15 07/17,
+							R0/T-500/L-500
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 337" aria-description="This post is rotated 21 degrees, is offset by 1 pixels right and 1 pixels down, and has a forest green background.">
+					<div class="post" style="			transform: rotate(21deg);
+						top: 1px;
+						left: 1px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Putting a new spin on social media"</div>
+						<div class="user">
+							-<a href="#">lotus_flower_home_entertainment_installer</a>,
+							19:15 07/17,
+							R21/T1/L1
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 336" aria-description="This post has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"INTRODUCING!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:47 07/15,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 335" aria-description="This post has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"LA2AR DOT SOCIAL"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:47 07/15,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 334" aria-description="This post has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Featuring!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:46 07/15,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 333" aria-description="This post has a forest green background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: 0px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Posts!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:45 07/15,
+							R0/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 332" aria-description="This post is rotated 5 degrees, is offset by 100 pixels left, and has a cornsilk background.">
+					<div class="post" style="			transform: rotate(5deg);
+						top: 0px;
+						left: -100px;
+						background-color: Cornsilk;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Up To One Degree of Rotational Freedom! (Maybe more!)"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:45 07/15,
+							R5/T0/L-100
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 331" aria-description="This post is rotated 360 degrees and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(360deg);
+						top: 0px;
+						left: 0px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Assigned Usernames!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:44 07/15,
+							R360/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 330" aria-description="This post is rotated 4 degrees and has a transparent background.">
+					<div class="post" style="			transform: rotate(4deg);
+						top: 0px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Multiple colors!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:44 07/15,
+							R4/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 329" aria-description="This post is rotated 175 degrees and has a black background.">
+					<div class="post" style="			transform: rotate(175deg);
+						top: 0px;
+						left: 0px;
+						background-color: Black;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"This is the secret item on the list!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:43 07/15,
+							R175/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 328" aria-description="This post is rotated 29 degrees, is offset by 21 pixels down, and has a transparent background.">
+					<div class="post" style="			transform: rotate(29deg);
+						top: 21px;
+						left: 0px;
+						background-color: Transparent;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Vertical Movement!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:43 07/15,
+							R29/T21/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 327" aria-description="This post is offset by 250 pixels up and has a coral background.">
+					<div class="post" style="			transform: rotate(0deg);
+						top: -250px;
+						left: 0px;
+						background-color: Coral;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Horizontal Movement"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:43 07/15,
+							R0/T-250/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 326" aria-description="This post is rotated 45 degrees and has a white background.">
+					<div class="post" style="			transform: rotate(45deg);
+						top: 0px;
+						left: 0px;
+						background-color: White;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Forms! Sliders! Dropdowns!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:42 07/15,
+							R45/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 325" aria-description="This post is rotated 352 degrees and has a forest green background.">
+					<div class="post" style="			transform: rotate(352deg);
+						top: 0px;
+						left: 0px;
+						background-color: ForestGreen;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"A completely new codebase!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:42 07/15,
+							R352/T0/L0
+						</div>
+					</div>
+				</li>
+				<li class="post-parent" style="z-index: 324" aria-description="This post is rotated 44 degrees and has a medium slate blue background.">
+					<div class="post" style="			transform: rotate(44deg);
+						top: 0px;
+						left: 0px;
+						background-color: MediumSlateBlue;
+						">
+						<div class="link"><a href="#">(_)</a></div>
+						<div class="words">"Some other stuff!"</div>
+						<div class="user">
+							-<a href="#">orchid_maid</a>,
+							20:42 07/15,
+							R44/T0/L0
+						</div>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</body>
+</html>

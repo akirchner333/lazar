@@ -15,9 +15,18 @@
  */
 
 body{
-  background: midnightblue;
+  background: MediumSeaGreen;
   margin: 0px;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
 }
 
 h1 {
@@ -32,24 +41,25 @@ h1 a{
 
 h2 {
   text-align: center;
-  color: oldlace;
 }
 
 .lazar {
   color: black;
   font-weight: heavy;
   font-style: italic;
-  text-shadow: 0.04em 0.04em #f00, 
-               0.08em 0.08em #0f0, 
-               0.12em 0.12em #00f,
-               0.16em 0.16em lightseagreen,
-               0.20em 0.20em antiquewhite,
-               0.24em 0.24em black,
-               0.28em 0.28em cornsilk;
+  text-shadow: 0.04em 0.04em lightseagreen, 
+               0.08em 0.08em antiquewhite, 
+               0.12em 0.12em black,
+               0.16em 0.16em cornsilk,
+               0.20em 0.20em midnightblue;
+}
+
+.lazar a:visited{
+  color: black;
 }
 
 .interactable-zone{
-  background: oldlace;
+  background: aliceblue;
   border: 1px solid black;
   padding: 10px;
   margin: 10px;
@@ -57,12 +67,16 @@ h2 {
 
 footer{
   box-sizing: border-box;
-  background: oldlace;
-  padding: 10px;
+  background: aliceblue;
+  border: 1px solid black;
   display: flex;
   flex-direction: row;
+  margin: 10px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 10px;
   justify-content: space-between;
-  width: 100%;
+  width: 70%;
 }
 
 /* _______________ HEADER ___________________ */
@@ -71,6 +85,8 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .user-bar .name{
@@ -135,13 +151,15 @@ footer{
   padding: 5px;
 }
 
+#landing {
+  width: 60%;
+}
 
-
-
-#help{
+#help, #museum{
   background: oldlace;
   margin: 20px;
   padding: 5px;
+  width: 60%;
 }
 
 .logo{
@@ -152,4 +170,77 @@ footer{
 .logo svg{
   height: 600px;
   padding: 20px;
+}
+
+#museum img {
+  max-height: 500px;
+  max-width: 100%;
+}
+
+#museum details{
+  padding-bottom: 20px;
+}
+
+#museum summary{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#museum details div {
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+
+.banner{
+  background: black;
+  color: white;
+  width: 230px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 15px;
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.banner .announce{
+  margin: 0 15px ;
+}
+
+.banner .total{
+  font-size: 60px;
+}
+
+.banner .slogan{
+  font-style: italic;
+  font-size: 15px;
+}
+
+.banner .fringe {
+  margin-top: 10px;
+  width: 0; 
+  height: 0; 
+  border-left: 115px solid transparent;
+  border-right: 115px solid transparent;
+  
+  border-bottom: 20px solid MediumSeaGreen;
+}
+
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .banner {
+    height: auto;
+
+  }
+
+  #timeline{
+    width: 100%;
+  }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lazar,</title>
+    <title>+lazar+</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -9,9 +9,13 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "distance" %>
+    <%= javascript_import_module_tag "diff" %>
     <%= javascript_import_module_tag "form" %>
-    <%= javascript_import_module_tag "carousel" %>
     <%= favicon_link_tag asset_path('icon.png') %>
+    <script>
+      const maxVariance = <%= ENV['VARIANCE'] %>
+    </script>
   </head>
 
   <body>
@@ -29,13 +33,18 @@
       <% end %>
       <%= render "partials/flash" %>
     </header>
-    <h1 class="lazar"><%= link_to "Lazar,", root_path %></h1>
-    <%= yield %>
+    <h1 class="lazar"><%= link_to "+lazar+", root_path %></h1>
+    <main>
+      <%= render partial: "posts/total", locals: {total: @total} %>
+      <%= yield %>
+      <%= render partial: "posts/daily", locals: {daily: @daily} %>
+    </main>
     <footer>
       <div>
         <%= link_to "Random", "/random" %>
       </div>
       <div>
+        <%= link_to "Museum", "/museum" %>&nbsp;
         <%= link_to "Help", "/help" %>
       </div>
     </footer>

@@ -1,11 +1,10 @@
 /* ~~~~~~~~~~~~ POSTS ~~~~~~~~~~~~~~~~ */
 #timeline {
   display: flex;
-  align-items: top;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  padding: 40px;
+  width: 60%;
 }
 
 .posts-list{
@@ -17,93 +16,52 @@
   overflow-y: scroll;
 }
 
-.show-post{
-  display: flex;
-  align-items: start;
-  margin: auto;
-  font-size: 20px;
+.show-post
+{
+  margin-left: 20px !important;
 }
 
-.show-post .post{
-  width: 60vw;
-}
-
-.arrow{
-  fill: oldlace;
-  width: 50px;
-  height: 50px;
-  margin: auto;
-}
-
-/* ----------------- carousel ------------------ */
-.posts-carousel{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  position: static;
-  justify-content: center;
-}
-
-.post-row{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  position: static;
-  justify-content: center;
-}
-
-.carousel-post{
-  display: none;
-  position: relative;
-}
-
-.carousel-post .post{
-  width: 50vw;
-}
-
-.posts-carousel .carousel-active{
-  display: block;
-}
-
-.posts-carousel .nav svg{
-  height: 50px;
-  width: 50px;
-  fill: oldlace;
-  cursor: pointer;
-}
-
-.hidden{
-  visibility: hidden;
-}
-
-.count{
-  color: oldlace;
+.show-post .words{
   font-weight: bold;
 }
 
-.button-row{
-  text-align: center;
+.reply-column {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.reply-column .post {
+  width: 40%;
+}
+
+.reply-button{
+  cursor: pointer;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~ */
 .post{
+  background: palegreen;
   padding: 10px;
-  border: 0.5px solid black;
-  border-radius: 4px;
   text-align: left;
-  background-color: oldlace;
   color: black;
-  margin: 2px;
+  margin: 15px;
+  margin-left: 50px;
+  border: 1px solid black;
 }
 
-.post-header{
+.post-header, .post-footer{
   display: flex;
   justify-content: space-between;
+}
+
+.words {
+  font-size: 20px;
 }
 
 .post-interactions{
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   flex-direction: row;
 }
 
@@ -136,6 +94,23 @@
   width: unset;
 }
 
+.red{
+  color: darkred;
+  font-weight: bold;
+}
+
+.line-box{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.line {
+  width: 0px;
+  height: 20px;
+  border: 1px solid black;
+}
+
 /*************************** FORM *************************/
 .hide {
   display: none !important;
@@ -154,13 +129,18 @@
   z-index: 10;
 }
 
-#post-form{
-  border-radius: 10px;
+#new-post{
   padding: 20px;
-  width: 50vw;
-  background: oldlace;
-  border: 3px solid black;
+  width: 60vw;
+  background: palegreen;
+  border: 1px solid black;
   z-index: 1;
+}
+
+#post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #post-form label{
@@ -202,6 +182,50 @@
 
 #likes .selected {
   background: salmon;
+}
+
+#post_words {
+  width: 100%;
+}
+
+.diff{
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+}
+
+.char{
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.delete{
+  color: grey;
+  font-weight: normal;
+  vertical-align: sub;
+  line-height: 0;
+}
+
+.insert{
+  color: mediumblue;
+  font-weight: normal;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.variance {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.form-buttons {
+  margin: 10px;
+}
+
+.form-buttons button, .form-buttons input{
+  font-size: 20px;
+  padding: 5px 10px;
 }
 
 /* --------------------------- Likes -------------------------------*/
